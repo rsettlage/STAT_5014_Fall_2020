@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sample homework on STAT-5014 Fall 2020</title>
+    <link>/STAT_5014_Fall_2020/tags/sample-homework/</link>
+    <description>Recent content in sample homework on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/STAT_5014_Fall_2020/tags/sample-homework/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sample homework</title>
+      <link>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
+      <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
+      <description>
+
+
+&lt;p&gt;This is a sample of how I would like the homework to look when turned in.
+</description>
+    </item>
+    
+  </channel>
+</rss>

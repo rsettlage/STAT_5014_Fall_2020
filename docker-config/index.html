@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Configuring Docker -- Work in progress!! - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Configuring Docker -- Work in progress!!" />
+<meta property="og:description" content="Nothing to do here!! This is really a work in progress for me.
+OK, decided to ditch the local config. In spite of the fact that Docker is supposed to be platform agnostic, it needs some sort of virtualization layer, so some versions of Windows are a no-go, eg Windows Home Ed. We will use Docker in Docker and use Singularity to launch it.
+Let’s talk a little about Docker." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/STAT_5014_Fall_2020/docker-config/" />
+<meta property="article:published_time" content="2020-08-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-20T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Configuring Docker -- Work in progress!!</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-08-20T00:00:00">August 20, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/course-logistics" rel="category">Course Logistics</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<p>Nothing to do here!! This is really a work in progress for me.</p>
+<p>OK, decided to ditch the local config. In spite of the fact that Docker is supposed to be platform agnostic, it needs some sort of virtualization layer, so some versions of Windows are a no-go, eg Windows Home Ed. We will use Docker in Docker and use Singularity to launch it.</p>
+<p>Let’s talk a little about Docker. Docker, imo, takes us to the extreme end of reproducible research. Docker allows for creation of the entire compute environment as a container. From the docs (see below), Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers. A container is launched by running an image. An image is an executable package that includes everything needed to run an application – the code, a runtime, libraries, environment variables, and configuration files. The image is everything, except, usually, the data.</p>
+<p><img src="https://docs.docker.com/images/Container%402x.png" height="10%" /></p>
+<p>The reason we are going this route is two-fold:</p>
+<ul>
+<li>platform issues plague attempts at teaching parallelization and cause many needless teaching headaches<br />
+</li>
+<li>reproducible research is a theme of this class</li>
+</ul>
+<p>To combat this, we will use Docker to create environments that are reproducibly the same for all of your class computes. We will do this on our VT HPC clusters. On shared clusters, full escallation to a priveledged user is not allowed, so we will use another container platform called Singularity which was made with security in mind. Singularity can pull and run Docker containers, so we are going to mix the two. To get to our clusters:</p>
+<ol style="list-style-type: decimal">
+<li>request an account: arc.vt.edu<br />
+</li>
+<li>get to ARC RStudio: ondemand.arc.vt.edu</li>
+</ol>
+<p>Like with Git, in this class, we don’t need to become experts, we simply need the basics. On our clusters, the basic workflow looks something like this:</p>
+<pre><code>module load singularity 
+singularity cache clean  
+singularity pull --force --name rstudio.simg docker://rsettlag/ood-rstudio-basic:4.0.0  </code></pre>
+<p>If you are creating your own containers from a Dockerfile and pushing to DockerHub, I have found this to work:</p>
+<pre><code>docker login
+docker container prune  
+docker build --no-cache -t ood-rstudio:basic .  
+docker run -itd --name ood-rstudio ood-rstudio:basic  
+docker commit -m &quot;base Rstudio on Debian-stretch and Rocker/RStudio for Open OnDemand -- still rough&quot; ood-rstudio rsettlag/ood-rstudio:basic  
+docker push rsettlag/ood-rstudio:basic  </code></pre>
+<p>If you want to read more about this:</p>
+<p><a href="https://docs.docker.com/get-started/" class="uri">https://docs.docker.com/get-started/</a><br />
+<a href="https://ropenscilabs.github.io/r-docker-tutorial/" class="uri">https://ropenscilabs.github.io/r-docker-tutorial/</a><br />
+<a href="https://colinfay.me/docker-r-reproducibility/" class="uri">https://colinfay.me/docker-r-reproducibility/</a></p>
+<p>We won’t go too far down this path except to make sure you know the idea and basics.</p>
+<p>Some basic install stuff:</p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-centos-7" class="uri">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-centos-7</a>
+<a href="https://www.andrewheiss.com/blog/2017/04/27/super-basic-practical-guide-to-docker-and-rstudio/" class="uri">https://www.andrewheiss.com/blog/2017/04/27/super-basic-practical-guide-to-docker-and-rstudio/</a></p>
+<p>Some less basic DockerFile stuff:</p>
+<p><a href="https://docs.docker.com/docker-hub/repos/" class="uri">https://docs.docker.com/docker-hub/repos/</a>
+<a href="https://www.linuxnix.com/how-to-push-docker-images-to-docker-hub-repository/" class="uri">https://www.linuxnix.com/how-to-push-docker-images-to-docker-hub-repository/</a></p>
+<p>Windows user: Windows Home Edition does not contain the secret sauce to allow virtualization. To get a more capable version of Windows, you can upgrade your Windows using the VT site license: <a href="https://apps.itpals.vt.edu/Apps/WebObjects/NetSoftware.woa/wo/0.0.3.3.21.19.1.123.3.7.1.1" class="uri">https://apps.itpals.vt.edu/Apps/WebObjects/NetSoftware.woa/wo/0.0.3.3.21.19.1.123.3.7.1.1</a></p>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/docker/" rel="tag">docker</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/git-config/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Git Conf</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/about/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">About</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2019/07/12/sample-homework/">Sample homework</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script></body>
+</html>

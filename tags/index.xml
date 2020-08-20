@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on STAT-5014 Fall 2020</title>
+    <link>/STAT_5014_Fall_2020/tags/</link>
+    <description>Recent content in Tags on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/STAT_5014_Fall_2020/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>docker</title>
+      <link>/STAT_5014_Fall_2020/tags/docker/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>/STAT_5014_Fall_2020/tags/git/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Schedule</title>
+      <link>/STAT_5014_Fall_2020/tags/schedule/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/schedule/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Syllabus</title>
+      <link>/STAT_5014_Fall_2020/tags/syllabus/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/syllabus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sample homework</title>
+      <link>/STAT_5014_Fall_2020/tags/sample-homework/</link>
+      <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/sample-homework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>homework</title>
+      <link>/STAT_5014_Fall_2020/tags/homework/</link>
+      <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/homework/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
