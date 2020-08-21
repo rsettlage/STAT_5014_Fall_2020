@@ -1,0 +1,239 @@
+---
+title: 'Introductions, Reproducible Research, (a little) R, and (a little) Git'
+subtitle: "August 20, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-1"
+date: 2020-08-20
+publishdate: 2020-08-20
+draft: false
+categories:
+- Lecture
+tags:
+- Lecture
+- Reproducible Research
+- Rmarkdown
+- LaTeX
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Today's Agenda
+
+- Introduce the course
+- Introduce the concepts of Reproducible Research
+- Introduce Git  
+- Introduce R as the (main) platform for the course
+- Homework 1
+
+## Course Learning Objectives
+
+* R programming
+* Reproducible research concepts
+* Good programming practices  
+* Data cleaning and munging
+* Git fundamentals
+* Markdown
+* Python basics
+* SAS basics
+
+## Tentative Course Lecture Schedule  
+
+Due dates are solid, however, feel free to race ahead.  
+https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/
+
+## Passing the course  
+
+Q. How do you pass the course??  
+A. Do the homework AND participate.
+
+There will be ca. 5 homeworks, you need to pass 4.  There will also be a group project which must receive a passing mark.  Each homework will be given 10 points, 7 is passing.  Point breakdown will be:
+
+- 2 pts for submitting  
+- 2 pts for clean, well written document  
+- 2 pts for complete description of analysis process  
+- 4 pts for completing the assigned tasks.  
+
+## Requirements for class environment
+
+Well, in a normal year, this would go something like this:
+* During lecture:
+    + Do not play on internet during lecture.
+* Coding with me:
+    + Please code along to inform yourself of questions.
+* In-class exercise:
+    + Do-it-yourself and ask questions
+
+This year, I hope you can at least find a quiet place for an hour or two each week to devote to this.
+
+## Class motivation
+
+1. Regression and ANOVA  
+
+2. UGLY code SUCKS  
+
+3. You have worked 6 months to analyze a data set.  You give your collaborator the perfect analysis and the results are very exciting.  They go away very happy and you don't hear from them for 1 year.  Suddenly, a flurry of emails ensues, they have new data to add to the previous pipeline, they need alterations to your perfect figure, they have lots of how did you questions, they ask you to write a methods section, etc etc.  You publish your perfect results.  Someone else analyzes the data and comes to *different* conclusions.  Are you sure you didn't have a bug in your code?  How good are your notes???
+
+## Reproducible Research - Concepts
+
+Guide to this topic here: 
+<http://ropensci.github.io/reproducibility-guide/>
+
+In general, we should **weave** code and text into a complete reference of our work.  The document should:
+
+- download or otherwise load/generate data
+- reproduce steps to munge data
+- recreate analysis steps
+- create figures and tables
+- explain any and all steps along the way
+- end with conclusions drawn
+- optionally add suggestions for future experiments  
+
+While the above works well as a record of our analysis steps, we are still missing a method to save, archive our work, and do more interesting things like collaborate and use version control.  
+
+## Version Control  
+
+What is version control - a system for storing data and tracking changes.  There are lots of different flavors:
+
+- Git, SVG, Mercural, Perforce, Bazaar, etc etc
+
+In this class, we will use GitHub and make everything public, i.e. free.
+
+One question you are probably asking: "I am just using R for my own assignments, on my own computer, by myself, why should I care about version control?"  Two stack overflow threads should help answer this:  
+
+- Why should I use version control?  
+<http://stackoverflow.com/questions/1408450/why-should-i-use-version-control>
+- R and version control for the solo data analyst  
+<http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst>
+
+## Version Control and Git
+
+Git is essentially a database of snapshots of the project directory tree.  You decide when and what to take snapshots of and if you using GitHub (or similar) when to push a copy to a remote repository.
+
+The basic workflow is:  
+
+1. git **pull**  
+2. **do work**  
+3. git **pull** to make sure you have latest files
+4. git **add** *\<your changed file\>* tells git what change you care about  
+5. git **commit** -m "some INFORMATIVE message about the changes"  
+6. git **push** to the repository (local or remote)  
+7. repeat  
+
+More instructions in the homework.
+
+## Git file states
+
+- Untracked - files that have not been added to the database
+- Committed - data is safely stored in your local database  
+- Modified - file is changed but not committed it to your database yet  
+- Staged - a modified file in its current version will go in next commit snapshot
+
+![Git file lifecycle](./img/git_file_lifecycle.png)
+
+## Git workflow
+
+Nice visual from Git-flow <https://jeffkreeftmeijer.com/git-flow/>
+
+```{r out.height="40%",echo=F,include=T}
+knitr::include_graphics("./img/Git_flow.png")
+```
+
+## Reproducible Research Analysis
+ 
+From Hadley Wickham & Garrett Grolemund's R for Data Science 
+<http://r4ds.had.co.nz>  
+![R data science](./img/data-science-pipeline.png)  
+
+## Reproducible Research Pipeline 
+
+Further illustrated by Peng and Eckel (2008)  
+```{r,out.width = "600px", echo=F}
+    knitr::include_graphics("./img/Peng_Eckel_2008.png",auto_pdf=F)
+```
+
+## R and Rstudio
+
+From <http://r-project.org>  
+R is an integrated suite of software facilities for data manipulation, calculation and graphical display. 
+
+Rstudio is a GUI for R.  <http://rstudio.com>
+
+Reasons to use R:  
+
+* free  
+* open source  
+* large community of both users and developers  
+* large number of extensions to facilitate common tasks (packages)  
+* superb functionality for data processing
+* very mature statistical and graphical capabilities
+
+## R packages
+R packages are community written (and often tested) extensions to R to enhance the functionality of R.  
+
+Examples:  
+
+1. MASS  
+    + mvrnorm  
+    + stepAIC  
+2. ggplot2  
+    + grammer of graphics  
+3. knitr  
+    + RMarkdown  
+
+## Rmarkdown  
+
+RMarkdown:  "Analyze. Share. Reproduce."
+
+Seems like what we are looking for.  
+
+A Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.
+__John Gruber__
+
+Rstudio includes an "extended and slightly revised version" of Gruber's original Markdown syntax. This includes codes for:
+
+1. adding lists  
+    + numbered, bullets, etc  
+2. text formatting  
+    + bold, italics, highlight, etc  
+3. adding equations  
+    + full LaTeX styled equations  
+    + numbering, indenting, aligning, etc  
+
+## LaTeX  
+
+<http://latex-project.org>  
+LaTeX is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation. LaTeX is the de facto standard for the communication and publication of scientific documents. LaTeX is available as free software.
+
+Which includes many many math symbols:  
+<http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html>
+
+And has a cool online tool:  
+<http://detexify.kirelabs.org/classify.html>
+
+## Reproducible Research | Coding
+
+Combining LaTeX and Knitr, we have a system to weave text and code into a highly customizable and formatted analysis report.
+
+https://www.sharelatex.com/learn/Knitr
+
+## Quick tour of Rstudio and R from Rstudio.cloud
+1. panels
+    + interactive, code, files, help
+2. packages
+    + CRAN, installing, loading
+3. RMarkdown
+4. General R  
+    + basic math, assignment ooperator    
+5. Basic plots
+
+**Closing**  
+
+  + In-class exercise  
+  + Homework 1

@@ -6,10 +6,22 @@
     <description>Recent content in Posts on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/STAT_5014_Fall_2020/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
+      <link>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
+      <description>Today’s Agenda  Introduce the course Introduce the concepts of Reproducible Research Introduce Git
+ Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
+ Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.
+https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
+    </item>
     
     <item>
       <title>Sample homework</title>

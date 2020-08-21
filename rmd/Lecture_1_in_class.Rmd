@@ -1,0 +1,134 @@
+---
+title: "Lecture 1 R Basics"
+subtitle: "Aug 20, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-1-inclass"
+date: 2020-08-20
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+editor_options:
+  chunk_output_type: inline 
+---
+
+# Basics of R and Rmarkdown
+
+An R Notebook, similar to an Rmarkdown file, contains both text and code in blocks.  These are weaved together to give a final document.  First, let's talk about the text.  The Markdown code we are using is roughly speaking, $\LaTeX$.  Here are a few things you will find useful:
+
+equation or eqnarray, note you can add a $\ast$ to get rid of line numbers.
+\begin{eqnarray}
+L(\underline{x} \mid p) & = & \prod_{i=1}^N p^{x_i}(1-p)^{1-x_i} \\
+    & = & p^{\sum x_i}(1-p)^{N-\sum x_i}
+\end{eqnarray}
+
+If you want it to render in-line, use the double \$\$:
+$$p(x)=p^x(1-p)^{1-x}$$
+
+You can even combine text and computations.  The sum of 5 and 3 is `r 5+3`.  Or, `5+3=` `r 5+3`.  After a code chunk is run, you have access to the values in any of the variables resident in memory.  More on that later.
+
+Need a symbol:  
+<http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html>  
+Need a symbol and don't know its name:  
+<http://detexify.kirelabs.org/classify.html>  
+
+Let's start with some basic R command shortcuts that will save you some time.
+
+* To save R script, use:  
+        control+S (both Windows and Mac)  
+        command+S (Mac only)
+* To quit, type:  
+        q()
+* To execute a line, use:  
+        control+R or control enter (Window)  
+        control-enter or command-enter (Mac)  
+* To clear the consol, use:  
+        control+L  
+        
+
+Let's move to commands that will work in scripts or at the R prompt:
+
+```{r eval=T, echo=T, include=T}
+# set working directory.
+setwd("./")
+
+# In Unix, Mac, you always use forward slash. 
+# In windows, you can use forward slash, or double backward slash.
+# C:/Users/hongxiaozhu/Documents/ (Windows)
+# C:\\Users\\hongxiaozhu\\Documents (Windows)
+
+# Install packages.
+#install.packages('spuRs',repos="https://cloud.r-project.org")
+library(spuRs) # load in a package.
+require(spuRs) # equivalent to library()
+find.package('spuRs')
+
+# Use help.
+#?plot
+#help('/')
+
+# Basic arithmetic
+2+3
+2-3
+2*3
+2/3
+exp(2)
+log(2)
+sqrt(2)
+pi
+ # modular (13/5 = 2 remainder 3; or 13 mod 5 = 3)
+13%%5
+ # integer division (the integer part of the quotient)
+13%/%5
+ # round
+round(13/5)
+
+#A trick.
+#x<
+# When you see '+' symbol, to get out of the
+# '+', press esc. 
+  
+# list files in directory
+# list all files in your working directory.
+dir("./")
+
+
+# define a variable and assign values. 
+    # assign 3.0 to x. 
+    # assign using arrow. 
+    # add () to print out the value. 
+
+# list all variables in memory. 
+
+
+# clear all variables in memory. 
+
+
+# Different ways to name a variable. 
+a = 1    # lower case letter
+A = 1    # upper case letter
+a_1 = 2.0    # underscore
+a.1 = 2    # dot
+.er <- 1    # more dots.
+
+
+gender = 'MALE'    # can be a character string.
+class(gender)
+var1 = TRUE    # can be logic expression 
+class(var1)   # find out the type of the variable
+
+# (13) save objects in memory to .RData file.  
+x = 1
+y = 4
+    # save
+    # save.image
+
+# load in a .RData workspace.
+rm(list=ls())
+
+```
+
+
+Let's end this with a quick look at the homework.

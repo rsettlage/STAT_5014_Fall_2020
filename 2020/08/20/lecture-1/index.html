@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Introductions, Reproducible Research, (a little) R, and (a little) Git - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Introductions, Reproducible Research, (a little) R, and (a little) Git" />
+<meta property="og:description" content="Today’s Agenda  Introduce the course Introduce the concepts of Reproducible Research Introduce Git
+ Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
+ Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.
+https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/STAT_5014_Fall_2020/2020/08/20/lecture-1/" />
+<meta property="article:published_time" content="2020-08-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-20T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Introductions, Reproducible Research, (a little) R, and (a little) Git</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-08-20T00:00:00">August 20, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Introduce the course</li>
+<li>Introduce the concepts of Reproducible Research</li>
+<li>Introduce Git<br />
+</li>
+<li>Introduce R as the (main) platform for the course</li>
+<li>Homework 1</li>
+</ul>
+</div>
+<div id="course-learning-objectives" class="section level2">
+<h2>Course Learning Objectives</h2>
+<ul>
+<li>R programming</li>
+<li>Reproducible research concepts</li>
+<li>Good programming practices<br />
+</li>
+<li>Data cleaning and munging</li>
+<li>Git fundamentals</li>
+<li>Markdown</li>
+<li>Python basics</li>
+<li>SAS basics</li>
+</ul>
+</div>
+<div id="tentative-course-lecture-schedule" class="section level2">
+<h2>Tentative Course Lecture Schedule</h2>
+<p>Due dates are solid, however, feel free to race ahead.<br />
+<a href="https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/" class="uri">https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</a></p>
+</div>
+<div id="passing-the-course" class="section level2">
+<h2>Passing the course</h2>
+<p>Q. How do you pass the course??<br />
+A. Do the homework AND participate.</p>
+<p>There will be ca. 5 homeworks, you need to pass 4. There will also be a group project which must receive a passing mark. Each homework will be given 10 points, 7 is passing. Point breakdown will be:</p>
+<ul>
+<li>2 pts for submitting<br />
+</li>
+<li>2 pts for clean, well written document<br />
+</li>
+<li>2 pts for complete description of analysis process<br />
+</li>
+<li>4 pts for completing the assigned tasks.</li>
+</ul>
+</div>
+<div id="requirements-for-class-environment" class="section level2">
+<h2>Requirements for class environment</h2>
+<p>Well, in a normal year, this would go something like this:
+* During lecture:
++ Do not play on internet during lecture.
+* Coding with me:
++ Please code along to inform yourself of questions.
+* In-class exercise:
++ Do-it-yourself and ask questions</p>
+<p>This year, I hope you can at least find a quiet place for an hour or two each week to devote to this.</p>
+</div>
+<div id="class-motivation" class="section level2">
+<h2>Class motivation</h2>
+<ol style="list-style-type: decimal">
+<li><p>Regression and ANOVA</p></li>
+<li><p>UGLY code SUCKS</p></li>
+<li><p>You have worked 6 months to analyze a data set. You give your collaborator the perfect analysis and the results are very exciting. They go away very happy and you don’t hear from them for 1 year. Suddenly, a flurry of emails ensues, they have new data to add to the previous pipeline, they need alterations to your perfect figure, they have lots of how did you questions, they ask you to write a methods section, etc etc. You publish your perfect results. Someone else analyzes the data and comes to <em>different</em> conclusions. Are you sure you didn’t have a bug in your code? How good are your notes???</p></li>
+</ol>
+</div>
+<div id="reproducible-research---concepts" class="section level2">
+<h2>Reproducible Research - Concepts</h2>
+<p>Guide to this topic here:
+<a href="http://ropensci.github.io/reproducibility-guide/" class="uri">http://ropensci.github.io/reproducibility-guide/</a></p>
+<p>In general, we should <strong>weave</strong> code and text into a complete reference of our work. The document should:</p>
+<ul>
+<li>download or otherwise load/generate data</li>
+<li>reproduce steps to munge data</li>
+<li>recreate analysis steps</li>
+<li>create figures and tables</li>
+<li>explain any and all steps along the way</li>
+<li>end with conclusions drawn</li>
+<li>optionally add suggestions for future experiments</li>
+</ul>
+<p>While the above works well as a record of our analysis steps, we are still missing a method to save, archive our work, and do more interesting things like collaborate and use version control.</p>
+</div>
+<div id="version-control" class="section level2">
+<h2>Version Control</h2>
+<p>What is version control - a system for storing data and tracking changes. There are lots of different flavors:</p>
+<ul>
+<li>Git, SVG, Mercural, Perforce, Bazaar, etc etc</li>
+</ul>
+<p>In this class, we will use GitHub and make everything public, i.e. free.</p>
+<p>One question you are probably asking: “I am just using R for my own assignments, on my own computer, by myself, why should I care about version control?” Two stack overflow threads should help answer this:</p>
+<ul>
+<li>Why should I use version control?<br />
+<a href="http://stackoverflow.com/questions/1408450/why-should-i-use-version-control" class="uri">http://stackoverflow.com/questions/1408450/why-should-i-use-version-control</a></li>
+<li>R and version control for the solo data analyst<br />
+<a href="http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst" class="uri">http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst</a></li>
+</ul>
+</div>
+<div id="version-control-and-git" class="section level2">
+<h2>Version Control and Git</h2>
+<p>Git is essentially a database of snapshots of the project directory tree. You decide when and what to take snapshots of and if you using GitHub (or similar) when to push a copy to a remote repository.</p>
+<p>The basic workflow is:</p>
+<ol style="list-style-type: decimal">
+<li>git <strong>pull</strong><br />
+</li>
+<li><strong>do work</strong><br />
+</li>
+<li>git <strong>pull</strong> to make sure you have latest files</li>
+<li>git <strong>add</strong> <em>&lt;your changed file&gt;</em> tells git what change you care about<br />
+</li>
+<li>git <strong>commit</strong> -m “some INFORMATIVE message about the changes”<br />
+</li>
+<li>git <strong>push</strong> to the repository (local or remote)<br />
+</li>
+<li>repeat</li>
+</ol>
+<p>More instructions in the homework.</p>
+</div>
+<div id="git-file-states" class="section level2">
+<h2>Git file states</h2>
+<ul>
+<li>Untracked - files that have not been added to the database</li>
+<li>Committed - data is safely stored in your local database<br />
+</li>
+<li>Modified - file is changed but not committed it to your database yet<br />
+</li>
+<li>Staged - a modified file in its current version will go in next commit snapshot</li>
+</ul>
+<div class="figure">
+<img src="img/git_file_lifecycle.png" alt="Git file lifecycle" />
+<p class="caption">Git file lifecycle</p>
+</div>
+</div>
+<div id="git-workflow" class="section level2">
+<h2>Git workflow</h2>
+<p>Nice visual from Git-flow <a href="https://jeffkreeftmeijer.com/git-flow/" class="uri">https://jeffkreeftmeijer.com/git-flow/</a></p>
+<p><img src="img/Git_flow.png" width="369" height="40%" /></p>
+</div>
+<div id="reproducible-research-analysis" class="section level2">
+<h2>Reproducible Research Analysis</h2>
+<p>From Hadley Wickham &amp; Garrett Grolemund’s R for Data Science
+<a href="http://r4ds.had.co.nz" class="uri">http://r4ds.had.co.nz</a><br />
+<img src="img/data-science-pipeline.png" alt="R data science" /></p>
+</div>
+<div id="reproducible-research-pipeline" class="section level2">
+<h2>Reproducible Research Pipeline</h2>
+<p>Further illustrated by Peng and Eckel (2008)<br />
+<img src="img/Peng_Eckel_2008.png" width="600px" /></p>
+</div>
+<div id="r-and-rstudio" class="section level2">
+<h2>R and Rstudio</h2>
+<p>From <a href="http://r-project.org" class="uri">http://r-project.org</a><br />
+R is an integrated suite of software facilities for data manipulation, calculation and graphical display.</p>
+<p>Rstudio is a GUI for R. <a href="http://rstudio.com" class="uri">http://rstudio.com</a></p>
+<p>Reasons to use R:</p>
+<ul>
+<li>free<br />
+</li>
+<li>open source<br />
+</li>
+<li>large community of both users and developers<br />
+</li>
+<li>large number of extensions to facilitate common tasks (packages)<br />
+</li>
+<li>superb functionality for data processing</li>
+<li>very mature statistical and graphical capabilities</li>
+</ul>
+</div>
+<div id="r-packages" class="section level2">
+<h2>R packages</h2>
+<p>R packages are community written (and often tested) extensions to R to enhance the functionality of R.</p>
+<p>Examples:</p>
+<ol style="list-style-type: decimal">
+<li>MASS
+<ul>
+<li>mvrnorm<br />
+</li>
+<li>stepAIC<br />
+</li>
+</ul></li>
+<li>ggplot2
+<ul>
+<li>grammer of graphics<br />
+</li>
+</ul></li>
+<li>knitr
+<ul>
+<li>RMarkdown</li>
+</ul></li>
+</ol>
+</div>
+<div id="rmarkdown" class="section level2">
+<h2>Rmarkdown</h2>
+<p>RMarkdown: “Analyze. Share. Reproduce.”</p>
+<p>Seems like what we are looking for.</p>
+<p>A Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.
+<strong>John Gruber</strong></p>
+<p>Rstudio includes an “extended and slightly revised version” of Gruber’s original Markdown syntax. This includes codes for:</p>
+<ol style="list-style-type: decimal">
+<li>adding lists
+<ul>
+<li>numbered, bullets, etc<br />
+</li>
+</ul></li>
+<li>text formatting
+<ul>
+<li>bold, italics, highlight, etc<br />
+</li>
+</ul></li>
+<li>adding equations
+<ul>
+<li>full LaTeX styled equations<br />
+</li>
+<li>numbering, indenting, aligning, etc</li>
+</ul></li>
+</ol>
+</div>
+<div id="latex" class="section level2">
+<h2>LaTeX</h2>
+<p><a href="http://latex-project.org" class="uri">http://latex-project.org</a><br />
+LaTeX is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation. LaTeX is the de facto standard for the communication and publication of scientific documents. LaTeX is available as free software.</p>
+<p>Which includes many many math symbols:<br />
+<a href="http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html" class="uri">http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html</a></p>
+<p>And has a cool online tool:<br />
+<a href="http://detexify.kirelabs.org/classify.html" class="uri">http://detexify.kirelabs.org/classify.html</a></p>
+</div>
+<div id="reproducible-research-coding" class="section level2">
+<h2>Reproducible Research | Coding</h2>
+<p>Combining LaTeX and Knitr, we have a system to weave text and code into a highly customizable and formatted analysis report.</p>
+<p><a href="https://www.sharelatex.com/learn/Knitr" class="uri">https://www.sharelatex.com/learn/Knitr</a></p>
+</div>
+<div id="quick-tour-of-rstudio-and-r-from-rstudio.cloud" class="section level2">
+<h2>Quick tour of Rstudio and R from Rstudio.cloud</h2>
+<ol style="list-style-type: decimal">
+<li>panels
+<ul>
+<li>interactive, code, files, help</li>
+</ul></li>
+<li>packages
+<ul>
+<li>CRAN, installing, loading</li>
+</ul></li>
+<li>RMarkdown</li>
+<li>General R
+<ul>
+<li>basic math, assignment ooperator<br />
+</li>
+</ul></li>
+<li>Basic plots</li>
+</ol>
+<p><strong>Closing</strong></p>
+<ul>
+<li>In-class exercise<br />
+</li>
+<li>Homework 1</li>
+</ul>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research/" rel="tag">Reproducible Research</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown/" rel="tag">Rmarkdown</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/latex/" rel="tag">LaTeX</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2019/07/12/sample-homework/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Sample homework</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/20/lecture-1/">Introductions, Reproducible Research, (a little) R, and (a little) Git</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2019/07/12/sample-homework/">Sample homework</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script></body>
+</html>
