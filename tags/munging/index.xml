@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/tags/git/</link>
-    <description>Recent content in git on STAT-5014 Fall 2020</description>
+    <title>munging on STAT-5014 Fall 2020</title>
+    <link>/STAT_5014_Fall_2020/tags/munging/</link>
+    <description>Recent content in munging on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/STAT_5014_Fall_2020/tags/munging/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,19 +22,6 @@
  Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
 You had worked 6 months to analyze a data set. Someone else analyzes the data and comes to different conclusions. How good are your notes???
 Answer: Awesome, because you annotated your code with text to create a RR compendium</description>
-    </item>
-    
-    <item>
-      <title>Git Conf</title>
-      <link>/STAT_5014_Fall_2020/git-config/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/STAT_5014_Fall_2020/git-config/</guid>
-      <description>
-
-
-&lt;p&gt;Note, this is a working document describing how we will use git in this class. Every students local computing platform is different and we will see exceptions. Please do this early and let me know if you have issues and see deviations that should go on this writeup. Basically, we need to have:
-</description>
     </item>
     
   </channel>

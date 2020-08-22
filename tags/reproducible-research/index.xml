@@ -6,13 +6,26 @@
     <description>Recent content in Reproducible Research on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/STAT_5014_Fall_2020/tags/reproducible-research/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
+      <title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</title>
+      <link>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
+      <description>Today’s Agenda  Review the concepts of Reproducible Research
+ Review Git
+ Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
+You had worked 6 months to analyze a data set. Someone else analyzes the data and comes to different conclusions. How good are your notes???
+Answer: Awesome, because you annotated your code with text to create a RR compendium</description>
+    </item>
+    
+    <item>
+      <title>Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
       <link>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       

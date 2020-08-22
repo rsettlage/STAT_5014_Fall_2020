@@ -6,24 +6,15 @@
     <description>Recent content in Tags on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/STAT_5014_Fall_2020/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>docker</title>
-      <link>/STAT_5014_Fall_2020/tags/docker/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/STAT_5014_Fall_2020/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>git</title>
       <link>/STAT_5014_Fall_2020/tags/git/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>/STAT_5014_Fall_2020/tags/git/</guid>
       <description></description>
@@ -32,7 +23,7 @@
     <item>
       <title>LaTeX</title>
       <link>/STAT_5014_Fall_2020/tags/latex/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>/STAT_5014_Fall_2020/tags/latex/</guid>
       <description></description>
@@ -41,16 +32,25 @@
     <item>
       <title>Lecture</title>
       <link>/STAT_5014_Fall_2020/tags/lecture/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>/STAT_5014_Fall_2020/tags/lecture/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>munging</title>
+      <link>/STAT_5014_Fall_2020/tags/munging/</link>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/munging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Reproducible Research</title>
       <link>/STAT_5014_Fall_2020/tags/reproducible-research/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>/STAT_5014_Fall_2020/tags/reproducible-research/</guid>
       <description></description>
@@ -59,9 +59,18 @@
     <item>
       <title>Rmarkdown</title>
       <link>/STAT_5014_Fall_2020/tags/rmarkdown/</link>
-      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>/STAT_5014_Fall_2020/tags/rmarkdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>/STAT_5014_Fall_2020/tags/docker/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/STAT_5014_Fall_2020/tags/docker/</guid>
       <description></description>
     </item>
     

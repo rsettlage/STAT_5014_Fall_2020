@@ -1,0 +1,448 @@
+---
+title: 'Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R'
+subtitle: "Sep 5, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-2"
+date: 2020-08-22
+publishdate: 2020-08-22 
+draft: false
+mathjax: true
+categories:
+- Lecture
+tags:
+- Lecture
+- Reproducible Research
+- Rmarkdown
+- Git
+- munging
+- LaTeX
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Today's Agenda
+
+- Review the concepts of Reproducible Research  
+- Review Git  
+- Importing, cleaning and munging data
+- Summarizing and exploring data
+- Vectors, matrices, and data frames 
+
+## Reproducible Research | Review
+
+This was the scenario:  
+You had worked 6 months to analyze a data set.  Someone else analyzes the data and comes to *different* conclusions.  How good are your notes???
+
+Answer: **_Awesome, because you annotated your code with text to create a RR compendium_**
+
+## Reproducible Research - Concepts
+**_Basically just switching the role of code and comments in writing software_**
+
+Guide to this topic here: 
+<http://ropensci.github.io/reproducibility-guide/>
+
+In general, we should **weave** code and text into a complete reference of our work.  The document should:
+
+- download or otherwise load/generate data
+- reproduce steps to munge data
+- recreate analysis steps
+- create figures and tables
+- explain any and all steps along the way
+- end with conclusions drawn
+- optionally add suggestions for future experiments  
+
+## Version Control  
+
+What is version control - a system for storing data and tracking changes.   
+
+- Why should I use version control?
+<http://stackoverflow.com/questions/1408450/why-should-i-use-version-control>
+- R and version control for the solo data analyst  
+<http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst>
+
+Thoughts or comments??
+
+## Version Control and Git
+
+Git is essentially a database of snapshots of the project directory tree.  You decide when and what to take snapshots of and if you using GitHub (or similar) when to push a copy to a remote repository.
+
+The basic workflow is:  
+
+1. git **pull**  
+2. **do work**  
+3. git **pull** to make sure you have latest files
+4. git **add** *\<your changed file\>* tells git what change you care about  
+5. git **commit** -m "some INFORMATIVE message about the changes"  
+6. git **push** to the repository (local or remote)  
+7. repeat  
+
+## Git file states
+
+- Untracked - files that have not been added to the database
+- Committed - data is safely stored in your local database  
+- Modified - file is changed but not committed it to your database yet  
+- Staged - a modified file in its current version will go in next commit snapshot
+
+![Git file lifecycle](./img/git_file_lifecycle.png)
+
+## Back to Reproducible Research Analysis
+
+From Hadley Wickham & Garrett Grolemund's R for Data Science 
+<http://r4ds.had.co.nz>  
+![Data Science Pipeline](./img/data-science-pipeline.png)  
+
+Today we focus on getting and cleaning the data.
+
+## Data wrangling
+
+Data wrangling or munging is the process of going from raw to useful data.  This can be 60-80% of the time spent on a project.  Steps may include any or all of the following:
+
++----------+-------------------------+
+| Step     | Examples                |
++==========+=========================+
+| Import   | - read.table(html,json) |
++----------+-------------------------+
+| Clean    | - filter and subset     |
+|          | - standardize           |
+|          | - renaming              |
+|          | - type conversions      |
++----------+-------------------------+
+| Reformat | - merging               |
+|          | - reshaping             |
+|          | - aggregating           |
++----------+-------------------------+
+
+
+## Data wrangling -- getting data 
+
+- load internal dataset 
+```{r echo=T, eval=F}
+    library(help = "datasets")
+    ?PlantGrowth
+```
+- copy and paste  
+- load file  
+    + local  
+    + web  
+```{r echo=T, eval=F}
+    ?read.table; ?read.csv
+    url<-"http://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/onewaymuzzle.dat"
+    chp2_muzzle<-read.table(url,header=T)
+    #google "how to get data into R"
+```
+- generate data
+```{r echo=T, eval=F}
+    set.seed(123456)
+    coin_flips<-rbinom(n = 1000,size = 1, prob = .501)
+```
+
+## Data importing -- good practices
+
+If you are getting data from the internet, it is a good idea to protect against:
+
+1. data source being down  
+2. data source being changed  
+3. other unknown issues  
+
+I generally pull the data down, then save the data to an .Rds file.  My project includes:  
+
+1. commented code used to pull data down  
+2. commented code used to save data  
+3. code to read data into R from the saved file  
+4. AND often project image files as mid-stream checkpoints
+
+
+## Data wrangling - cleaning  
+
+Getting data into R is *__usually__* not the problem, often the fun starts when we start to actually look at what we were given.  Common issues:  
+
+issue | examples
+:-----|:-------
+missing values | recorded as "-", "NA","0"
+jagged arrays | missing fields  
+inconsistent data coding | 2017-01-22 vs 01-22-2017 vs Jan 22, 2017
+line termination | platform inconsistencies
+field delimiter issues | csv has data values that use commas  
+  
+
+And pretty much any other issue you might imagine.
+
+## Data wrangling - summarizing and tables
+
+A quick way to see if there are issues with the data is to create a summary of the data. There are many useful metrics to capture, BUT, at a high level, here we really are most concerned with metrics associated with the data structure, i.e. number of observations, missing values, data types etc.  R has a function for that...  :)  
+
+```{r echo=T,eval=F}
+    ?str
+    ?summary
+    str(iris)
+    summary(iris)
+```
+
+
+## Data wrangling - reformatting/standardizing
+
+Now that we have the data in R, we need to get it into a useable format.  One idea for a set of standards for structuring a data set is to create a so called "tidy" data set.
+
+<http://vita.had.co.nz/papers/tidy-data.html>
+
+Essentially, we need to reformat the data such that:  
+
+1. Each variable forms a column.  
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.  
+
+Any other structure to the data is considered messy.  Sound easy?  
+
+## Data wrangling - reformatting 
+
+OK, what is wrong with this? 
+```{r, echo=F, eval=T}
+    messy_data1_df<-data.frame(treatmenta=c("NA",16,3),treatmentb=c(2,11,1),row.names=c("John Smith","Jane Doe","Mary Johnson"),stringsAsFactors=F)
+    knitr::kable(messy_data1_df,format = "markdown", caption="Messy Data")
+```
+  
+What we want is something more akin to a model:  
+
+$$
+y_i = \beta_1 x_{i1} + \beta_2 x_{i2} ...
+$$
+
+*Going to give this topic more time next week with the tidyverse*
+
+To print the table in a document, we have several options.  My current favorites are kable and stargazer.  Other community tools include **Pander** and **xtable**.
+
+## Data wrangling -- other wrangling tasks
+
+dplyr is another package by Hadley Wickam.  As a practicing data scientist, he has a good feel for what functions we would like to see.
+
+A few data processing goals enabled in dplyr
+
+1. data summarizing  
+2. subsetting by observation  
+3. subsetting variables  
+4. creating new variables  
+5. grouping data  
+6. combining data  
+
+*look at Data Wrangling Cheatsheet*
+
+## Data wrangling -- quick plot summaries
+
+Sometimes, a picture really is worth a 1000 words.
+
+```{r boxexample, echo=F, include=T, eval=T, fig.width=6, fig.height=4}
+    library(beeswarm)
+    sex <- (runif(1000)>0.5)*1
+    drug_duration <- sex*0.1 + rnorm(1000, 0, 0.1) + 5
+    drug_info <- data.frame(cbind(drug_duration,sex))
+    drug_info$id <- ifelse(drug_info$sex==0,"M","F")
+    par(mfcol=c(1,2))
+    boxplot(drug_info$drug_duration)
+    beeswarm(drug_duration,add=T, pch=20, cex=0.3)
+    boxplot(drug_duration~id,drug_info)
+    beeswarm(drug_duration~id,drug_info, add=T, pch=20, cex=0.3)
+```
+
+## Data wrangling -- another quick plot
+
+```{r lcng_implementation, echo=F,eval=T,results='asis', fig.width=6, fig.height=4}
+    library(scatterplot3d)
+    new_lcng_number<-function(last,current_mult,
+                              current_increment,current_modulus){
+        temp<-(current_mult*last+current_increment) %% current_modulus
+        return(temp)
+    }
+
+    par(mfcol=c(1,2),mai=c(0.1,0.1,0.1,0.1))
+    a<-1.9;c<-1;m<-3;x2_0<-5  ## with a pattern in 3D
+    t_obsevs=3*1000+2
+    lcng2a<-data.frame(matrix(x2_0,nrow=t_obsevs,ncol=2))
+    for(i in 3:t_obsevs){
+        lcng2a[i,1]<-new_lcng_number(lcng2a[i-1,1],a,c,m)
+        lcng2a[i,2]<-i%%3
+    }
+    lcng2a<-lcng2a[-c(1:2),]
+    scatterplot3d(x=lcng2a[lcng2a$X2==0,1],y=lcng2a[lcng2a$X2==1,1],z=lcng2a[lcng2a$X2==2,1],pch=20,axis = F)
+    a<-11.9;c<-1;m<-3;x2_0<-5 ## no OBVIOUS pattern in 3D
+    t_obsevs=3*1000+2
+    lcng2a<-data.frame(matrix(x2_0,nrow=t_obsevs,ncol=2))
+    for(i in 3:t_obsevs){
+        lcng2a[i,1]<-new_lcng_number(lcng2a[i-1,1],a,c,m)
+        lcng2a[i,2]<-i%%3
+    }
+    lcng2a<-lcng2a[-c(1:2),]
+    scatterplot3d(x=lcng2a[lcng2a$X2==0,1],y=lcng2a[lcng2a$X2==1,1],z=lcng2a[lcng2a$X2==2,1],pch=20, axis=F)
+    
+
+```
+
+## Data wranging -- common plots
+
+1. histogram
+2. box plot vs violin plot
+3. scatter plot
+4. pie chart, ...
+
+*don't forget color and shape as dimensions*
+
+## Remember -- Good practices note
+
+If you are getting data from the internet, it is a good idea to protect against:
+
+1. data source being down  
+2. data source being changed  
+3. other unknown issues  
+
+I generally pull the data down, then save the data to a .Rds file.  My project includes:  
+
+1. commented code used to pull data down  
+2. commented code used to save data  
+3. code to read data into R from the saved file  
+4. AND often project image files as mid-stream checkpoints
+
+## Basic R data structures
+
+- vector
+- matrices (and arrays)
+- data frame
+- list
+
+## Vectors
+
+Vectors are data structures containing 1 or more elements of the same type.  R knows about **logical, numeric (integer and double), character**, complex and raw.  For instance:
+
+```{r eval=F, include=T, echo=T}
+v<-1  
+v<-c(1,2)  
+v<-c("a","b")
+```
+
+Note 1: a scalar is a vector  
+Note 2: v<-c("a",1) may not do what you want.  
+
+try: typeof(v), str(v), or class(v)  
+
+## Matrices
+
+Matrices are the two dimensional version of vectors.  All elements are of the same type.  Arrays are the multi-dimensional equivalent to matrices, but are actually vectors.
+
+```{r eval=F, include=T, echo=T}
+y<-matrix(LETTERS,nrow = 13)
+rnames<-c(1:13)
+cnames<-c("odds","evens")
+y<-matrix(LETTERS,nrow = 13,byrow = T, dimnames=list(rnames,cnames))
+z<-array(1:12,c(3,2,2))
+str(z)
+```
+
+## Data Frames (and data tables)
+
+Data frames are generic matrices meaning they can hold data of different types (by column).
+
+```{r eval=F, include=T, echo=T}
+# ?data.frame
+L3 <- LETTERS[1:3]
+fac <- sample(L3, 10, replace = TRUE)
+(d <- data.frame(x = 1, y = 1:10, fac = fac))
+```
+
+## Lists | we won't use this for a while
+
+An unordered collection of objects.  These can be useful in creating complex data types.
+
+```{r eval=F, include=T, echo=T}
+name<-c("jack","jill","joe","jenny")
+ages<-c(6,7,8,9)
+people<-list(name=name,ages=ages)
+people<-list()
+people[["jack"]]<-data.frame(age=6,married="T",spouse="jill")
+people[["jill"]]<-data.frame(age=6,married="T",spouse="jack")
+people[["joe"]]<-data.frame(age=6,married="F")
+```
+
+## Examples | simple calculations
+
+1. calculate sum of 1^2 + 2^2 + ... + 400^2
+2. calculate sum of 1\*2 + 2\*3 + 3\*4 + ... + 249\*250
+
+## Example | Numerical integration using Riemann sum
+
+$\int_0^{\pi/6}cos(x) dx$
+
+```{r echo=F, eval=T, include=T, fig.height=4, fig.width=6}
+
+par(mfcol=c(1,2))
+##example 1 -- f(x) = x^2
+
+# step 1: partition the range of the integration into n segements.
+n.seg = 6  # this is the total number of segments. 
+segments = seq(from = 1, to = 3, length.out = n.seg + 1)
+# this gives n.seg+1 equally spaced segment points
+plot(segments, segments^2,type='n', main='x^2', col="red", xlim=c(1,3),xaxs="i")
+# step 2. calculate the evaluation point, middle point of each segment.
+eval.points = (segments[1:n.seg] + segments[2:(n.seg+1)])/2
+# step 3. calculate the width of the segments.
+del = (2)/n.seg
+rect(eval.points-del/2,0,eval.points+del/2,ytop=eval.points^2,xpd=F,col="green")
+lines(eval.points, (eval.points)^2, col="red",type="l")
+# step 4. evaluate the function at the evaluation points
+f.t = cos(eval.points) 
+# step 5. calculate the area of each rectangle and sum up.
+total1<-sum(f.t*del)
+
+
+##example 2 -- f(x) = cos(x)
+
+# step 1: partition the range of the integration into n segements.
+n.seg = 1000  # this is the total number of segments. 
+segments = seq(from = 0, to = pi/6, length.out = n.seg + 1)
+# this gives n.seg+1 equally spaced segment points
+plot(segments, cos(segments), type='l', main='cos(x)')
+# step 2. calculate the evaluation point, middle point of each segment.
+eval.points = (segments[1:n.seg] + segments[2:(n.seg+1)])/2
+# step 3. calculate the width of the segments.
+del = (pi/6)/n.seg
+# step 4. evaluate the function at the evaluation points
+f.t = cos(eval.points) 
+# step 5. calculate the area of each rectangle and sum up.
+total2<-sum(f.t*del)
+
+```
+
+## Example | Solve system of equations
+
+$$
+\begin{aligned}
+x_1 - 2x_2 &= -1  \\
+-x_1 + 3x_2 &= 3
+\end{aligned}
+$$
+Can be written:
+
+$$
+\begin{aligned}
+\begin{pmatrix} 1 & -2 \\ -1 & 3 \end{pmatrix}
+\begin{pmatrix} x_1 \\ x_2\end{pmatrix} = 
+\begin{pmatrix} -1 \\ 3\end{pmatrix}
+\end{aligned}
+$$
+OR, solving:
+
+$$
+\begin{aligned}
+\begin{pmatrix} x_1 \\ x_2\end{pmatrix} = \begin{pmatrix} 1 & -2 \\ -1 & 3 \end{pmatrix}^{-1}
+\begin{pmatrix} -1 \\ 3\end{pmatrix}
+\end{aligned}
+$$
+
+## Next up
+
++ In-class munging  
++ Homework 2

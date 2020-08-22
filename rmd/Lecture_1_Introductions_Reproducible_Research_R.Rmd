@@ -1,5 +1,5 @@
 ---
-title: 'Introductions, Reproducible Research, (a little) R, and (a little) Git'
+title: 'Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git'
 subtitle: "August 20, 2020"
 author: "Robert Settlage"
 authorbox: false

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R" />
+<meta property="og:description" content="Today’s Agenda  Review the concepts of Reproducible Research
+ Review Git
+ Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
+You had worked 6 months to analyze a data set. Someone else analyzes the data and comes to different conclusions. How good are your notes???
+Answer: Awesome, because you annotated your code with text to create a RR compendium" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/STAT_5014_Fall_2020/2020/08/22/lecture-2/" />
+<meta property="article:published_time" content="2020-08-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-22T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-08-22T00:00:00">August 22, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Review the concepts of Reproducible Research<br />
+</li>
+<li>Review Git<br />
+</li>
+<li>Importing, cleaning and munging data</li>
+<li>Summarizing and exploring data</li>
+<li>Vectors, matrices, and data frames</li>
+</ul>
+</div>
+<div id="reproducible-research-review" class="section level2">
+<h2>Reproducible Research | Review</h2>
+<p>This was the scenario:<br />
+You had worked 6 months to analyze a data set. Someone else analyzes the data and comes to <em>different</em> conclusions. How good are your notes???</p>
+<p>Answer: <strong><em>Awesome, because you annotated your code with text to create a RR compendium</em></strong></p>
+</div>
+<div id="reproducible-research---concepts" class="section level2">
+<h2>Reproducible Research - Concepts</h2>
+<p><strong><em>Basically just switching the role of code and comments in writing software</em></strong></p>
+<p>Guide to this topic here:
+<a href="http://ropensci.github.io/reproducibility-guide/" class="uri">http://ropensci.github.io/reproducibility-guide/</a></p>
+<p>In general, we should <strong>weave</strong> code and text into a complete reference of our work. The document should:</p>
+<ul>
+<li>download or otherwise load/generate data</li>
+<li>reproduce steps to munge data</li>
+<li>recreate analysis steps</li>
+<li>create figures and tables</li>
+<li>explain any and all steps along the way</li>
+<li>end with conclusions drawn</li>
+<li>optionally add suggestions for future experiments</li>
+</ul>
+</div>
+<div id="version-control" class="section level2">
+<h2>Version Control</h2>
+<p>What is version control - a system for storing data and tracking changes.</p>
+<ul>
+<li>Why should I use version control?
+<a href="http://stackoverflow.com/questions/1408450/why-should-i-use-version-control" class="uri">http://stackoverflow.com/questions/1408450/why-should-i-use-version-control</a></li>
+<li>R and version control for the solo data analyst<br />
+<a href="http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst" class="uri">http://stackoverflow.com/questions/2712421/r-and-version-control-for-the-solo-data-analyst</a></li>
+</ul>
+<p>Thoughts or comments??</p>
+</div>
+<div id="version-control-and-git" class="section level2">
+<h2>Version Control and Git</h2>
+<p>Git is essentially a database of snapshots of the project directory tree. You decide when and what to take snapshots of and if you using GitHub (or similar) when to push a copy to a remote repository.</p>
+<p>The basic workflow is:</p>
+<ol style="list-style-type: decimal">
+<li>git <strong>pull</strong><br />
+</li>
+<li><strong>do work</strong><br />
+</li>
+<li>git <strong>pull</strong> to make sure you have latest files</li>
+<li>git <strong>add</strong> <em>&lt;your changed file&gt;</em> tells git what change you care about<br />
+</li>
+<li>git <strong>commit</strong> -m “some INFORMATIVE message about the changes”<br />
+</li>
+<li>git <strong>push</strong> to the repository (local or remote)<br />
+</li>
+<li>repeat</li>
+</ol>
+</div>
+<div id="git-file-states" class="section level2">
+<h2>Git file states</h2>
+<ul>
+<li>Untracked - files that have not been added to the database</li>
+<li>Committed - data is safely stored in your local database<br />
+</li>
+<li>Modified - file is changed but not committed it to your database yet<br />
+</li>
+<li>Staged - a modified file in its current version will go in next commit snapshot</li>
+</ul>
+<div class="figure">
+<img src="img/git_file_lifecycle.png" alt="Git file lifecycle" />
+<p class="caption">Git file lifecycle</p>
+</div>
+</div>
+<div id="back-to-reproducible-research-analysis" class="section level2">
+<h2>Back to Reproducible Research Analysis</h2>
+<p>From Hadley Wickham &amp; Garrett Grolemund’s R for Data Science
+<a href="http://r4ds.had.co.nz" class="uri">http://r4ds.had.co.nz</a><br />
+<img src="img/data-science-pipeline.png" alt="Data Science Pipeline" /></p>
+<p>Today we focus on getting and cleaning the data.</p>
+</div>
+<div id="data-wrangling" class="section level2">
+<h2>Data wrangling</h2>
+<p>Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. Steps may include any or all of the following:</p>
+<table style="width:51%;">
+<colgroup>
+<col width="15%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Import</td>
+<td><ul>
+<li>read.table(html,json)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Clean</td>
+<td><ul>
+<li>filter and subset</li>
+<li>standardize</li>
+<li>renaming</li>
+<li>type conversions</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Reformat</td>
+<td><ul>
+<li>merging</li>
+<li>reshaping</li>
+<li>aggregating</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-wrangling-getting-data" class="section level2">
+<h2>Data wrangling – getting data</h2>
+<ul>
+<li>load internal dataset</li>
+</ul>
+<pre class="r"><code>    library(help = &quot;datasets&quot;)
+    ?PlantGrowth</code></pre>
+<ul>
+<li>copy and paste<br />
+</li>
+<li>load file
+<ul>
+<li>local<br />
+</li>
+<li>web</li>
+</ul></li>
+</ul>
+<pre class="r"><code>    ?read.table; ?read.csv
+    url&lt;-&quot;http://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/onewaymuzzle.dat&quot;
+    chp2_muzzle&lt;-read.table(url,header=T)
+    #google &quot;how to get data into R&quot;</code></pre>
+<ul>
+<li>generate data</li>
+</ul>
+<pre class="r"><code>    set.seed(123456)
+    coin_flips&lt;-rbinom(n = 1000,size = 1, prob = .501)</code></pre>
+</div>
+<div id="data-importing-good-practices" class="section level2">
+<h2>Data importing – good practices</h2>
+<p>If you are getting data from the internet, it is a good idea to protect against:</p>
+<ol style="list-style-type: decimal">
+<li>data source being down<br />
+</li>
+<li>data source being changed<br />
+</li>
+<li>other unknown issues</li>
+</ol>
+<p>I generally pull the data down, then save the data to an .Rds file. My project includes:</p>
+<ol style="list-style-type: decimal">
+<li>commented code used to pull data down<br />
+</li>
+<li>commented code used to save data<br />
+</li>
+<li>code to read data into R from the saved file<br />
+</li>
+<li>AND often project image files as mid-stream checkpoints</li>
+</ol>
+</div>
+<div id="data-wrangling---cleaning" class="section level2">
+<h2>Data wrangling - cleaning</h2>
+<p>Getting data into R is <em><strong>usually</strong></em> not the problem, often the fun starts when we start to actually look at what we were given. Common issues:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">issue</th>
+<th align="left">examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">missing values</td>
+<td align="left">recorded as “-”, “NA”,“0”</td>
+</tr>
+<tr class="even">
+<td align="left">jagged arrays</td>
+<td align="left">missing fields</td>
+</tr>
+<tr class="odd">
+<td align="left">inconsistent data coding</td>
+<td align="left">2017-01-22 vs 01-22-2017 vs Jan 22, 2017</td>
+</tr>
+<tr class="even">
+<td align="left">line termination</td>
+<td align="left">platform inconsistencies</td>
+</tr>
+<tr class="odd">
+<td align="left">field delimiter issues</td>
+<td align="left">csv has data values that use commas</td>
+</tr>
+</tbody>
+</table>
+<p>And pretty much any other issue you might imagine.</p>
+</div>
+<div id="data-wrangling---summarizing-and-tables" class="section level2">
+<h2>Data wrangling - summarizing and tables</h2>
+<p>A quick way to see if there are issues with the data is to create a summary of the data. There are many useful metrics to capture, BUT, at a high level, here we really are most concerned with metrics associated with the data structure, i.e. number of observations, missing values, data types etc. R has a function for that… :)</p>
+<pre class="r"><code>    ?str
+    ?summary
+    str(iris)
+    summary(iris)</code></pre>
+</div>
+<div id="data-wrangling---reformattingstandardizing" class="section level2">
+<h2>Data wrangling - reformatting/standardizing</h2>
+<p>Now that we have the data in R, we need to get it into a useable format. One idea for a set of standards for structuring a data set is to create a so called “tidy” data set.</p>
+<p><a href="http://vita.had.co.nz/papers/tidy-data.html" class="uri">http://vita.had.co.nz/papers/tidy-data.html</a></p>
+<p>Essentially, we need to reformat the data such that:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable forms a column.<br />
+</li>
+<li>Each observation forms a row.<br />
+</li>
+<li>Each type of observational unit forms a table.</li>
+</ol>
+<p>Any other structure to the data is considered messy. Sound easy?</p>
+</div>
+<div id="data-wrangling---reformatting" class="section level2">
+<h2>Data wrangling - reformatting</h2>
+<p>OK, what is wrong with this?</p>
+<table>
+<caption><span id="tab:unnamed-chunk-5">Table 1: </span>Messy Data</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">treatmenta</th>
+<th align="right">treatmentb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">John Smith</td>
+<td align="left">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Jane Doe</td>
+<td align="left">16</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">Mary Johnson</td>
+<td align="left">3</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>What we want is something more akin to a model:</p>
+<p><span class="math display">\[
+y_i = \beta_1 x_{i1} + \beta_2 x_{i2} ...
+\]</span></p>
+<p><em>Going to give this topic more time next week with the tidyverse</em></p>
+<p>To print the table in a document, we have several options. My current favorites are kable and stargazer. Other community tools include <strong>Pander</strong> and <strong>xtable</strong>.</p>
+</div>
+<div id="data-wrangling-other-wrangling-tasks" class="section level2">
+<h2>Data wrangling – other wrangling tasks</h2>
+<p>dplyr is another package by Hadley Wickam. As a practicing data scientist, he has a good feel for what functions we would like to see.</p>
+<p>A few data processing goals enabled in dplyr</p>
+<ol style="list-style-type: decimal">
+<li>data summarizing<br />
+</li>
+<li>subsetting by observation<br />
+</li>
+<li>subsetting variables<br />
+</li>
+<li>creating new variables<br />
+</li>
+<li>grouping data<br />
+</li>
+<li>combining data</li>
+</ol>
+<p><em>look at Data Wrangling Cheatsheet</em></p>
+</div>
+<div id="data-wrangling-quick-plot-summaries" class="section level2">
+<h2>Data wrangling – quick plot summaries</h2>
+<p>Sometimes, a picture really is worth a 1000 words.</p>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_2_Data_structures_Reproducible_research_Git_files/figure-html/boxexample-1.png" width="576" /></p>
+</div>
+<div id="data-wrangling-another-quick-plot" class="section level2">
+<h2>Data wrangling – another quick plot</h2>
+<pre><code>## Warning: package &#39;scatterplot3d&#39; was built under R version 4.0.2</code></pre>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_2_Data_structures_Reproducible_research_Git_files/figure-html/lcng_implementation-1.png" width="576" /></p>
+</div>
+<div id="data-wranging-common-plots" class="section level2">
+<h2>Data wranging – common plots</h2>
+<ol style="list-style-type: decimal">
+<li>histogram</li>
+<li>box plot vs violin plot</li>
+<li>scatter plot</li>
+<li>pie chart, …</li>
+</ol>
+<p><em>don’t forget color and shape as dimensions</em></p>
+</div>
+<div id="remember-good-practices-note" class="section level2">
+<h2>Remember – Good practices note</h2>
+<p>If you are getting data from the internet, it is a good idea to protect against:</p>
+<ol style="list-style-type: decimal">
+<li>data source being down<br />
+</li>
+<li>data source being changed<br />
+</li>
+<li>other unknown issues</li>
+</ol>
+<p>I generally pull the data down, then save the data to a .Rds file. My project includes:</p>
+<ol style="list-style-type: decimal">
+<li>commented code used to pull data down<br />
+</li>
+<li>commented code used to save data<br />
+</li>
+<li>code to read data into R from the saved file<br />
+</li>
+<li>AND often project image files as mid-stream checkpoints</li>
+</ol>
+</div>
+<div id="basic-r-data-structures" class="section level2">
+<h2>Basic R data structures</h2>
+<ul>
+<li>vector</li>
+<li>matrices (and arrays)</li>
+<li>data frame</li>
+<li>list</li>
+</ul>
+</div>
+<div id="vectors" class="section level2">
+<h2>Vectors</h2>
+<p>Vectors are data structures containing 1 or more elements of the same type. R knows about <strong>logical, numeric (integer and double), character</strong>, complex and raw. For instance:</p>
+<pre class="r"><code>v&lt;-1  
+v&lt;-c(1,2)  
+v&lt;-c(&quot;a&quot;,&quot;b&quot;)</code></pre>
+<p>Note 1: a scalar is a vector<br />
+Note 2: v&lt;-c(“a”,1) may not do what you want.</p>
+<p>try: typeof(v), str(v), or class(v)</p>
+</div>
+<div id="matrices" class="section level2">
+<h2>Matrices</h2>
+<p>Matrices are the two dimensional version of vectors. All elements are of the same type. Arrays are the multi-dimensional equivalent to matrices, but are actually vectors.</p>
+<pre class="r"><code>y&lt;-matrix(LETTERS,nrow = 13)
+rnames&lt;-c(1:13)
+cnames&lt;-c(&quot;odds&quot;,&quot;evens&quot;)
+y&lt;-matrix(LETTERS,nrow = 13,byrow = T, dimnames=list(rnames,cnames))
+z&lt;-array(1:12,c(3,2,2))
+str(z)</code></pre>
+</div>
+<div id="data-frames-and-data-tables" class="section level2">
+<h2>Data Frames (and data tables)</h2>
+<p>Data frames are generic matrices meaning they can hold data of different types (by column).</p>
+<pre class="r"><code># ?data.frame
+L3 &lt;- LETTERS[1:3]
+fac &lt;- sample(L3, 10, replace = TRUE)
+(d &lt;- data.frame(x = 1, y = 1:10, fac = fac))</code></pre>
+</div>
+<div id="lists-we-wont-use-this-for-a-while" class="section level2">
+<h2>Lists | we won’t use this for a while</h2>
+<p>An unordered collection of objects. These can be useful in creating complex data types.</p>
+<pre class="r"><code>name&lt;-c(&quot;jack&quot;,&quot;jill&quot;,&quot;joe&quot;,&quot;jenny&quot;)
+ages&lt;-c(6,7,8,9)
+people&lt;-list(name=name,ages=ages)
+people&lt;-list()
+people[[&quot;jack&quot;]]&lt;-data.frame(age=6,married=&quot;T&quot;,spouse=&quot;jill&quot;)
+people[[&quot;jill&quot;]]&lt;-data.frame(age=6,married=&quot;T&quot;,spouse=&quot;jack&quot;)
+people[[&quot;joe&quot;]]&lt;-data.frame(age=6,married=&quot;F&quot;)</code></pre>
+</div>
+<div id="examples-simple-calculations" class="section level2">
+<h2>Examples | simple calculations</h2>
+<ol style="list-style-type: decimal">
+<li>calculate sum of 1^2 + 2^2 + … + 400^2</li>
+<li>calculate sum of 1*2 + 2*3 + 3*4 + … + 249*250</li>
+</ol>
+</div>
+<div id="example-numerical-integration-using-riemann-sum" class="section level2">
+<h2>Example | Numerical integration using Riemann sum</h2>
+<p><span class="math inline">\(\int_0^{\pi/6}cos(x) dx\)</span></p>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_2_Data_structures_Reproducible_research_Git_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+</div>
+<div id="example-solve-system-of-equations" class="section level2">
+<h2>Example | Solve system of equations</h2>
+<p><span class="math display">\[
+\begin{aligned}
+x_1 - 2x_2 &amp;= -1  \\
+-x_1 + 3x_2 &amp;= 3
+\end{aligned}
+\]</span>
+Can be written:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{pmatrix} 1 &amp; -2 \\ -1 &amp; 3 \end{pmatrix}
+\begin{pmatrix} x_1 \\ x_2\end{pmatrix} = 
+\begin{pmatrix} -1 \\ 3\end{pmatrix}
+\end{aligned}
+\]</span>
+OR, solving:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{pmatrix} x_1 \\ x_2\end{pmatrix} = \begin{pmatrix} 1 &amp; -2 \\ -1 &amp; 3 \end{pmatrix}^{-1}
+\begin{pmatrix} -1 \\ 3\end{pmatrix}
+\end{aligned}
+\]</span></p>
+</div>
+<div id="next-up" class="section level2">
+<h2>Next up</h2>
+<ul>
+<li>In-class munging<br />
+</li>
+<li>Homework 2</li>
+</ul>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research/" rel="tag">Reproducible Research</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown/" rel="tag">Rmarkdown</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/git/" rel="tag">Git</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/munging/" rel="tag">munging</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/latex/" rel="tag">LaTeX</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/20/lecture-1/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/22/lecture-2/">Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/20/lecture-1/">Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2019/07/12/sample-homework/">Sample homework</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

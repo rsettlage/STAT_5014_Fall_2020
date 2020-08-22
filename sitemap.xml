@@ -3,12 +3,62 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/STAT_5014_Fall_2020/about/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
+    <loc>/STAT_5014_Fall_2020/categories/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/STAT_5014_Fall_2020/categories/</loc>
+    <loc>/STAT_5014_Fall_2020/tags/git/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/latex/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/lecture/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/categories/lecture/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/munging/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/post/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/reproducible-research/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/rmarkdown/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/tags/</loc>
+    <lastmod>2020-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/STAT_5014_Fall_2020/about/</loc>
     <lastmod>2020-08-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -28,47 +78,12 @@
   </url>
   
   <url>
-    <loc>/STAT_5014_Fall_2020/tags/git/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/STAT_5014_Fall_2020/git-config/</loc>
     <lastmod>2020-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/tags/latex/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/tags/lecture/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/categories/lecture/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/post/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/tags/reproducible-research/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/tags/rmarkdown/</loc>
     <lastmod>2020-08-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -94,11 +109,6 @@
   
   <url>
     <loc>/STAT_5014_Fall_2020/tags/syllabus/</loc>
-    <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/STAT_5014_Fall_2020/tags/</loc>
     <lastmod>2020-08-20T00:00:00+00:00</lastmod>
   </url>
   
