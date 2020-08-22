@@ -1,0 +1,49 @@
+---
+title: "Homework 0"
+subtitle: "Due: more like a guide to knowing you are setup"
+author: "Robert Settlage"
+authorbox: false
+slug: "Homeowrk 0"
+date: 2020-08-20
+publishdate: 2020-08-20
+draft: false
+categories:
+- Homework
+tags: ["homework"]
+output:
+  pdf_document: default
+  fig_caption: yes
+  fig_height: 6
+  fig_width: 7
+  html_document: null
+  classoption: landscape
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+Homework 0 is all about being prepared.  Install *ALL* the required software (OR use Rstudio.cloud).  For the submission, please knit to pdf the default document as described below, print and bring to class.  This is the *ONLY* homework you will turn in via a printed copy.
+
+1. File --> New File --> R Markdown
+2. Fill in Author (you) and title (Homework 1)
+3. click the pdf toggle and hit ok
+4. click the knit pulldown and choose "knit to pdf"
+5. save it where ever you like
+6. print the resulting pdf and bring to first class
+
+### Required software (all free, install in order -- only if using Rstudio on laptop)
+
+Package         Source
+-------         --------------------------------
+Git:            https://git-scm.com/
+Github:         https://github.com (account) 
+Docker:         https://docs.docker.com/get-started/
+LaTeX:          https://miktex.org/
+R:              https://cran.r-project.org/  
+Rstudio:        http://rstudio.com/  
+-------         --------------------------------
+
+Note, on some platforms, LaTeX seems to be a royal PITA usually due to a previous installation.  If you have troubles, try installing the R package *tiny_tex*.  In this class, you are required to knit direct to pdf.  To test this, do "File -> New File -> R Markdown", choose the PDF toggle, click "ok", then simply "Knit to pdf".  If this works, you are good to go and you have your first homework assignment.
+
+### Preperation for next homework:  
+We will be using Git for *ALL* future assignments.  Make sure your computing platform is setup by following the instructions given on the course website under __submitting homework__.  To test your setup, add/commit/push the file you created and knitted in the last problem.  If you have questions or problems, see me.  Additionally, if you have time, please follow the git tutorial at:  
+- <http://www.molecularecologist.com/2013/11/using-github-with-r-and-rstudio/>  
+- <https://try.github.io/levels/1/challenges/1>

@@ -1,0 +1,94 @@
+---
+title: "Sample homework"
+author: "Bob Settlage"
+date: '2019-07-12'
+output:
+  pdf_document:
+    fig_caption: yes
+  html_document:
+    df_print: paged
+tags: 
+- sample homework
+categories:
+- Course Logistics
+---
+
+This is a sample of how I would like the homework to look when turned in.
+<!--more-->
+This is a sample of how I would like the homework to look when turned in.  _It will look a bit better imo, because you will knit to pdf rather than html as shown here._
+
+# Homework 1 
+# Your Name 
+# Date
+
+```{r setup, include=FALSE}
+##### 
+##### 
+##### Project setup #####
+##### 
+##### 
+##### 
+knitr::opts_chunk$set(collapse = TRUE)
+library(stargazer)
+##### 
+##### 
+```
+
+## Problem 1
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+You can embed an R code chunk like this, note that `kable` makes REALLY nice tables with ZERO effort as seen in Table 1.  Don't just print output to consol, use kable!!  In my opinion, including code to create tables in-line is a detraction, this is simple to show you how easy it is to do it.  Code that is relevant to the problem should be included, code that is for display or as a summary, should be omitted in-line and it is up to you on if it should be included in an Appendix.
+
+```{r Problem1a}
+##### 
+##### 
+##### Problem 1: Data summary #####
+##### output using kable
+##### 
+##### 
+knitr::kable(summary(cars), caption = "Quick summary of car data.")
+```
+
+Likewise, `stargazer` simplifies making tables of linear model output.  See Table 2 below.  See how simple??  Note that you don't need to set the type AND it will look better when knit to pdf.
+ 
+```{r Problem1b, results='asis'}
+##### 
+##### 
+##### Problem 1: Quick lm #####
+##### output using Stargazer
+##### 
+##### 
+fit <- lm(dist ~ speed, data = cars)
+stargazer(fit,header = F,type = "html")
+```
+
+## Problem 2
+
+You can also embed plots and have Rmarkdown figure out the figure number automatically.  Make sure and name the code chuck and then reference the figure using `\@ref(fig:Problem2a)`. See Figure \@ref(fig:Problem2a) for example: 
+
+```{r Problem2a, fig.cap='A fancy pie chart.', tidy=FALSE}
+##### 
+##### 
+##### Problem 2: plot #####
+##### making a pie chart
+##### 
+#####  
+par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
+  col = c('#0292D8', '#F7EA39', '#C4B632'),
+  init.angle = -50, border = NA
+)
+```
+
+---
+
+# Appendix 1: R code
+
+If you name the code chucks, it is easy to include code not really important to the main text but necessary as an Appendix.  For instance:
+
+```{r Appendix, ref.label=c("setup","Problem1a","Problem1b","Problem2a"), echo=TRUE, eval=FALSE, tidy=FALSE, include=T}
+  
+```
