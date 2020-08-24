@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Course Logistics on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/categories/course-logistics/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/categories/course-logistics/</link>
     <description>Recent content in Course Logistics on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/categories/course-logistics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/categories/course-logistics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Configuring Docker -- Work in progress!!</title>
-      <link>/STAT_5014_Fall_2020/docker-config/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/docker-config/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/docker-config/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/docker-config/</guid>
       <description>Nothing to do here!! This is really a work in progress for me.
 OK, decided to ditch the local config. In spite of the fact that Docker is supposed to be platform agnostic, it needs some sort of virtualization layer, so some versions of Windows are a no-go, eg Windows Home Ed. We will use Docker in Docker and use Singularity to launch it.
 Let’s talk a little about Docker.</description>
@@ -24,10 +24,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Git Conf</title>
-      <link>/STAT_5014_Fall_2020/git-config/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/git-config/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</guid>
       <description>
 
 
@@ -37,10 +37,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Stat 5014 Fall 2020 Schedule</title>
-      <link>/STAT_5014_Fall_2020/schedule/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/schedule/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</guid>
       <description>
 
 
@@ -50,10 +50,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Stat 5014 Fall 2020 Syllabus</title>
-      <link>/STAT_5014_Fall_2020/syllabus/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/syllabus/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/syllabus/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/syllabus/</guid>
       <description>
 
 
@@ -63,10 +63,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Sample homework</title>
-      <link>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
       <description>
 
 
@@ -76,10 +76,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Submitting homework</title>
-      <link>/STAT_5014_Fall_2020/homework-submit/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</link>
       <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/homework-submit/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</guid>
       <description>
 
 

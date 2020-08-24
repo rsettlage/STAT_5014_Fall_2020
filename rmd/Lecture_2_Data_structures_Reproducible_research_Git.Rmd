@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R'
-subtitle: "Sep 5, 2020"
+subtitle: "Sep 2, 2020"
 author: "Robert Settlage"
 authorbox: false
 slug: "Lecture-2"

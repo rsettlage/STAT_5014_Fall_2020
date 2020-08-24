@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lecture 3 - Data wrangling, munging and creating tidy datasets - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Lecture 3 - Data wrangling, munging and creating tidy datasets" />
+<meta property="og:description" content="Today’s Agenda  Review data importing, cleaning and munging data Creating tidy datasets Using the tidyverse In-class tidy’ing   Data wrangling Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. Data Wrangling Cheatsheet Steps may include any or all of the following:
+   Step Examples    Import  read." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/" />
+<meta property="article:published_time" content="2020-08-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-24T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Lecture 3 - Data wrangling, munging and creating tidy datasets</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-08-24T00:00:00">August 24, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Review data importing, cleaning and munging data</li>
+<li>Creating tidy datasets</li>
+<li>Using the tidyverse</li>
+<li>In-class tidy’ing</li>
+</ul>
+</div>
+<div id="data-wrangling" class="section level2">
+<h2>Data wrangling</h2>
+<p>Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. <em>Data Wrangling Cheatsheet</em> Steps may include any or all of the following:</p>
+<table style="width:51%;">
+<colgroup>
+<col width="15%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Import</td>
+<td><ul>
+<li>read.table(html,json)</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Clean</td>
+<td><ul>
+<li>filter and subset</li>
+<li>standardize</li>
+<li>renaming</li>
+<li>type conversions</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Reformat</td>
+<td><ul>
+<li>merging</li>
+<li>reshaping</li>
+<li>aggregating</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-importing-good-practices" class="section level2">
+<h2>Data importing – good practices</h2>
+<pre class="r"><code>    #google &quot;how to get data into R&quot;
+    url&lt;-&quot;http://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/Sensory.dat&quot;
+    sensory_raw&lt;-read.table(url, header=F, skip=1, fill=T, stringsAsFactors = F)
+    # read.table is ok, I prefer fread (in data.table package)
+    saveRDS(sensory_raw,file=&quot;sensory_raw.RDS&quot;)</code></pre>
+<p>If you are getting data from the internet, it is a good idea to protect against:</p>
+<ol style="list-style-type: decimal">
+<li>data source being down<br />
+</li>
+<li>data source being changed<br />
+</li>
+<li>other unknown issues</li>
+</ol>
+<p>I generally pull the data down, then save the data to an .Rds file. My project includes:</p>
+<ol style="list-style-type: decimal">
+<li>commented code used to pull data down<br />
+</li>
+<li>commented code used to save data<br />
+</li>
+<li>code to read data into R from the saved file<br />
+</li>
+<li>AND often project image files as mid-stream checkpoints</li>
+</ol>
+</div>
+<div id="data-wrangling-summaries" class="section level2">
+<h2>Data wrangling – summaries</h2>
+<p>?str, ?summary, group_by and dplyr, should mention doBy package<br />
+Sometimes, a picture really is worth a 1000 words.</p>
+<p>Run the following code until I fix the figure… =/</p>
+<pre class="r"><code>    library(beeswarm)
+    sex &lt;- (runif(1000)&gt;0.5)*1
+    drug_duration &lt;- sex*0.1 + rnorm(1000, 0, 0.1) + 5
+    drug_info &lt;- data.frame(cbind(drug_duration,sex))
+    drug_info$id &lt;- ifelse(drug_info$sex==0,&quot;M&quot;,&quot;F&quot;)</code></pre>
+</div>
+<div id="box-example" class="section level2">
+<h2>box example</h2>
+<p><img src="../img/boxexample2-1.png" width="576" /></p>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<div id="summary-functions" class="section level3">
+<h3>summary functions</h3>
+<ol style="list-style-type: decimal">
+<li>what does the imported data look like? Missing values, odd structures?</li>
+<li>What summaries, text or plots, might you make on the girder data as imported assuming 9 different girders?</li>
+</ol>
+</div>
+<div id="dplyr" class="section level3">
+<h3>dplyr</h3>
+<ol style="list-style-type: decimal">
+<li>Using dplyr functions, can you summarize the data? Mean by method, mean by girder? Min? Max?</li>
+</ol>
+</div>
+</div>
+<div id="problem-1-data-import" class="section level2">
+<h2>Problem 1 – Data import</h2>
+<div id="part-a" class="section level3">
+<h3>Part a:</h3>
+<p>Import data from a girder strength experiment described in Wu and Hamada’s Experiment Design book. This data has shear strength data obtained by 10 different methods on 9 different girders.
+url &lt;- “<a href="https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/fullgirder.dat" class="uri">https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/fullgirder.dat</a>”</p>
+</div>
+<div id="part-b" class="section level3">
+<h3>Part b:</h3>
+<p>What if the girder names, eg “S1/1”, had a meaning such as “steel girder 1 from lot 1” and you wanted to include this in your model. Can you import the data with the name correctly parsed? HINT: ?fread.</p>
+</div>
+</div>
+<div id="data-wrangling---reformattingstandardizing" class="section level2">
+<h2>Data wrangling - reformatting/standardizing</h2>
+<p>Now that we have the data in R, we need to get it into a useable format. One idea for a set of standards for structuring a data set is to create a so called “tidy” data set.</p>
+<p><a href="http://vita.had.co.nz/papers/tidy-data.html" class="uri">http://vita.had.co.nz/papers/tidy-data.html</a></p>
+<p>Essentially, we need to reformat the data such that:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable forms a column.<br />
+</li>
+<li>Each observation forms a row.<br />
+</li>
+<li>Each type of observational unit forms a table.</li>
+</ol>
+<p>Any other structure to the data is considered messy. Sound easy?</p>
+</div>
+<div id="data-wrangling---reformatting" class="section level2">
+<h2>Data wrangling - reformatting</h2>
+<p>OK, what is wrong with this?</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 1: </span>Messy Data</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">treatmenta</th>
+<th align="right">treatmentb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">John Smith</td>
+<td align="left">NA</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Jane Doe</td>
+<td align="left">16</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">Mary Johnson</td>
+<td align="left">3</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>What we want is something more akin to a model:</p>
+<p><span class="math display">\[
+y_i = \beta_1 x_{i1} + \beta_2 x_{i2} ...
+\]</span></p>
+</div>
+<div id="data-wrangling---base-r" class="section level2">
+<h2>Data wrangling - base R</h2>
+<p>The point in data munging is efficiently transforming and cleaning data to bring it into a usable state. In the example above, we saw functions from <em>plyr</em> and <em>tidyr</em> (look up <em>tidyverse</em>) used for to create a data “pipeline”. You may find other solutions that suit you better.</p>
+<pre class="r"><code>    tidy_data1_df&lt;-cbind(messy_data1_df,names=rownames(messy_data1_df))
+    tidy_data1_df&lt;-rbind(tidy_data1_df,tidy_data1_df)
+    tidy_data1_df[4:6,1]&lt;-tidy_data1_df[4:6,2]
+    tidy_data1_df$treatmentb&lt;-rep(c(&quot;a&quot;,&quot;b&quot;),each=3)
+    colnames(tidy_data1_df)&lt;-c(&quot;value&quot;,&quot;treatment&quot;,&quot;names&quot;)
+    rownames(tidy_data1_df)&lt;-NULL
+    tidy_data1_df&lt;-tidy_data1_df[,c(3,2,1)]
+    tidy_data1_df$value&lt;-as.numeric(tidy_data1_df$value)</code></pre>
+</div>
+<div id="data-wrangling---tidy-example" class="section level2">
+<h2>Data wrangling - tidy example</h2>
+<pre class="r"><code>    suppressPackageStartupMessages(library(tidyverse))
+    tidy_data1_df&lt;-messy_data1_df %&gt;%
+                    tibble::rownames_to_column() %&gt;%
+                    gather(&quot;treatment&quot;,&quot;value&quot;,treatmenta:treatmentb) %&gt;%
+                    mutate(treatment=str_replace(treatment,&quot;treatment&quot;,&quot;&quot;)) %&gt;%
+                    mutate(value=as.numeric(value))</code></pre>
+<pre><code>## Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion</code></pre>
+<pre class="r"><code>    knitr::kable(tidy_data1_df,format = &quot;markdown&quot;, caption=&quot;Tidy Data&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 2: </span>Tidy Data</caption>
+<thead>
+<tr class="header">
+<th align="left">rowname</th>
+<th align="left">treatment</th>
+<th align="right">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">John Smith</td>
+<td align="left">a</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Jane Doe</td>
+<td align="left">a</td>
+<td align="right">16</td>
+</tr>
+<tr class="odd">
+<td align="left">Mary Johnson</td>
+<td align="left">a</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">John Smith</td>
+<td align="left">b</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Jane Doe</td>
+<td align="left">b</td>
+<td align="right">11</td>
+</tr>
+<tr class="even">
+<td align="left">Mary Johnson</td>
+<td align="left">b</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a></p>
+</div>
+<div id="data-wrangling---messy-data-symptoms" class="section level2">
+<h2>Data wrangling - messy data symptoms</h2>
+<ul>
+<li>Column headers are values, not variable names.</li>
+<li>Multiple variables are stored in one column.</li>
+<li>Variables are stored in both rows and columns.</li>
+<li>Multiple types of observational units are stored in the same table.<br />
+</li>
+<li>A single observational unit is stored in multiple tables.</li>
+</ul>
+</div>
+<div id="in-class-tidying" class="section level2">
+<h2>In-class tidy’ing</h2>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/munging/" rel="tag">munging</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse/" rel="tag">tidyverse</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/22/lecture-2/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="http://rsettlage.github.io/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/24/lecture-3/">Lecture 3 - Data wrangling, munging and creating tidy datasets</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/22/lecture-2/">Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/20/lecture-1/">Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse" title="Tidyverse">Tidyverse</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -2,21 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/post/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/post/</link>
     <description>Recent content in Posts on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Lecture 3 - Data wrangling, munging and creating tidy datasets</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</guid>
+      <description>Today’s Agenda  Review data importing, cleaning and munging data Creating tidy datasets Using the tidyverse In-class tidy’ing   Data wrangling Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. Data Wrangling Cheatsheet Steps may include any or all of the following:
+   Step Examples    Import  read.</description>
+    </item>
+    
+    <item>
       <title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</title>
-      <link>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
       <description>Today’s Agenda  Review the concepts of Reproducible Research
  Review Git
  Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
@@ -26,10 +36,10 @@ Answer: Awesome, because you annotated your code with text to create a RR compen
     
     <item>
       <title>Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
-      <link>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
       <description>Today’s Agenda  Introduce the course Introduce the concepts of Reproducible Research Introduce Git
  Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
  Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.
@@ -38,10 +48,10 @@ https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
     
     <item>
       <title>Sample homework</title>
-      <link>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
       <description>
 
 

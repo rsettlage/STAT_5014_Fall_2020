@@ -1,0 +1,45 @@
+---
+title: "Lecture 3 in-class data wrangling, munging and creating tidy datasets"
+subtitle: "Sep 9, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-2-inclass"
+date: 2020-08-22
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+editor_options:
+  chunk_output_type: inline 
+---
+
+# Quick review
+
+# summary functions
+1. what does the imported data look like?  Missing values, odd structures?
+2. What summaries, text or plots, might you make on the girder data as imported assuming 9 different girders? 
+
+# dplyr
+1. Using dplyr functions, can you summarize the data? Mean by method, mean by girder?  Min? Max?
+```{r}
+library(dplyr)
+library(tidyr)
+iris %>% 
+    group_by(Species) %>%
+    summarize(avg=mean(Sepal.Width)) 
+```
+
+# homework practice and expectations
+
+Girder experiment
+<https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/fullgirder.dat>
+```{r}
+# look at first few lines
+# what strategy should we use
+# what summaries/plots are informative
+# 
+```
+
+
+## homework 2

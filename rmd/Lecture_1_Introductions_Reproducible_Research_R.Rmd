@@ -7,6 +7,7 @@ slug: "Lecture-1"
 date: 2020-08-20
 publishdate: 2020-08-20 
 draft: false
+mathjax: true
 categories:
 - Lecture
 tags:

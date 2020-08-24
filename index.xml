@@ -2,21 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/</link>
     <description>Recent content on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Lecture 3 - Data wrangling, munging and creating tidy datasets</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</guid>
+      <description>Today’s Agenda  Review data importing, cleaning and munging data Creating tidy datasets Using the tidyverse In-class tidy’ing   Data wrangling Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. Data Wrangling Cheatsheet Steps may include any or all of the following:
+   Step Examples    Import  read.</description>
+    </item>
+    
+    <item>
       <title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</title>
-      <link>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
       <description>Today’s Agenda  Review the concepts of Reproducible Research
  Review Git
  Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
@@ -26,10 +36,10 @@ Answer: Awesome, because you annotated your code with text to create a RR compen
     
     <item>
       <title>About</title>
-      <link>/STAT_5014_Fall_2020/about/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/about/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/about/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/about/</guid>
       <description>This class is STAT 5014. It is a 1 credit P/F class designed to get students up to speed with R and at least aware of other languages. At 1 credit, we do not have time to cover many advanced topics. I will introduce topics and I will provide lots of reading material for those interested in learning more.
 Course material Generally, there will be 3 parts:
  Lecture slides &amp;ndash; html style markdown Example code &amp;ndash; html style markdown Homework &amp;ndash; knitted pdf and the corresponding Rmd  I am including both pdf and html markdown to provide examples for those that are interested.</description>
@@ -37,10 +47,10 @@ Course material Generally, there will be 3 parts:
     
     <item>
       <title>Configuring Docker -- Work in progress!!</title>
-      <link>/STAT_5014_Fall_2020/docker-config/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/docker-config/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/docker-config/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/docker-config/</guid>
       <description>Nothing to do here!! This is really a work in progress for me.
 OK, decided to ditch the local config. In spite of the fact that Docker is supposed to be platform agnostic, it needs some sort of virtualization layer, so some versions of Windows are a no-go, eg Windows Home Ed. We will use Docker in Docker and use Singularity to launch it.
 Let’s talk a little about Docker.</description>
@@ -48,10 +58,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Git Conf</title>
-      <link>/STAT_5014_Fall_2020/git-config/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/git-config/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</guid>
       <description>
 
 
@@ -61,10 +71,10 @@ Let’s talk a little about Docker.</description>
     
     <item>
       <title>Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
-      <link>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
       <description>Today’s Agenda  Introduce the course Introduce the concepts of Reproducible Research Introduce Git
  Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
  Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.
@@ -73,10 +83,10 @@ https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
     
     <item>
       <title>Stat 5014 Fall 2020 Schedule</title>
-      <link>/STAT_5014_Fall_2020/schedule/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/schedule/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</guid>
       <description>
 
 
@@ -86,10 +96,10 @@ https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
     
     <item>
       <title>Stat 5014 Fall 2020 Syllabus</title>
-      <link>/STAT_5014_Fall_2020/syllabus/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/syllabus/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/syllabus/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/syllabus/</guid>
       <description>
 
 
@@ -99,10 +109,10 @@ https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
     
     <item>
       <title>Sample homework</title>
-      <link>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/07/12/sample-homework/</guid>
       <description>
 
 
@@ -112,10 +122,10 @@ https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
     
     <item>
       <title>Submitting homework</title>
-      <link>/STAT_5014_Fall_2020/homework-submit/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</link>
       <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/homework-submit/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</guid>
       <description>
 
 

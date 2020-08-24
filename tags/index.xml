@@ -2,111 +2,120 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/tags/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/</link>
     <description>Recent content in Tags on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>git</title>
-      <link>/STAT_5014_Fall_2020/tags/git/</link>
-      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/STAT_5014_Fall_2020/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LaTeX</title>
-      <link>/STAT_5014_Fall_2020/tags/latex/</link>
-      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/STAT_5014_Fall_2020/tags/latex/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Lecture</title>
-      <link>/STAT_5014_Fall_2020/tags/lecture/</link>
-      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/lecture/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>munging</title>
-      <link>/STAT_5014_Fall_2020/tags/munging/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/munging/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/munging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/tidyverse/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/git/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/munging/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LaTeX</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/latex/</link>
+      <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/latex/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reproducible Research</title>
-      <link>/STAT_5014_Fall_2020/tags/reproducible-research/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/reproducible-research/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/reproducible-research/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/reproducible-research/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rmarkdown</title>
-      <link>/STAT_5014_Fall_2020/tags/rmarkdown/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/rmarkdown/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/rmarkdown/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/rmarkdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>docker</title>
-      <link>/STAT_5014_Fall_2020/tags/docker/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/docker/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/docker/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Schedule</title>
-      <link>/STAT_5014_Fall_2020/tags/schedule/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/schedule/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/schedule/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/schedule/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Syllabus</title>
-      <link>/STAT_5014_Fall_2020/tags/syllabus/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/syllabus/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/syllabus/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/syllabus/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sample homework</title>
-      <link>/STAT_5014_Fall_2020/tags/sample-homework/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/sample-homework/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/sample-homework/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/sample-homework/</guid>
       <description></description>
     </item>
     
     <item>
       <title>homework</title>
-      <link>/STAT_5014_Fall_2020/tags/homework/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/homework/</link>
       <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/tags/homework/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/homework/</guid>
       <description></description>
     </item>
     

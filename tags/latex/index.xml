@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LaTeX on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/tags/latex/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/latex/</link>
     <description>Recent content in LaTeX on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/latex/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</title>
-      <link>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
       <description>Today’s Agenda  Review the concepts of Reproducible Research
  Review Git
  Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
@@ -26,10 +26,10 @@ Answer: Awesome, because you annotated your code with text to create a RR compen
     
     <item>
       <title>Lecture 1 - Introductions, Reproducible Research, (a little) R, and (a little) Git</title>
-      <link>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/20/lecture-1/</guid>
       <description>Today’s Agenda  Introduce the course Introduce the concepts of Reproducible Research Introduce Git
  Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
  Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.

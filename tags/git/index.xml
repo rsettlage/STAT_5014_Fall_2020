@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>git on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/tags/git/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/git/</link>
     <description>Recent content in git on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Aug 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lecture 2 - Data structures, Reproducible Research, loading, cleaning and munging data in R</title>
-      <link>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</link>
       <pubDate>Sat, 22 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/22/lecture-2/</guid>
       <description>Today’s Agenda  Review the concepts of Reproducible Research
  Review Git
  Importing, cleaning and munging data Summarizing and exploring data Vectors, matrices, and data frames   Reproducible Research | Review This was the scenario:
@@ -26,10 +26,10 @@ Answer: Awesome, because you annotated your code with text to create a RR compen
     
     <item>
       <title>Git Conf</title>
-      <link>/STAT_5014_Fall_2020/git-config/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</link>
       <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/git-config/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/git-config/</guid>
       <description>
 
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tidyverse on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/tidyverse/</link>
+    <description>Recent content in tidyverse on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 3 - Data wrangling, munging and creating tidy datasets</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</guid>
+      <description>Today’s Agenda  Review data importing, cleaning and munging data Creating tidy datasets Using the tidyverse In-class tidy’ing   Data wrangling Data wrangling or munging is the process of going from raw to useful data. This can be 60-80% of the time spent on a project. Data Wrangling Cheatsheet Steps may include any or all of the following:
+   Step Examples    Import  read.</description>
+    </item>
+    
+  </channel>
+</rss>

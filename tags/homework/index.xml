@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>homework on STAT-5014 Fall 2020</title>
-    <link>/STAT_5014_Fall_2020/tags/homework/</link>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/homework/</link>
     <description>Recent content in homework on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 10 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/STAT_5014_Fall_2020/tags/homework/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/homework/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Submitting homework</title>
-      <link>/STAT_5014_Fall_2020/homework-submit/</link>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</link>
       <pubDate>Wed, 10 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/STAT_5014_Fall_2020/homework-submit/</guid>
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/homework-submit/</guid>
       <description>
 
 
