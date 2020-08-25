@@ -15,7 +15,18 @@ In Lectures 2 and 3, we spoke about Reproducible Research, R and version control
 
 ## Problem 1
 
-Work through Primers titled "Work with Data" and "Tidy Your Data"
+Work through Primers titled "Work with Data" and "Tidy Your Data".
+
+For a different take on how to use R, try swirl:
+
+```{r echo=TRUE, eval=FALSE}
+install.packages("swirl")
+install_course("Getting_and_Cleaning_Data")
+install_course("Exploratory_Data_Analysis")
+swirl()
+```
+
+These can be a little cheezy, but are overall a pretty decent intro.  Each one takes 5-10 min.  Pick and choose as you like.  Don't worry about submitting anything at the end, these were used for credits in a Coursera Data Science Course.
 
 ## Problem 2
 
