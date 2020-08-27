@@ -4,19 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Lecture 4 - R functions and logic, good programming practices - STAT-5014 Fall 2020</title>
+	<title>Lecture 5 - Vector and matrix math - STAT-5014 Fall 2020</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-	<meta property="og:title" content="Lecture 4 - R functions and logic, good programming practices" />
-<meta property="og:description" content="Today’s Agenda  Review data munging and creating tidy datasets Introduce good programming practices
- R functions
- for next
- if else while loop   Data wrangling - messy data symptoms  Column headers are values, not variable names. Multiple variables are stored in one column. Variables are stored in both rows and columns. Multiple types of observational units are stored in the same table.
- A single observational unit is stored in multiple tables." />
+	<meta property="og:title" content="Lecture 5 - Vector and matrix math" />
+<meta property="og:description" content="Today’s Agenda  Review good programming practices Review R functions – for/next, if/else, while/loop
+ Show some of the functions R has for matrix/vector operations   Good Programming Practices Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-4/" />
-<meta property="article:published_time" content="2020-08-25T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-25T00:00:00+00:00" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/26/lecture-5/" />
+<meta property="article:published_time" content="2020-08-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-26T00:00:00+00:00" />
 
 	
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -81,11 +78,11 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Lecture 4 - R functions and logic, good programming practices</h1>
+			<h1 class="post__title">Lecture 5 - Vector and matrix math</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2020-08-25T00:00:00">August 25, 2020</time>
+	<time class="meta__text" datetime="2020-08-26T00:00:00">August 26, 2020</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -100,35 +97,15 @@
 <div id="todays-agenda" class="section level2">
 <h2>Today’s Agenda</h2>
 <ul>
-<li>Review data munging and creating tidy datasets</li>
-<li>Introduce good programming practices<br />
+<li>Review good programming practices</li>
+<li>Review R functions – for/next, if/else, while/loop<br />
 </li>
-<li>R functions<br />
-</li>
-<li>for next<br />
-</li>
-<li>if else</li>
-<li>while loop</li>
+<li>Show some of the functions R has for matrix/vector operations</li>
 </ul>
-</div>
-<div id="data-wrangling---messy-data-symptoms" class="section level2">
-<h2>Data wrangling - messy data symptoms</h2>
-<ul>
-<li>Column headers are values, not variable names.</li>
-<li>Multiple variables are stored in one column.</li>
-<li>Variables are stored in both rows and columns.</li>
-<li>Multiple types of observational units are stored in the same table.<br />
-</li>
-<li>A single observational unit is stored in multiple tables.</li>
-</ul>
-<p>With a goal of eventually evaluating a model:<br />
-<span class="math display">\[
-y_i = \beta_1 x_{i1} + \beta_2 x_{i2} ...
-\]</span></p>
 </div>
 <div id="good-programming-practices" class="section level2">
 <h2>Good Programming Practices</h2>
-<p>Most analysis will require some amount of programming (scripting). As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts.</p>
+<p>Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts.</p>
 <p>Google’s R Style Guide <a href="https://google.github.io/styleguide/Rguide.xml" class="uri">https://google.github.io/styleguide/Rguide.xml</a><br />
 Hadley Wickam’s Style Guide: <a href="http://r-pkgs.had.co.nz/style.html" class="uri">http://r-pkgs.had.co.nz/style.html</a></p>
 </div>
@@ -139,7 +116,7 @@ To enable this, we need well documented (annotated) <em><strong>readable</strong
 <ol style="list-style-type: decimal">
 <li>variable/object names
 <ul>
-<li>nouns describing what the object holds, e.g. originaData instead of d<br />
+<li>nouns describing what the object holds, e.g. originaData instad of d<br />
 </li>
 <li>DO NOT use existing variables or functions, e.g. T&lt;-1000</li>
 </ul></li>
@@ -166,23 +143,21 @@ To enable this, we need well documented (annotated) <em><strong>readable</strong
 </div>
 <div id="functions" class="section level2">
 <h2>Functions</h2>
-<p>A function is an <em><strong>object</strong></em> that takes some input objects (args) and produces some output objects. <em><strong>All</strong></em> work in R is done in functions. ‘[&lt;-’(animals,4,“duck”)</p>
+<p>A function is an <em><strong>object</strong></em> that takes some input objects (args) and produces some output objects.</p>
 <pre class="r"><code>    dataA&lt;-1;dataB&lt;-2
-
     BAD&lt;-function(x){
-    mean(c(x,dataA))
+        mean(c(x,dataA))
     }
-    
     computeMeanGOOD&lt;-function(x=3,y=5){
         # quick function to compute the geometric mean of two numbers, x and y
         # returns geometric mean
         if (!is.numeric(x) || !is.numeric(y)) stop(&quot;both x and y must be numeric&quot;)
-        return((x+y)/2)
+        return(mean(c(x,y)))
     }
-    
     BAD(x=dataB)
     computeMeanGOOD(x=dataA,y=dataB)</code></pre>
-<p>GOOD functions include passing in ALL necessary data. If we do not do this, we can have MAJOR issues with variable scope that is often difficult to troubleshoot. Ideally our code also includes error checking.</p>
+<p>GOOD functions include passing in ALL necessary data. If we do not do this, we can have MAJOR issues with variable scope that are often difficult to troubleshoot. Ideally our code also includes error checking.</p>
+<p><em><strong>All</strong></em> work in R is done in functions. ‘[&lt;-’(animals,4,“duck”)</p>
 </div>
 <div id="variable-scope" class="section level2">
 <h2>Variable scope</h2>
@@ -198,7 +173,7 @@ Another good site. Also has a few great stats books.</p>
     
     a &lt;- 1; b &lt;- 2
     f&lt;-function(x){ a*x + b }
-    ## what about this one??
+    ## what was this one
     g&lt;-function(x){ a &lt;&lt;- 2; b &lt;- 1; print(objects()); f(x) }
     g(2)</code></pre>
 </div>
@@ -303,81 +278,47 @@ Another good site. Also has a few great stats books.</p>
         ifelse(x&gt;bar,1,0)
     }
     x1&lt;-rnorm(n = 50000,mean=0.5)
-    times&lt;-microbenchmark(result1&lt;-left_right1(x=x1),result2&lt;-left_right2(x=x1),times = 100, unit = &quot;ms&quot;,control=list(warmup=0))</code></pre>
-<pre><code>## Warning in microbenchmark(result1 &lt;- left_right1(x = x1), result2 &lt;-
-## left_right2(x = x1), : Could not measure overhead. Your clock might lack
-## precision.</code></pre>
+    times&lt;-microbenchmark(result1&lt;-left_right1(x=x1),result2&lt;-left_right2(x=x1),times = 100, unit = &quot;ms&quot;)</code></pre>
 </div>
-<div id="timings-plot" class="section level2">
-<h2>Timings plot</h2>
+<div id="plot-of-timings" class="section level2">
+<h2>Plot of timings</h2>
 <pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
-<p><img src="/STAT_5014_Fall_2020/post/Lecture_4_good_programming_R_functions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_5_matrix_vector_math_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="bit-more-on-functions-in-r" class="section level2">
-<h2>Bit more on functions in R</h2>
-<p><a href="https://csgillespie.github.io/efficientR/programming.html" class="uri">https://csgillespie.github.io/efficientR/programming.html</a></p>
-<p>Everything in R is essentially a function call. Generally, this means at some point the function call will make a call to the underlying C/Fortran code.</p>
-<p>“A golden rule in R programming is to access the underlying C/Fortran routines as quickly as possible; the fewer functions calls required to achieve this, the better. For example, suppose <code>x</code> is a standard vector of length <code>n</code>. Then:”</p>
+<div id="what-is-your-prediction-for-the-following-timings" class="section level2">
+<h2>What is your prediction for the following timings?</h2>
+<p>(run me!!)</p>
+<pre class="r"><code>library(microbenchmark)
+
+N &lt;- 100000 #### &lt;- might start a little lower
+#manual vs internal mean function
+microbenchmark(result1&lt;-sum(1:N)/N,
+               result2&lt;-mean(1:N),times = 100, unit = &quot;ms&quot;)
+
+#preallocate vs form on fly
+temp&lt;-rep(NULL,N)
+microbenchmark(result1&lt;-{for(i in 1:length(temp)){temp[i]&lt;-1}},
+               result2&lt;-{temp2&lt;-rep(1,N)},times = 100, unit = &quot;ms&quot;)</code></pre>
 </div>
-<div id="example" class="section level2">
-<h2>Example</h2>
-<pre class="r"><code>x = x + 1</code></pre>
-<p><em>has a single call to the <code>+</code></em> function, whereas:</p>
-<pre class="r"><code>for(i in seq_len(n)) 
-  x[i] = x[i] + 1</code></pre>
-<p>has:</p>
+<div id="r-and-useful-matrix-stuff" class="section level2">
+<h2>R and useful matrix stuff</h2>
+<ol style="list-style-type: decimal">
+<li>matrix mult %*%</li>
+<li>transpose t()</li>
+<li>create diagonal matrix diag()
 <ul>
-<li><em>n</em> function calls to <em>+</em>;<br />
-</li>
-<li><em>n</em> function calls to the <em>[</em> function;<br />
-</li>
-<li><em>n</em> function calls to the <em>[&lt;-</em> function;<br />
-</li>
-<li>one call to the <em>for</em> function;<br />
-</li>
-<li>one call the the <em>seq_along</em> function.</li>
-</ul>
-<p>We will check this out in a bit.</p>
+<li>this one has two cases</li>
+</ul></li>
+<li>matrix inverse solve()</li>
+<li>determinate det()</li>
+<li>rank matA &lt;- qr(A); matA$rank</li>
+<li>t(x) %*% y crossprod()</li>
+</ol>
+<p>More comprehensive list here:
+<a href="https://www.statmethods.net/advstats/matrix.html" class="uri">https://www.statmethods.net/advstats/matrix.html</a></p>
 </div>
-<div id="memory-allocation-method-1" class="section level2">
-<h2>Memory allocation – Method 1</h2>
-<p>Memory management is the Achilles’ heel of many programming languages. If we are careful in our programming, we can alleviate many of the issues.</p>
-<p>Consider the following examples given in Gillespie’s R Book:</p>
-<p>Method 1: create empty vector, grow vector to final size</p>
-<pre class="r"><code>method1 = function(n) {
-  vec = NULL # Or vec = c()
-  for(i in seq_len(n))
-    vec = c(vec, i)
-  vec
-}</code></pre>
-</div>
-<div id="memory-allocation-method-2" class="section level2">
-<h2>Memory allocation – Method 2</h2>
-<p>Method 2: create vector of final length and change values via subscripting</p>
-<pre class="r"><code>method2 = function(n) {
-  vec = numeric(n)
-  for(i in seq_len(n))
-    vec[i] = i
-  vec
-}</code></pre>
-</div>
-<div id="memory-allocation-method-3" class="section level2">
-<h2>Memory allocation – Method 3</h2>
-<p>Method 3: create final object directly</p>
-<pre class="r"><code>method3 = function(n) seq_len(n)</code></pre>
-<p>Thoughts on the 3 methods??</p>
-</div>
-<div id="memory-and-functions" class="section level2">
-<h2>Memory and functions</h2>
-<p>This topic is really intertwined with lexical scoping. The basic idea is that R manages objects by creating environments. Each environment is essentially a bag of names pointing to thier associated memory space. Creating a function, creates a new environment. The environment lives as long as the function is active.</p>
-<p><a href="http://adv-r.had.co.nz/Functions.html#lexical-scoping" class="uri">http://adv-r.had.co.nz/Functions.html#lexical-scoping</a><br />
-<a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
-<p>As you program in R more, you will want to pay special attention to memory management and function calls.</p>
-<p>– memory used<br />
-– speed issues</p>
-<p>look at memory size of objects
-look at memory use of R
-look at memory use of R during a function call with large object</p>
+<div id="switch-to-notebook" class="section level2">
+<h2>Switch to notebook</h2>
 </div>
 
 		</div>
@@ -386,7 +327,7 @@ look at memory use of R during a function call with large object</p>
 	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
 		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
-		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/functions/" rel="tag">functions</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/math/" rel="tag">math</a></li>
 		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/good-programming/" rel="tag">good programming</a></li>
 		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/logic/" rel="tag">logic</a></li>
 	</ul>
@@ -397,10 +338,7 @@ look at memory use of R during a function call with large object</p>
 
 <nav class="post-nav flex">
 	<div class="post-nav__item post-nav__item--prev">
-		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/24/lecture-3/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 3 - Data wrangling, munging and creating tidy datasets</p></a>
-	</div>
-	<div class="post-nav__item post-nav__item--next">
-		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/26/lecture-5/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Lecture 5 - Vector and matrix math</p></a>
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/25/lecture-4/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 4 - R functions and logic, good programming practices</p></a>
 	</div>
 </nav>
 
