@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functions on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/functions/</link>
+    <description>Recent content in functions on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/functions/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 4 - R functions and logic, good programming practices</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-4/</link>
+      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-4/</guid>
+      <description>Today’s Agenda  Review data munging and creating tidy datasets Introduce good programming practices
+ R functions
+ for next
+ if else while loop   Data wrangling - messy data symptoms  Column headers are values, not variable names. Multiple variables are stored in one column. Variables are stored in both rows and columns. Multiple types of observational units are stored in the same table.
+ A single observational unit is stored in multiple tables.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -12,6 +12,29 @@
     
     
     <item>
+      <title>Lecture 4 - R functions and logic, good programming practices</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-4/</link>
+      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-4/</guid>
+      <description>Today’s Agenda  Review data munging and creating tidy datasets Introduce good programming practices
+ R functions
+ for next
+ if else while loop   Data wrangling - messy data symptoms  Column headers are values, not variable names. Multiple variables are stored in one column. Variables are stored in both rows and columns. Multiple types of observational units are stored in the same table.
+ A single observational unit is stored in multiple tables.</description>
+    </item>
+    
+    <item>
+      <title>Lecture 5 - Vector and matrix math</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-5/</link>
+      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-5/</guid>
+      <description>Today’s Agenda  Review good programming practices Review R functions – for/next, if/else, while/loop
+ Show some of the functions R has for matrix/vector operations   Good Programming Practices Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts.</description>
+    </item>
+    
+    <item>
       <title>Lecture 3 - Data wrangling, munging and creating tidy datasets</title>
       <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/24/lecture-3/</link>
       <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>

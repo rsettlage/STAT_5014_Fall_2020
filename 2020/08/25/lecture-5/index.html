@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lecture 5 - Vector and matrix math - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Lecture 5 - Vector and matrix math" />
+<meta property="og:description" content="Today’s Agenda  Review good programming practices Review R functions – for/next, if/else, while/loop
+ Show some of the functions R has for matrix/vector operations   Good Programming Practices Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-5/" />
+<meta property="article:published_time" content="2020-08-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-25T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Lecture 5 - Vector and matrix math</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-08-25T00:00:00">August 25, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Review good programming practices</li>
+<li>Review R functions – for/next, if/else, while/loop<br />
+</li>
+<li>Show some of the functions R has for matrix/vector operations</li>
+</ul>
+</div>
+<div id="good-programming-practices" class="section level2">
+<h2>Good Programming Practices</h2>
+<p>Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts.</p>
+<p>Google’s R Style Guide <a href="https://google.github.io/styleguide/Rguide.xml" class="uri">https://google.github.io/styleguide/Rguide.xml</a><br />
+Hadley Wickam’s Style Guide: <a href="http://r-pkgs.had.co.nz/style.html" class="uri">http://r-pkgs.had.co.nz/style.html</a></p>
+</div>
+<div id="good-programming-practices-cont" class="section level2">
+<h2>Good Programming Practices cont</h2>
+<p>Remember: ultimate goal is Reproducible Research.<br />
+To enable this, we need well documented (annotated) <em><strong>readable</strong></em> code.</p>
+<ol style="list-style-type: decimal">
+<li>variable/object names
+<ul>
+<li>nouns describing what the object holds, e.g. originaData instad of d<br />
+</li>
+<li>DO NOT use existing variables or functions, e.g. T&lt;-1000</li>
+</ul></li>
+<li>function formation
+<ul>
+<li>function names should be verb associated with the function purpose<br />
+</li>
+<li>comment both function purpose and required arguments<br />
+</li>
+<li>arguments should have defaults (my personal preference)</li>
+<li>my preference is to explicitly return a value<br />
+</li>
+</ul></li>
+<li>commenting rules
+<ul>
+<li>comment your code!! ’nough said?<br />
+</li>
+</ul></li>
+<li>indent within logical blocks of code !!
+<ul>
+<li>indenting improves the readability of the code by orders of magnitude!</li>
+</ul></li>
+</ol>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>A function is an <em><strong>object</strong></em> that takes some input objects (args) and produces some output objects.</p>
+<pre class="r"><code>    dataA&lt;-1;dataB&lt;-2
+    BAD&lt;-function(x){
+        mean(c(x,dataA))
+    }
+    computeMeanGOOD&lt;-function(x=3,y=5){
+        # quick function to compute the geometric mean of two numbers, x and y
+        # returns geometric mean
+        if (!is.numeric(x) || !is.numeric(y)) stop(&quot;both x and y must be numeric&quot;)
+        return(mean(c(x,y)))
+    }
+    BAD(x=dataB)
+    computeMeanGOOD(x=dataA,y=dataB)</code></pre>
+<p>GOOD functions include passing in ALL necessary data. If we do not do this, we can have MAJOR issues with variable scope that are often difficult to troubleshoot. Ideally our code also includes error checking.</p>
+<p><em><strong>All</strong></em> work in R is done in functions. ‘[&lt;-’(animals,4,“duck”)</p>
+</div>
+<div id="variable-scope" class="section level2">
+<h2>Variable scope</h2>
+<p>R uses Lexical scoping rules. What tha?</p>
+<p><a href="https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/" class="uri">https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/</a><br />
+Totally recommend subscribing to Darren’s blog AND reading all his past posts.</p>
+<p><a href="http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/" class="uri">http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/</a><br />
+Another good site. Also has a few great stats books.</p>
+<p>While we are at it, r-bloggers has many useful tidbits. <a href="https://www.r-bloggers.com" class="uri">https://www.r-bloggers.com</a></p>
+<pre class="r"><code>    z &lt;- 1; a &lt;- 1
+    m &lt;- function(){a &lt;- 2; return(c(a,z)) }
+    m(); a
+    
+    a &lt;- 1; b &lt;- 2
+    f&lt;-function(x){ a*x + b }
+    ## what was this one
+    g&lt;-function(x){ a &lt;&lt;- 2; b &lt;- 1; print(objects()); f(x) }
+    g(2)</code></pre>
+</div>
+<div id="for-statement" class="section level2">
+<h2>FOR statement</h2>
+<p>Often, we want to loop through a set number of items or do a task a predetermined length of time. Can add additional controls via <strong>break</strong> and <strong>next</strong>. To get help on functions type ?“for”</p>
+<pre class="r"><code>    Iter &lt;- 5
+    cumIndex &lt;- 0
+    for(i in 1:Iter){
+        #if(i %% 2==1) next
+        cumIndex &lt;- cumIndex + 1
+        #if(cumIndex&gt;3) break
+    }
+    print(cumIndex)</code></pre>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="if-else-statement" class="section level2">
+<h2>If ELSE statement</h2>
+<p>A powerful addition to any program is the ability to change the course of the program as conditions change. In R, one such flow change statement is the if else statement.</p>
+<pre class="r"><code>    Iter &lt;- 20
+    cumSumODDS &lt;- 0
+    cumSumEVENS &lt;- 0
+    for(i in 1:Iter){
+        if(i %% 2 == 1){
+            print(paste0(&quot;i=&quot;,i,&quot; is odd&quot;))
+            cumSumODDS = cumSumODDS + i
+        }else{
+            print(paste0(&quot;i=&quot;,i,&quot; is even&quot;))
+            cumSumEVENS = cumSumEVENS + i
+        }
+    }</code></pre>
+<pre><code>## [1] &quot;i=1 is odd&quot;
+## [1] &quot;i=2 is even&quot;
+## [1] &quot;i=3 is odd&quot;
+## [1] &quot;i=4 is even&quot;
+## [1] &quot;i=5 is odd&quot;
+## [1] &quot;i=6 is even&quot;
+## [1] &quot;i=7 is odd&quot;
+## [1] &quot;i=8 is even&quot;
+## [1] &quot;i=9 is odd&quot;
+## [1] &quot;i=10 is even&quot;
+## [1] &quot;i=11 is odd&quot;
+## [1] &quot;i=12 is even&quot;
+## [1] &quot;i=13 is odd&quot;
+## [1] &quot;i=14 is even&quot;
+## [1] &quot;i=15 is odd&quot;
+## [1] &quot;i=16 is even&quot;
+## [1] &quot;i=17 is odd&quot;
+## [1] &quot;i=18 is even&quot;
+## [1] &quot;i=19 is odd&quot;
+## [1] &quot;i=20 is even&quot;</code></pre>
+<pre class="r"><code>    cumSumEVENS</code></pre>
+<pre><code>## [1] 110</code></pre>
+<pre class="r"><code>    cumSumODDS</code></pre>
+<pre><code>## [1] 100</code></pre>
+</div>
+<div id="while-loop" class="section level2">
+<h2>While loop</h2>
+<p>A while loop can be thought of as a combination of a for loop and an if statement. Do until condition is true. In any iterative function, it is a good idea to a) have a progress indicator and b) have a fail safe.</p>
+<pre class="r"><code>    dummyVar &lt;- 0
+    iter &lt;- 0
+    while(dummyVar&lt;100){
+        dummyVar = dummyVar + 1
+        ## PROGRESS
+        if(dummyVar %% 5 == 0){
+            print(paste0(&quot;loop step=&quot;,dummyVar))
+        }
+        ## FAIL SAFE
+        if(iter&gt;50){
+            break
+        }else{
+            iter=iter+1
+        }
+    }</code></pre>
+<pre><code>## [1] &quot;loop step=5&quot;
+## [1] &quot;loop step=10&quot;
+## [1] &quot;loop step=15&quot;
+## [1] &quot;loop step=20&quot;
+## [1] &quot;loop step=25&quot;
+## [1] &quot;loop step=30&quot;
+## [1] &quot;loop step=35&quot;
+## [1] &quot;loop step=40&quot;
+## [1] &quot;loop step=45&quot;
+## [1] &quot;loop step=50&quot;</code></pre>
+</div>
+<div id="timing" class="section level2">
+<h2>Timing</h2>
+<p>As you start to make functions, it is a good idea to think about how long things take.</p>
+<p>Really good blog on this here: <a href="https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/" class="uri">https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/</a></p>
+<p>Consider the following code and timings:</p>
+<pre class="r"><code>    library(&quot;microbenchmark&quot;)</code></pre>
+<pre><code>## Warning: package &#39;microbenchmark&#39; was built under R version 4.0.2</code></pre>
+<pre class="r"><code>    ##takes a vector and a value, determines if the elements of the vector are to the right/left
+    left_right1&lt;-function(x = c(0.1,0.9), bar = 0.5){
+        temp&lt;-NULL
+        for(i in seq_along(x)){
+            temp[i] &lt;- (x[i]&gt;bar)*1
+        }
+        return(temp)
+    }
+    left_right2 &lt;- function(x = c(0.1,0.9), bar = 0.5){
+        ifelse(x&gt;bar,1,0)
+    }
+    x1&lt;-rnorm(n = 50000,mean=0.5)
+    times&lt;-microbenchmark(result1&lt;-left_right1(x=x1),result2&lt;-left_right2(x=x1),times = 100, unit = &quot;ms&quot;)</code></pre>
+</div>
+<div id="plot-of-timings" class="section level2">
+<h2>Plot of timings</h2>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_5_matrix_vector_math_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="what-is-your-prediction-for-the-following-timings" class="section level2">
+<h2>What is your prediction for the following timings?</h2>
+<p>(run me!!)</p>
+<pre class="r"><code>library(microbenchmark)
+
+N &lt;- 100000 #### &lt;- might start a little lower
+#manual vs internal mean function
+microbenchmark(result1&lt;-sum(1:N)/N,
+               result2&lt;-mean(1:N),times = 100, unit = &quot;ms&quot;)
+
+#preallocate vs form on fly
+temp&lt;-rep(NULL,N)
+microbenchmark(result1&lt;-{for(i in 1:length(temp)){temp[i]&lt;-1}},
+               result2&lt;-{temp2&lt;-rep(1,N)},times = 100, unit = &quot;ms&quot;)</code></pre>
+</div>
+<div id="r-and-useful-matrix-stuff" class="section level2">
+<h2>R and useful matrix stuff</h2>
+<ol style="list-style-type: decimal">
+<li>matrix mult %*%</li>
+<li>transpose t()</li>
+<li>create diagonal matrix diag()
+<ul>
+<li>this one has two cases</li>
+</ul></li>
+<li>matrix inverse solve()</li>
+<li>determinate det()</li>
+<li>rank matA &lt;- qr(A); matA$rank</li>
+<li>t(x) %*% y crossprod()</li>
+</ol>
+<p>More comprehensive list here:
+<a href="https://www.statmethods.net/advstats/matrix.html" class="uri">https://www.statmethods.net/advstats/matrix.html</a></p>
+</div>
+<div id="switch-to-notebook" class="section level2">
+<h2>Switch to notebook</h2>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/math/" rel="tag">math</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/good-programming/" rel="tag">good programming</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/logic/" rel="tag">logic</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/24/lecture-3/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 3 - Data wrangling, munging and creating tidy datasets</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/25/lecture-4/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Lecture 4 - R functions and logic, good programming practices</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="http://rsettlage.github.io/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/25/lecture-4/">Lecture 4 - R functions and logic, good programming practices</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/25/lecture-5/">Lecture 5 - Vector and matrix math</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/24/lecture-3/">Lecture 3 - Data wrangling, munging and creating tidy datasets</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/functions" title="Functions">Functions</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/good-programming" title="Good programming">Good programming</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/logic" title="Logic">Logic</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/math" title="Math">Math</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse" title="Tidyverse">Tidyverse</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+---
+title: 'Lecture 5 - Vector and matrix math'
+subtitle: "Sep 23, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-5"
+date: 2020-08-25
+publishdate: 2020-08-25
+draft: false
+mathjax: true
+categories:
+- Lecture
+tags:
+- Lecture
+- math
+- good programming
+- logic
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Today's Agenda
+
+- Review good programming practices 
+- Review R functions -- for/next, if/else, while/loop  
+- Show some of the functions R has for matrix/vector operations   
+
+## Good Programming Practices
+
+Most analysis will require some amount of programming.  As we program, we should strive to create readable and reusable code.  The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices.  You will devolop your own style, but it would be good to start with some guidance from some experts.  
+
+Google's R Style Guide <https://google.github.io/styleguide/Rguide.xml>  
+Hadley Wickam's Style Guide: <http://r-pkgs.had.co.nz/style.html>  
+
+## Good Programming Practices cont
+
+Remember: ultimate goal is Reproducible Research.  
+To enable this, we need well documented (annotated) _**readable**_ code.
+
+1. variable/object names  
+    + nouns describing what the object holds, e.g. originaData instad of d  
+    + DO NOT use existing variables or functions, e.g. T<-1000
+2. function formation  
+    + function names should be verb associated with the function purpose  
+    + comment both function purpose and required arguments    
+    + arguments should have defaults (my personal preference)
+    + my preference is to explicitly return a value  
+3. commenting rules  
+    + comment your code!!  'nough said?  
+4. indent within logical blocks of code !!
+    + indenting improves the readability of the code by orders of magnitude!  
+    
+## Functions
+
+A function is an _**object**_ that takes some input objects (args) and produces some output objects.
+
+```{r echo=T, eval=F}
+    dataA<-1;dataB<-2
+    BAD<-function(x){
+        mean(c(x,dataA))
+    }
+    computeMeanGOOD<-function(x=3,y=5){
+        # quick function to compute the geometric mean of two numbers, x and y
+        # returns geometric mean
+        if (!is.numeric(x) || !is.numeric(y)) stop("both x and y must be numeric")
+        return(mean(c(x,y)))
+    }
+    BAD(x=dataB)
+    computeMeanGOOD(x=dataA,y=dataB)
+```
+
+GOOD functions include passing in ALL necessary data.  If we do not do this, we can have MAJOR issues with variable scope that are often difficult to troubleshoot.  Ideally our code also includes error checking.
+
+_**All**_ work in R is done in functions. '[<-'(animals,4,"duck")
+
+## Variable scope
+
+R uses Lexical scoping rules.  What tha?
+
+<https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/>  
+Totally recommend subscribing to Darren's blog AND reading all his past posts.  
+
+<http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/>  
+Another good site.  Also has a few great stats books.
+
+While we are at it, r-bloggers has many useful tidbits. <https://www.r-bloggers.com>
+
+```{r eval=F, echo=T}
+    z <- 1; a <- 1
+    m <- function(){a <- 2; return(c(a,z)) }
+    m(); a
+    
+    a <- 1; b <- 2
+    f<-function(x){ a*x + b }
+    ## what was this one
+    g<-function(x){ a <<- 2; b <- 1; print(objects()); f(x) }
+    g(2)
+
+```
+
+
+## FOR statement
+
+Often, we want to loop through a set number of items or do a task a predetermined length of time.  Can add additional controls via **break** and **next**.  To get help on functions type ?"for"
+
+```{r echo=T, eval=T, cache=T}
+    Iter <- 5
+    cumIndex <- 0
+    for(i in 1:Iter){
+        #if(i %% 2==1) next
+        cumIndex <- cumIndex + 1
+        #if(cumIndex>3) break
+    }
+    print(cumIndex)
+
+```
+
+## If ELSE statement
+
+A powerful addition to any program is the ability to change the course of the program as conditions change.  In R, one such flow change statement is the if else statement.
+
+```{r eval=T, echo=T}
+    Iter <- 20
+    cumSumODDS <- 0
+    cumSumEVENS <- 0
+    for(i in 1:Iter){
+        if(i %% 2 == 1){
+            print(paste0("i=",i," is odd"))
+            cumSumODDS = cumSumODDS + i
+        }else{
+            print(paste0("i=",i," is even"))
+            cumSumEVENS = cumSumEVENS + i
+        }
+    }
+    cumSumEVENS
+    cumSumODDS
+```
+
+## While loop
+
+A while loop can be thought of as a combination of a for loop and an if statement.  Do until condition is true.  In any iterative function, it is a good idea to a) have a progress indicator and b) have a fail safe.
+
+```{r eval=T, echo=T}
+    dummyVar <- 0
+    iter <- 0
+    while(dummyVar<100){
+        dummyVar = dummyVar + 1
+        ## PROGRESS
+        if(dummyVar %% 5 == 0){
+            print(paste0("loop step=",dummyVar))
+        }
+        ## FAIL SAFE
+        if(iter>50){
+            break
+        }else{
+            iter=iter+1
+        }
+    }
+```
+
+## Timing
+
+As you start to make functions, it is a good idea to think about how long things take.
+
+Really good blog on this here:  <https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/>
+
+Consider the following code and timings:
+
+```{r echo=T, eval=T, cache=F,tidy=F}
+
+    library("microbenchmark")
+    ##takes a vector and a value, determines if the elements of the vector are to the right/left
+    left_right1<-function(x = c(0.1,0.9), bar = 0.5){
+        temp<-NULL
+        for(i in seq_along(x)){
+            temp[i] <- (x[i]>bar)*1
+        }
+        return(temp)
+    }
+    left_right2 <- function(x = c(0.1,0.9), bar = 0.5){
+        ifelse(x>bar,1,0)
+    }
+    x1<-rnorm(n = 50000,mean=0.5)
+    times<-microbenchmark(result1<-left_right1(x=x1),result2<-left_right2(x=x1),times = 100, unit = "ms")
+```
+
+## Plot of timings
+```{r echo=F, eval=T, cache=F, fig.height=4}
+    #identical(result1, result2)
+    ggplot2::autoplot(times)
+```
+
+## What is your prediction for the following timings?
+
+(run me!!)
+```{r give_examples, echo=T, eval=F, include=T}
+library(microbenchmark)
+
+N <- 100000 #### <- might start a little lower
+#manual vs internal mean function
+microbenchmark(result1<-sum(1:N)/N,
+               result2<-mean(1:N),times = 100, unit = "ms")
+
+#preallocate vs form on fly
+temp<-rep(NULL,N)
+microbenchmark(result1<-{for(i in 1:length(temp)){temp[i]<-1}},
+               result2<-{temp2<-rep(1,N)},times = 100, unit = "ms")
+
+```
+
+## R and useful matrix stuff
+
+1. matrix mult %*%
+2. transpose t()
+3. create diagonal matrix diag()
+    + this one has two cases
+4. matrix inverse solve()
+5. determinate det()
+6. rank matA <- qr(A); matA$rank
+7. t(x) %*% y crossprod()
+
+More comprehensive list here:
+<https://www.statmethods.net/advstats/matrix.html>
+
+## Switch to notebook
+
+

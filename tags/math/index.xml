@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>math on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/</link>
+    <description>Recent content in math on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 5 - Vector and matrix math</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-5/</link>
+      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/08/25/lecture-5/</guid>
+      <description>Today’s Agenda  Review good programming practices Review R functions – for/next, if/else, while/loop
+ Show some of the functions R has for matrix/vector operations   Good Programming Practices Most analysis will require some amount of programming. As we program, we should strive to create readable and reusable code. The art of creating good code is captured in the broad and opinionated topic of Good Programming Practices. You will devolop your own style, but it would be good to start with some guidance from some experts.</description>
+    </item>
+    
+  </channel>
+</rss>

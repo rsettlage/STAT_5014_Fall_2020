@@ -1,0 +1,145 @@
+---
+title: "Lecture 5 - in-class dual vector/matrix operations and math"
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+editor_options:
+  chunk_output_type: inline
+---
+
+## vectors and matrices in R
+
+Super easy to create:
+
+```{r echo=T, eval=F, include=T}
+    a <- c(1:5)
+    B <- matrix(1:10,ncol=2,nrow = 5)
+    a
+    B
+```
+
+## basic operations
+
+\begin{itemize}
+    \item add, multiply vector/matrix by a scalar
+    \item add, multiply vectors/matrix
+    \item length of vector $$||a|| = \sqrt{\sum_{i=1}^k a_i^2}$$
+\end{itemize}
+
+```{r echo=T, eval=F, include=T}
+
+## add scalar
+a
+a + 5
+## multiply by scalar
+B
+B * 5
+## multiply vectors/matrix
+a * a
+a * B
+B * a
+## length of vector
+sqrt(sum(a*a))
+```
+
+## matrix math
+
+<http://www.statmethods.net/advstats/matrix.html>
+
+\begin{itemize}
+        \item transpose of vector/matrix
+        \item multiply vector/matrix
+        \item some special operations
+        \begin{itemize}
+            \item diag (2 forms)
+            \item solve
+            \item trace
+            \item determinant
+            \item Kronecker product
+        \end{itemize}
+\end{itemize}
+
+```{r echo=T, eval=F, include=T}
+## transpose
+t(a)
+t(t(B))
+## matrix multiply
+a %*% B
+B %*% a
+t(B) %*% a
+## diag
+diag(1,3)
+diag(c(1,2,3))
+diag(B)
+## solve
+C <- matrix(1:9 + rnorm(9,0,1e-3),ncol=3) 
+C %*% solve(C)
+## trace
+sum(diag(C))
+## det
+det(C)
+## Kronecker product
+I <- diag(3)
+J <- matrix(1,3,3)
+blockDiag <- kronecker(I, J)
+```
+
+## Using duality to do stuff
+
+colMeans.  What if we want the means of a matrix by columns.  Of course there are functions for this, but, for kicks, can we do this with some mixed matrix art ... ??
+
+```{r eval=F, echo=T, include=T}
+
+C <- matrix(1:9 + rnorm(900,0,1e-3),ncol=30)
+colMeans(C) ## presumably optimized version
+ones <- rep(1,30)
+t(ones) %*% C / 30 ## manual but using matrix operations
+
+library(microbenchmark)
+
+#for kicks
+microbenchmark(result1<-{colMeans(C)},
+               result2<-{t(ones) %*% C / 30},times = 100, unit = "ms")
+
+```
+
+## Making things faster:
+
+A lot of effort has gone into making matrix math faster on computers.  Again, this is a guided tour, so I will show you a few things and hope this sparks your curiousity enough to hit google:
+
+```{r echo=T, eval=F, include=T}
+
+    A = matrix(rnorm(20*40000, mean=0, sd=5), 20, 40000)
+    B = matrix(rnorm(20*40000, mean=0, sd=5), 20, 40000)
+    time1 <- system.time({t(A)%*%B})
+    time2 <- system.time({crossprod(A,B)})
+    print(rbind(time1,time2))
+
+```
+
+Don't invert matrices:
+
+<https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/>
+<https://www.r-bloggers.com/dont-invert-that-matrix-why-and-how/>
+
+```{r echo=T, eval=F, include=T}
+
+    n <- 5000
+    A = matrix(rnorm(n*n, mean=0, sd=5), n, n)
+    x <- rnorm(n)
+    system.time({b_inverting <- solve(A)%*%x})
+    system.time({b_solving <- solve(A,x)})
+
+    max(abs(b_inverting - b_solving))
+```
+
+## For those interested in boosting their local R
+
+Not all installations of R come accelerated:  
+
+*There are several highly optimized libraries that can be used instead of the default base libraries. These libraries are optimized to take advantage of the hardware they are run on, and can be significatantly faster than the base implementation (operations such as Matrix multiplications may be over 40 times faster*  
+<https://csantill.github.io/RPerformanceWBLAS/>
+
+## Homework 5
