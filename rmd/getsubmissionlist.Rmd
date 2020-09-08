@@ -1,0 +1,68 @@
+---
+title: "Speed Grader"
+author: "Bob Settlage"
+date: "August 31, 2020"
+output: html_notebook
+---
+
+
+```{r setup, include=FALSE}
+    options(stringsAsFactors = FALSE)
+    setwd("/Users/rsettlag/Google Drive/Projects/NLI_class_material/STAT_5014_student_repos")
+```
+
+## Pull student repos
+
+```{bash git_pull, echo=T, eval=T, include=T}
+    pwd
+    for i in stat5014_* ; do echo $i ; cd $i; git pull; cd .. ; done
+```
+
+```{bash find_submissions, echo=T, eval=T, include=T}
+
+    ####### CHANGE ME ##############
+    find ./ -iname "*pdf" -exec echo '{}' \; | grep "HW1_" >HW1_submissions.temp.txt
+    find ./ -iname "*Rmd" -exec echo '{}' \; | grep "HW1_" >>HW1_submissions.temp.txt
+    sort Midterm_submissions.temp.txt | grep "/HW1_*.[Rp]" >HW1_submissions.txt
+    rm HW1_submissions.temp.txt
+```
+
+## Make quick grading sheet and add points for submitting
+
+```{r submitting_points, echo=FALSE}
+    getwd()
+    setwd("/Users/rsettlag/Google\ Drive/Projects/NLI_class_material/STAT_4004_student_repos")
+
+    ####### CHANGE ME ##############
+    current_homework_set <- "HW1"
+    submission_points <- 0
+    submission_file <- paste0(current_homework_set,"_submissions.txt")
+    ###############################
+    library(xlsx)
+    pid_list<-read.delim("student_list.txt",header=F)
+    submission_set<-read.delim(submission_file,header=F)
+    
+    ########## TODO #################
+    ## add code to auto add points for submitting
+    # correct_files <- submission_set[grepl("/[Hh][Ww][0-9]_[[:alnum:]]+\\.",submission_set$V1,perl=T),]
+    ################################
+    
+    (results_file <- paste0(current_homework_set,"_results.xlsx"))
+    write.xlsx(pid_list,file=results_file,row.names = F,col.names = F)
+    
+```
+
+## Open current homework Rmd and pdf files allowing time for grading.
+
+```{bash gather_submission, echo=T, eval=T, include=T}
+    ####### CHANGE ME ##############
+    open HW1_results.xlsx
+    
+    ####### CHANGE ME ##############
+    for i in `cat HW1_submissions.txt | grep pdf`; do open -W -F -n $i ; done
+    
+````
+
+
+
+

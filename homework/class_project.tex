@@ -1,0 +1,170 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Class project},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+
+\title{Class project}
+\providecommand{\subtitle}[1]{}
+\subtitle{Due December 9, 2020}
+\author{}
+\date{\vspace{-2.5em}2020-09-08}
+
+\begin{document}
+\maketitle
+
+For each assignment, turn in by the due date/time. Late assignments must
+be arranged prior to submission. In every case, assignments are to be
+typed neatly using proper English in Markdown.
+
+In this class, we have talked through many aspects of analysis in R. To
+guide the tour through R, we introduced tutorials via Swirl or
+Rstudio.cloud Primers. We added to this topics on Reproducible Research,
+version control, and Good Programming Practices. In this project, we
+need to tie it all together. Here, we will work in small teams to join
+the data revolution. If nothing else, 2020 has been the year of the Data
+Scientist. Between Covid-19 data, population income or other social
+data, and election data, we have been locked at home with nothing
+between us and a fun and perhaps informative data analysis except a
+keyboard. In this project, the challenge will be to choose a large and
+multivariate dataset, pull the data into R, and them munge it as
+appropriate into a tidy dataset. From here, do something interesting
+with it!
+
+We will work in small teams, determined by class size. Choose one of the
+three topics listed below, alter to fit your interest. Submit a project
+proposal for approval. This should be submitted through a new GitHub
+repo with all team members and myself listed as collaborators.
+
+\hypertarget{project-1-covid-19}{%
+\subsection{Project 1: COVID-19}\label{project-1-covid-19}}
+
+We are awash in case load data. We also have data on hospital beds, ICU
+beds, first responder counts, population demographics, etc. Create a
+dashboard combining COVID case load data with some other demographic to
+create an informative graphic. The graphic should contain a time
+component, should allow fitering in some interesting way and create
+meaningful summary statistics. Here are a couple of possible data
+sources:
+
+\url{https://covidatlas.com/data}\\
+\url{https://hifld-geoplatform.opendata.arcgis.com/datasets/hospitals}
+
+\hypertarget{project-2-social-disparity}{%
+\subsection{Project 2: Social
+disparity}\label{project-2-social-disparity}}
+
+There are a ton of reports of social disparity in the U.S. Create a
+dashboard combining racial population statistics with other data such as
+income, health or other factor. This dashboard could include a time
+component and should include a spatial component. Ideally, it would
+involve a map and plots of the data. Question: does the time series data
+accurately depict what the underlying data show? Are there other
+features to the data that might suggest other trends that might be
+interesting to follow up on? Here are a couple of papers and data
+sources:
+
+\url{https://www.racialequitytools.org/resourcefiles/lui.pdf}\\
+\url{https://www.federalreserve.gov/econres/notes/feds-notes/recent-trends-in-wealth-holding-by-race-and-ethnicity-evidence-from-the-survey-of-consumer-finances-20170927.htm}~\\
+\url{https://www.pgpf.org/blog/2019/10/income-and-wealth-in-the-united-states-an-overview-of-data}~\\
+\url{https://www.census.gov/data/tables/time-series/demo/income-poverty/cps-pinc/pinc-01.html}
+
+\hypertarget{project-3-election-2020}{%
+\subsection{Project 3: Election 2020}\label{project-3-election-2020}}
+
+This is an Presidential election year in the U.S. Here, you should
+create a dashboard of political interest. Ideally, the dashboard will
+contain a map and summary plots of the data. What data can you find that
+might suggest one candidate over the other, locally, regionally,
+nationally? Is there a time component to the data showing enthusiams
+change? Is there social data available that might show trends? A few of
+the many possible data sources:
+
+Twitter:
+\url{https://towardsdatascience.com/understanding-political-twitter-ce3476a38377}\\
+\url{https://web.archive.org/web/20160628093159/http://www.nsd.uib.no/macrodataguide/country2.html?id=840\&c=United\%20States\%20of\%20America}
+\url{https://www.cpds-data.org/}
+
+Rubrics for grading (passing \textgreater{} 8 pts):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Version control -- git -- all member make commits? (2 pts)
+\item
+  Reproducible Research adherance (2 pts)
+\item
+  Good Programing Practices followed (2 pts)
+\item
+  Overall project creativitity (2 pts)
+\item
+  Overall project execution (2 pts)
+\end{enumerate}
+
+\end{document}

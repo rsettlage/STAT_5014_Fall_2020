@@ -35,7 +35,7 @@ To this, add 3 density functions (Appendix Cassella & Berger) in centered format
 
 # Problem 3
 
-A quote from Donoho (1995): "an article about computational results is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result."  To the document created in Problem 4, add a summary of the steps in performing Reproducible Research in numbered list format as detailed in:  
+A quote from Donoho (1995): "an article about computational results is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result."  To the document created in Problem 2, add a summary of the steps in performing Reproducible Research in numbered list format as detailed in:  
 <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285>.  
 \newline
 Next to each item, comment on any challenges you see in performing the step.  If you are interested in learning more, a good summary of why this is important can be found in  
