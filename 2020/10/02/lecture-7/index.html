@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Going parallel in R - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Going parallel in R" />
+<meta property="og:description" content="Today’s Agenda  Apply review parallel programming using  parapply foreach    Apply family of functions We often want to “apply” a function along a “margin” of our data. In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.
+In R, we have helper functions to further simplify our code by obviating the for loop.
+Apply family:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/02/lecture-7/" />
+<meta property="article:published_time" content="2020-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-02T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Going parallel in R</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-10-02T00:00:00">October 02, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Apply review</li>
+<li>parallel programming using
+<ul>
+<li>parapply</li>
+<li>foreach</li>
+</ul></li>
+</ul>
+</div>
+<div id="apply-family-of-functions" class="section level2">
+<h2>Apply family of functions</h2>
+<p>We often want to “apply” a function along a “margin” of our data. In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.</p>
+<p>In R, we have helper functions to further simplify our code by obviating the for loop.</p>
+<p>Apply family:</p>
+<p>apply, lapply , sapply, vapply, mapply, rapply, and tapply</p>
+<p>Nice tutorial:<br />
+<a href="https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/" class="uri">https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/</a></p>
+</div>
+<div id="apply-detail" class="section level2">
+<h2>Apply detail</h2>
+<p><em>apply(X, MARGIN, FUN, …)</em></p>
+<pre class="r"><code>    # ?apply
+    x &lt;- cbind(x1 = 3, x2 = c(4:1, 2:5))
+    dimnames(x)[[1]] &lt;- letters[1:8]
+    x
+    apply(x, 2, mean, trim = .2)
+    col.sums &lt;- apply(x, 2, sum)
+    row.sums &lt;- apply(x, 1, sum)</code></pre>
+</div>
+<div id="what-is-difference-between-various-apply-functions" class="section level2">
+<h2>What is difference between various apply functions</h2>
+<p>We could start with the help <code>?apply, ?sapply</code>. The main differences are:<br />
+<a href="http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/" class="uri">http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/</a></p>
+</div>
+<div id="apply-on-a-big-matrix" class="section level2">
+<h2>Apply on a big matrix</h2>
+<pre class="r"><code>  size &lt;- 5000
+  big_x &lt;- matrix(rnorm(size^2),nrow=size)
+  
+  
+  object.size(big_x)
+  system.time({median(apply(big_x,1,median))})
+  # ca. 1.6 sec on my Mac</code></pre>
+</div>
+<div id="what-if-we-want-to-go-really-big" class="section level2">
+<h2>What if we want to go really big</h2>
+<p>Turns out, the first thing we need to do is worry about how big an object we can store. It seems as though, in R 3.5 there were some limits imposed on our vectors that were not present in earlier releases.</p>
+<p><a href="https://stackoverflow.com/questions/51248293/error-vector-memory-exhausted-limit-reached-r-3-5-0-macos/51956149#51956149" class="uri">https://stackoverflow.com/questions/51248293/error-vector-memory-exhausted-limit-reached-r-3-5-0-macos/51956149#51956149</a></p>
+<p>So, reading through that, how we we ‘fix’ it?</p>
+<pre class="r"><code>  size &lt;- 5e4
+  big_x &lt;- matrix(rnorm(size^2),nrow=size)
+
+  library(usethis)
+  usethis::edit_r_environ()</code></pre>
+<p>Now add the following line to this file, save and restart R:
+<code>R_MAX_VSIZE=100Gb</code></p>
+<p>I put 100 Gb and it works on my Mac. This may or may not be appropriate for your system. On our clusters, it depends on the job size and cluster you get a job on. On Cascades, for a full node, 100Gb will fit in RAM so you can go bigger than that!</p>
+</div>
+<div id="bigger-example" class="section level2">
+<h2>Bigger example</h2>
+<pre class="r"><code>  size &lt;- 4e4
+  big_x &lt;- matrix(rnorm(size^2),nrow=size)
+  object.size(big_x) #12 Gb !!
+  system.time({median(apply(big_x,1,median))})
+  # 7 min on my Mac</code></pre>
+</div>
+<div id="an-aside-on-rs-startup" class="section level2">
+<h2>An aside on R’s startup</h2>
+<p>The basic idea is that much of what we want all the time can be configured so we don’t have to continuously type it. For some of this, we can and should put this in a code chunk at the start of our Markdown files. For instance, setting a path. For other things we just want all the time that is more like style preferences or things R needs to do as it starts, we need to edit our R startup files.</p>
+<p><a href="https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/" class="uri">https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/</a></p>
+<p>This is what we did a few slides ago using the <code>usethis</code> package. We added an environment variable to R’s startup so that we could create larger vectors.</p>
+<p>Note that when sharing code, you need to be a little careful about how custum you make your startup. Commonly used helper functions and other customizations could be better in a package. For some other startup tricks:<br />
+<a href="https://www.gettinggeneticsdone.com/2011/08/sync-your-rprofile-across-multiple-r.html" class="uri">https://www.gettinggeneticsdone.com/2011/08/sync-your-rprofile-across-multiple-r.html</a></p>
+</div>
+<div id="parapply" class="section level2">
+<h2>parapply</h2>
+<p>This doesn’t seem like a very big matrix, but it takes a while to do the compute. How can we do this faster?</p>
+<ul>
+<li>colSums<br />
+</li>
+<li>go parallel</li>
+</ul>
+<pre class="r"><code># Determine the number of available cores
+library(parallel)
+
+## good idea to leave a little for system stuff
+cores &lt;- 5
+cores &lt;- detectCores() - 1 
+cores &lt;- max(1, detectCores() - 1)
+
+# Create a cluster via makeCluster
+cl &lt;- makeCluster(cores)
+
+# Parallelize
+system.time({median(parApply(cl, big_x, 2, median))})
+#4 sec
+
+# Stop the cluster
+stopCluster(cl)</code></pre>
+</div>
+<div id="what-can-be-parallelized" class="section level2">
+<h2>What can be parallelized</h2>
+<p><code>embarassingly</code> parallel tasks are perfect candidates. Things that update, somewhere between maybe and no.</p>
+<pre class="r"><code>  ## yes
+  # operations across margins of a dataset
+  # see above
+  # bootstrapping, ie independent operations on a dataset
+  bootstrapped_mean &lt;- function(data, size){
+    s &lt;- sample(1:nrow(data),size)
+    return(mean(data[s]))
+  }
+  
+  ## no (or not usually)
+  cumprod() #could be clever to make this parallel
+  # Monte Carlo
+  ## again, could be clever
+  ## dependent loops
+  for(i in 2:100){
+    x[i] &lt;- x[i-1]
+  }</code></pre>
+</div>
+<div id="types-of-clusters" class="section level2">
+<h2>types of clusters</h2>
+<ul>
+<li>FORK (Mac/Linux)
+divide and conquer, env goes with fork, but may diverge during run</li>
+<li>PSOCK (all - default)
+nothing exported except base packages</li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/36794063/r-foreach-from-single-machine-to-cluster" class="uri">https://stackoverflow.com/questions/36794063/r-foreach-from-single-machine-to-cluster</a></p>
+<pre class="r"><code>cl&lt;-makeForkCluster(cores)
+base &lt;- 2 #note, it was not created when we created the cluster!!
+
+#clusterExport(cl, &quot;base&quot;)
+parLapply(cl, 
+          2:4, 
+          function(exponent) 
+            base^exponent)
+
+stopCluster(cl)</code></pre>
+</div>
+<div id="steps" class="section level2">
+<h2>steps</h2>
+<ul>
+<li>load package</li>
+<li>make cluster</li>
+<li>export data/functions (clusterExport or clusterEvalQ)</li>
+<li>do work</li>
+<li>stop cluster!! &lt;– super important unless you want to reboot ;)</li>
+</ul>
+</div>
+<div id="foreach" class="section level2">
+<h2>foreach</h2>
+<p>The <code>foreach</code> package works much like lapply. Note that this returns a list like lapply. You can change this, for instance, try <code>.combine = 'c'</code>.</p>
+<p><a href="https://privefl.github.io/blog/a-guide-to-parallelism-in-r/" class="uri">https://privefl.github.io/blog/a-guide-to-parallelism-in-r/</a></p>
+<pre class="r"><code>library(foreach)
+library(doParallel)
+
+foreach(i=2:4) %do% {
+  2^i
+}</code></pre>
+</div>
+<div id="going-parallel" class="section level2">
+<h2>Going parallel</h2>
+<p>The last set ran sequentially, if we want to do this in parallel, we need to make and register a cluster and use <code>dopar</code>.</p>
+<pre class="r"><code>makeForkCluster(cores)
+registerDoParallel(cl)
+foreach(i=2:4, .combine = &#39;c&#39;) %dopar% {
+  2^i
+}
+stopCluster(cl)</code></pre>
+</div>
+<div id="data-and-packages" class="section level2">
+<h2>Data and packages</h2>
+<p>The foreach package works more like a <em>PSOCK</em> cluster but it exports variables it needs. However, it only looks in the env the foreach call is made in. So, you either need to use the .export option or make sure the data is in the current env (pass in to function if you are in a function).</p>
+<p>For packages, you have two options, a) use the .packages option or b) use the package::function construct.</p>
+</div>
+<div id="seeds" class="section level2">
+<h2>seeds</h2>
+<p>Seeds are one thing you need to be careful with when trying to parallelize. You either want the same or different seeds across all workers.</p>
+<p>Instead of using <code>set.seed</code>, use <code>clusterSetRNGStream</code></p>
+<p><a href="https://www.johndcook.com/blog/2016/01/29/random-number-generator-seed-mistakes/" class="uri">https://www.johndcook.com/blog/2016/01/29/random-number-generator-seed-mistakes/</a>
+<a href="https://grokbase.com/t/r/r-sig-hpc/106hvnreqp/parallel-random-numbers-set-seed-i-rsprng-rlecuyer" class="uri">https://grokbase.com/t/r/r-sig-hpc/106hvnreqp/parallel-random-numbers-set-seed-i-rsprng-rlecuyer</a></p>
+<p><a href="https://rstudio-pubs-static.s3.amazonaws.com/225942_3229fa0992bd4146b7edf75f60a34bdc.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/225942_3229fa0992bd4146b7edf75f60a34bdc.html</a></p>
+<p><code>bigstatsr</code></p>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/math/" rel="tag">math</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/parallel/" rel="tag">parallel</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/09/24/lecture-6/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">The apply family of functions</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="http://rsettlage.github.io/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/10/02/lecture-7/">Going parallel in R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/09/24/lecture-6/">The apply family of functions</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/26/lecture-5/">Lecture 5 - Vector and matrix math</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/apply" title="Apply">Apply</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/functions" title="Functions">Functions</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/good-programming" title="Good programming">Good programming</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/logic" title="Logic">Logic</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/math" title="Math">Math</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/parallel" title="Parallel">Parallel</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse" title="Tidyverse">Tidyverse</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

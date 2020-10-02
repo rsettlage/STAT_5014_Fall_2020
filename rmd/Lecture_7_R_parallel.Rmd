@@ -1,0 +1,262 @@
+---
+title: 'Going parallel in R'
+subtitle: "Oct 2, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-7"
+date: 2020-10-02
+publishdate: 2020-10-02
+draft: false
+mathjax: true
+categories:
+- Lecture
+tags:
+- Lecture
+- math
+- parallel
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Today's Agenda
+
+- Apply review
+- parallel programming using 
+  + parapply 
+  + foreach
+    
+
+## Apply family of functions
+
+We often want to "apply" a function along a "margin" of our data.  In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.
+
+In R, we have helper functions to further simplify our code by obviating the for loop.
+
+Apply family:
+
+apply, lapply , sapply, vapply, mapply, rapply, and tapply
+
+Nice tutorial:  
+<https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/>
+
+## Apply detail
+
+*apply(X, MARGIN, FUN, ...)*
+
+```{r echo=T, eval=F, include=T}
+    # ?apply
+    x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+    dimnames(x)[[1]] <- letters[1:8]
+    x
+    apply(x, 2, mean, trim = .2)
+    col.sums <- apply(x, 2, sum)
+    row.sums <- apply(x, 1, sum)
+
+```
+
+## What is difference between various apply functions
+
+We could start with the help `?apply, ?sapply`. The main differences are:  
+ <http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/>
+ 
+## Apply on a big matrix
+
+```{r big_matrix, echo=T, eval=F, include=T}
+  
+  size <- 5000
+  big_x <- matrix(rnorm(size^2),nrow=size)
+  
+  
+  object.size(big_x)
+  system.time({median(apply(big_x,1,median))})
+  # ca. 1.6 sec on my Mac
+  
+```
+
+## What if we want to go really big
+
+Turns out, the first thing we need to do is worry about how big an object we can store.  It seems as though, in R 3.5 there were some limits imposed on our vectors that were not present in earlier releases.
+
+<https://stackoverflow.com/questions/51248293/error-vector-memory-exhausted-limit-reached-r-3-5-0-macos/51956149#51956149>
+
+So, reading through that, how we we 'fix' it?
+
+```{r echo=T, eval=F, include=T}
+
+  size <- 5e4
+  big_x <- matrix(rnorm(size^2),nrow=size)
+
+  library(usethis)
+  usethis::edit_r_environ()
+```
+
+Now add the following line to this file, save and restart R:
+`R_MAX_VSIZE=100Gb`
+
+I put 100 Gb and it works on my Mac.  This may or may not be appropriate for your system.  On our clusters, it depends on the job size and cluster you get a job on.  On Cascades, for a full node, 100Gb will fit in RAM so you can go bigger than that!
+
+## Bigger example
+
+```{r echo=T, eval=F, include=T}  
+
+  size <- 4e4
+  big_x <- matrix(rnorm(size^2),nrow=size)
+  object.size(big_x) #12 Gb !!
+  system.time({median(apply(big_x,1,median))})
+  # 7 min on my Mac
+  
+```
+
+## An aside on R's startup
+
+The basic idea is that much of what we want all the time can be configured so we don't have to continuously type it.  For some of this, we can and should put this in a code chunk at the start of our Markdown files.  For instance, setting a path.  For other things we just want all the time that is more like style preferences or things R needs to do as it starts, we need to edit our R startup files.
+
+<https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/>
+
+This is what we did a few slides ago using the `usethis` package.  We added an environment variable to R's startup so that we could create larger vectors.
+
+Note that when sharing code, you need to be a little careful about how custum you make your startup.  Commonly used helper functions and other customizations could be better in a package.  For some other startup tricks:  
+<https://www.gettinggeneticsdone.com/2011/08/sync-your-rprofile-across-multiple-r.html>
+
+## parapply
+
+This doesn't seem like a very big matrix, but it takes a while to do the compute.  How can we do this faster?
+
+- colSums  
+- go parallel 
+
+```{r echo=T, eval=F, include=T}
+
+# Determine the number of available cores
+library(parallel)
+
+## good idea to leave a little for system stuff
+cores <- 5
+cores <- detectCores() - 1 
+cores <- max(1, detectCores() - 1)
+
+# Create a cluster via makeCluster
+cl <- makeCluster(cores)
+
+# Parallelize
+system.time({median(parApply(cl, big_x, 2, median))})
+#4 sec
+
+# Stop the cluster
+stopCluster(cl)
+```
+
+## What can be parallelized
+
+`embarassingly` parallel tasks are perfect candidates.  Things that update, somewhere between maybe and no.
+
+```{r eval=F, echo=T, include=T}
+
+  ## yes
+  # operations across margins of a dataset
+  # see above
+  # bootstrapping, ie independent operations on a dataset
+  bootstrapped_mean <- function(data, size){
+    s <- sample(1:nrow(data),size)
+    return(mean(data[s]))
+  }
+  
+  ## no (or not usually)
+  cumprod() #could be clever to make this parallel
+  # Monte Carlo
+  ## again, could be clever
+  ## dependent loops
+  for(i in 2:100){
+    x[i] <- x[i-1]
+  }
+```
+
+## types of clusters
+
+- FORK (Mac/Linux)
+  divide and conquer, env goes with fork, but may diverge during run
+- PSOCK (all - default)
+  nothing exported except base packages
+  
+<https://stackoverflow.com/questions/36794063/r-foreach-from-single-machine-to-cluster>
+  
+```{r echo=T, eval=F, include=T}
+
+cl<-makeForkCluster(cores)
+base <- 2 #note, it was not created when we created the cluster!!
+
+#clusterExport(cl, "base")
+parLapply(cl, 
+          2:4, 
+          function(exponent) 
+            base^exponent)
+
+stopCluster(cl)
+
+```
+
+## steps
+
+- load package
+- make cluster
+- export data/functions (clusterExport or clusterEvalQ)
+- do work
+- stop cluster!! <-- super important unless you want to reboot ;)
+
+## foreach
+
+The `foreach` package works much like lapply.  Note that this returns a list like lapply.  You can change this, for instance, try `.combine = 'c'`.
+
+<https://privefl.github.io/blog/a-guide-to-parallelism-in-r/>
+
+```{r echo=T, eval=F, include=T}
+
+library(foreach)
+library(doParallel)
+
+foreach(i=2:4) %do% {
+  2^i
+}
+
+```
+
+## Going parallel
+
+The last set ran sequentially, if we want to do this in parallel, we need to make and register a cluster and use `dopar`.
+
+```{r echo=T, eval=F, include=T}
+
+makeForkCluster(cores)
+registerDoParallel(cl)
+foreach(i=2:4, .combine = 'c') %dopar% {
+  2^i
+}
+stopCluster(cl)
+
+```
+
+## Data and packages
+
+The foreach package works more like a _PSOCK_ cluster but it exports variables it needs.  However, it only looks in the env the foreach call is made in.  So, you either need to use the .export option or make sure the data is in the current env (pass in to function if you are in a function).
+
+For packages, you have two options, a) use the .packages option or b) use the package::function construct.
+
+## seeds
+
+Seeds are one thing you need to be careful with when trying to parallelize.  You either want the same or different seeds across all workers.
+
+Instead of using `set.seed`, use `clusterSetRNGStream`
+
+<https://www.johndcook.com/blog/2016/01/29/random-number-generator-seed-mistakes/>
+<https://grokbase.com/t/r/r-sig-hpc/106hvnreqp/parallel-random-numbers-set-seed-i-rsprng-rlecuyer>
+
+<https://rstudio-pubs-static.s3.amazonaws.com/225942_3229fa0992bd4146b7edf75f60a34bdc.html>
+
+`bigstatsr`
+

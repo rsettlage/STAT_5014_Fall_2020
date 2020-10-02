@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>parallel on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/parallel/</link>
+    <description>Recent content in parallel on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/parallel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Going parallel in R</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/02/lecture-7/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/02/lecture-7/</guid>
+      <description>Today’s Agenda  Apply review parallel programming using  parapply foreach    Apply family of functions We often want to “apply” a function along a “margin” of our data. In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.
+In R, we have helper functions to further simplify our code by obviating the for loop.
+Apply family:</description>
+    </item>
+    
+  </channel>
+</rss>

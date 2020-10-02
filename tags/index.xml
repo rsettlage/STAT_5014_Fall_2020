@@ -6,10 +6,46 @@
     <description>Recent content in Tags on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parallel</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/parallel/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/parallel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apply</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/apply/</link>
+      <pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/apply/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>good programming</title>
@@ -21,29 +57,11 @@
     </item>
     
     <item>
-      <title>Lecture</title>
-      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</link>
-      <pubDate>Wed, 26 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>logic</title>
       <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/logic/</link>
       <pubDate>Wed, 26 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/logic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>math</title>
-      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/</link>
-      <pubDate>Wed, 26 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/math/</guid>
       <description></description>
     </item>
     

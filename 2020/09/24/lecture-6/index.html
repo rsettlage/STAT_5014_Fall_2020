@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>The apply family of functions - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="The apply family of functions" />
+<meta property="og:description" content="Today’s Agenda  Function optimizing
+ Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
+Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
+Consider the following code and timings:
+ library(&quot;microbenchmark&quot;) ## calculate mean of vector lvec &lt;- 10000 vec &lt;- rnorm(lvec) times&lt;-microbenchmark(result1&lt;-mean(vec), result2&lt;-sum(vec)/length(vec), result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/09/24/lecture-6/" />
+<meta property="article:published_time" content="2020-09-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-24T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">The apply family of functions</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-09-24T00:00:00">September 24, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+<script src="/STAT_5014_Fall_2020/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/STAT_5014_Fall_2020/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Function optimizing<br />
+</li>
+<li>Apply functions</li>
+</ul>
+</div>
+<div id="functions-and-timing" class="section level2">
+<h2>Functions and Timing</h2>
+<p>As you start to make functions, it is a good idea to think about how long things take.</p>
+<p>Really good blog on this here: <a href="https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/" class="uri">https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/</a></p>
+<p>Consider the following code and timings:</p>
+<pre class="r"><code>    library(&quot;microbenchmark&quot;)
+    ## calculate mean of vector
+    lvec &lt;- 10000
+    vec &lt;- rnorm(lvec)
+    times&lt;-microbenchmark(result1&lt;-mean(vec),
+                          result2&lt;-sum(vec)/length(vec),
+                          result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;)
+    identical(result1, result2)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="functions-and-timing-1" class="section level2">
+<h2>Functions and Timing</h2>
+<pre class="r"><code>ggplot2::autoplot(times)</code></pre>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
+<p><img src="/STAT_5014_Fall_2020/post/Lecture_6_apply_functions_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="matrix" class="section level2">
+<h2>Matrix</h2>
+<p>Last week, we went through matrix operations and hopefully talked about why we don’t invert matrices:</p>
+<p><a href="https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/" class="uri">https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/</a>
+<a href="https://www.r-bloggers.com/dont-invert-that-matrix-why-and-how/" class="uri">https://www.r-bloggers.com/dont-invert-that-matrix-why-and-how/</a></p>
+<pre class="r"><code>    n &lt;- 2000
+    A = matrix(rnorm(n*n, mean=0, sd=5), n, n)
+    y &lt;- rnorm(n)
+    time1 &lt;- system.time({b_inverting &lt;- solve(A)%*%y})
+    time2 &lt;- system.time({b_solving &lt;- solve(A,y)})
+    time3 &lt;- system.time({b_matrix_solve &lt;- Matrix::solve(A,y)})
+
+    print(rbind(time1, time2, time3)[,1:3])</code></pre>
+<pre><code>##       user.self sys.self elapsed
+## time1    17.683    0.048  18.038
+## time2     1.906    0.004   1.914
+## time3     2.688    0.057   2.751</code></pre>
+<pre class="r"><code>    max(c(abs(b_inverting - b_solving),abs(b_matrix_solve - b_solving)))</code></pre>
+<pre><code>## [1] 7.25045e-14</code></pre>
+</div>
+<div id="for-those-interested-in-boosting-thier-local-r" class="section level2">
+<h2>For those interested in boosting thier local R</h2>
+<p>Not all installations of R come accelerated:</p>
+<p><em>There are several highly optimized libraries that can be used instead of the default base libraries. These libraries are optimized to take advantage of the hardware they are run on, and can be significatantly faster than the base implementation (operations such as Matrix multiplications may be over 40 times faster</em><br />
+<a href="https://csantill.github.io/RPerformanceWBLAS/" class="uri">https://csantill.github.io/RPerformanceWBLAS/</a></p>
+</div>
+<div id="apply-family-of-functions" class="section level2">
+<h2>Apply family of functions</h2>
+<p>We often want to “apply” a function along a “margin” of our data. In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.</p>
+<p>In R, we have helper functions to further simplify our code by obviating the for loop.</p>
+<p>Apply family:</p>
+<p>apply, lapply , sapply, vapply, mapply, rapply, and tapply</p>
+<p>Nice tutorial:<br />
+<a href="https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/" class="uri">https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/</a></p>
+</div>
+<div id="apply-detail" class="section level2">
+<h2>Apply detail</h2>
+<p><em>apply(X, MARGIN, FUN, …)</em></p>
+<pre class="r"><code>    # ?apply
+    x &lt;- cbind(x1 = 3, x2 = c(4:1, 2:5))
+    dimnames(x)[[1]] &lt;- letters[1:8]
+    x
+    apply(x, 2, mean, trim = .2)
+    col.sums &lt;- apply(x, 2, sum)
+    row.sums &lt;- apply(x, 1, sum)</code></pre>
+</div>
+<div id="what-is-difference-between-various-apply-functions" class="section level2">
+<h2>What is difference between various apply functions</h2>
+<p>We could start with the help <code>?apply, ?sapply</code>. The main differences are:<br />
+<a href="http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/" class="uri">http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/</a></p>
+</div>
+<div id="apply-functions" class="section level2">
+<h2>Apply functions</h2>
+<pre><code>## Loading required package: xml2</code></pre>
+<table class="table" style="font-size: 5px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function Name
+</th>
+<th style="text-align:left;">
+Objects the Function Works On
+</th>
+<th style="text-align:left;">
+What the Function Sees as Elements
+</th>
+<th style="text-align:left;">
+Result Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+apply
+</td>
+<td style="text-align:left;">
+Matrix
+</td>
+<td style="text-align:left;">
+Rows or columns
+</td>
+<td style="text-align:left;">
+Vector, matrix, array, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Array
+</td>
+<td style="text-align:left;">
+Rows, columns, or any dimension
+</td>
+<td style="text-align:left;">
+Vector, matrix, array, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Data frame
+</td>
+<td style="text-align:left;">
+Rows or columns
+</td>
+<td style="text-align:left;">
+Vector, matrix, array, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sapply
+</td>
+<td style="text-align:left;">
+Vector
+</td>
+<td style="text-align:left;">
+Elements
+</td>
+<td style="text-align:left;">
+Vector, matrix, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Data frame
+</td>
+<td style="text-align:left;">
+Variables
+</td>
+<td style="text-align:left;">
+Vector, matrix, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+List
+</td>
+<td style="text-align:left;">
+Elements
+</td>
+<td style="text-align:left;">
+Vector, matrix, or list
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lapply
+</td>
+<td style="text-align:left;">
+Vector
+</td>
+<td style="text-align:left;">
+Elements
+</td>
+<td style="text-align:left;">
+List
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Data frame
+</td>
+<td style="text-align:left;">
+Variables
+</td>
+<td style="text-align:left;">
+List
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+List
+</td>
+<td style="text-align:left;">
+Elements
+</td>
+<td style="text-align:left;">
+List
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="purrrmap-and-friends" class="section level2">
+<h2>purrr::map and friends</h2>
+<p>As usual in R, there are many ways to accomplish tasks. Another package was developed to do some of what XXapply does. <em>purrr</em> is part of the Tidyverse, so you may already have it installed.</p>
+<p>Unlike the apply set of function, the <em>purrr</em> set works with piping which may be helpful in some sitations.</p>
+<pre class="r"><code>library(purrr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;purrr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:rvest&#39;:
+## 
+##     pluck</code></pre>
+<pre class="r"><code>## not the best example as this is better done with group_by/summarize
+sum_iris &lt;- iris %&gt;% dplyr::select(-Species) %&gt;% map(mean) %&gt;% data.frame()
+knitr::kable(as.data.frame(sum_iris))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.843333
+</td>
+<td style="text-align:right;">
+3.057333
+</td>
+<td style="text-align:right;">
+3.758
+</td>
+<td style="text-align:right;">
+1.199333
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/apply/" rel="tag">apply</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/08/26/lecture-5/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Lecture 5 - Vector and matrix math</p></a>
+	</div>
+	<div class="post-nav__item post-nav__item--next">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/10/02/lecture-7/" rel="next"><span class="post-nav__caption">Next&thinsp;»</span><p class="post-nav__post-title">Going parallel in R</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="http://rsettlage.github.io/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/10/02/lecture-7/">Going parallel in R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/09/24/lecture-6/">The apply family of functions</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/08/26/lecture-5/">Lecture 5 - Vector and matrix math</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/apply" title="Apply">Apply</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/functions" title="Functions">Functions</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/good-programming" title="Good programming">Good programming</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/logic" title="Logic">Logic</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/math" title="Math">Math</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/parallel" title="Parallel">Parallel</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse" title="Tidyverse">Tidyverse</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

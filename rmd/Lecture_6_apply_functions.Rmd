@@ -1,0 +1,147 @@
+---
+title: 'The apply family of functions'
+subtitle: "Sept 24, 2020"
+author: "Robert Settlage"
+authorbox: false
+slug: "Lecture-6"
+date: 2020-09-24
+publishdate: 2020-09024
+draft: false
+mathjax: true
+categories:
+- Lecture
+tags:
+- Lecture
+- apply
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Today's Agenda
+
+- Function optimizing  
+- Apply functions
+    
+## Functions and Timing
+
+As you start to make functions, it is a good idea to think about how long things take.
+
+Really good blog on this here:  <https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/>
+
+Consider the following code and timings:
+
+```{r quick_timing, echo=T, eval=T, cache=F, tidy=F}
+
+    library("microbenchmark")
+    ## calculate mean of vector
+    lvec <- 10000
+    vec <- rnorm(lvec)
+    times<-microbenchmark(result1<-mean(vec),
+                          result2<-sum(vec)/length(vec),
+                          result3<-sum(vec)/lvec,times = 100, unit = "ms")
+    identical(result1, result2)
+```
+
+## Functions and Timing
+
+```{r echo=T, eval=T, cache=F, tidy=T, include=T, fig.height=4}
+    ggplot2::autoplot(times)
+```
+
+## Matrix
+
+Last week, we went through matrix operations and hopefully talked about why we don't invert matrices:
+
+<https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/>
+<https://www.r-bloggers.com/dont-invert-that-matrix-why-and-how/>
+
+```{r echo=T, eval=T, include=T}
+    
+    n <- 2000
+    A = matrix(rnorm(n*n, mean=0, sd=5), n, n)
+    y <- rnorm(n)
+    time1 <- system.time({b_inverting <- solve(A)%*%y})
+    time2 <- system.time({b_solving <- solve(A,y)})
+    time3 <- system.time({b_matrix_solve <- Matrix::solve(A,y)})
+
+    print(rbind(time1, time2, time3)[,1:3])
+    max(c(abs(b_inverting - b_solving),abs(b_matrix_solve - b_solving)))
+```
+
+## For those interested in boosting thier local R
+
+Not all installations of R come accelerated:  
+
+*There are several highly optimized libraries that can be used instead of the default base libraries. These libraries are optimized to take advantage of the hardware they are run on, and can be significatantly faster than the base implementation (operations such as Matrix multiplications may be over 40 times faster*  
+<https://csantill.github.io/RPerformanceWBLAS/>
+
+## Apply family of functions
+
+We often want to "apply" a function along a "margin" of our data.  In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.
+
+In R, we have helper functions to further simplify our code by obviating the for loop.
+
+Apply family:
+
+apply, lapply , sapply, vapply, mapply, rapply, and tapply
+
+Nice tutorial:  
+<https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/>
+
+## Apply detail
+
+*apply(X, MARGIN, FUN, ...)*
+
+```{r echo=T, eval=F, include=T}
+    # ?apply
+    x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+    dimnames(x)[[1]] <- letters[1:8]
+    x
+    apply(x, 2, mean, trim = .2)
+    col.sums <- apply(x, 2, sum)
+    row.sums <- apply(x, 1, sum)
+
+```
+
+## What is difference between various apply functions
+
+We could start with the help `?apply, ?sapply`. The main differences are:  
+ <http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/>
+ 
+## Apply functions
+
+```{r apply_descriptions, eval=T, echo=F, include=T, results='asis'}
+
+    library(rvest)
+    library(kableExtra)
+    webpage <- read_html("http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/")
+    tbls <- html_nodes(webpage, "table")
+    tbls_ls <- webpage %>%
+            html_nodes("table") %>%
+            #.[c(2:5,16:18)] %>%
+            html_table(fill = TRUE)
+    tbls_ls <- tbls_ls[[1]]
+    knitr::kable(tbls_ls) %>% 
+        kable_styling(font_size=5)
+```
+
+## purrr::map and friends
+
+As usual in R, there are many ways to accomplish tasks.  Another package was developed to do some of what XXapply does.  *purrr* is part of the Tidyverse, so you may already have it installed.
+
+Unlike the apply set of function, the *purrr* set works with piping which may be helpful in some sitations.
+
+```{r}
+
+library(purrr)
+## not the best example as this is better done with group_by/summarize
+sum_iris <- iris %>% dplyr::select(-Species) %>% map(mean) %>% data.frame()
+knitr::kable(as.data.frame(sum_iris))
+
+```

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>apply on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/apply/</link>
+    <description>Recent content in apply on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/apply/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The apply family of functions</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/09/24/lecture-6/</link>
+      <pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/09/24/lecture-6/</guid>
+      <description>Today’s Agenda  Function optimizing
+ Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
+Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
+Consider the following code and timings:
+ library(&amp;quot;microbenchmark&amp;quot;) ## calculate mean of vector lvec &amp;lt;- 10000 vec &amp;lt;- rnorm(lvec) times&amp;lt;-microbenchmark(result1&amp;lt;-mean(vec), result2&amp;lt;-sum(vec)/length(vec), result3&amp;lt;-sum(vec)/lvec,times = 100, unit = &amp;quot;ms&amp;quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.</description>
+    </item>
+    
+  </channel>
+</rss>
