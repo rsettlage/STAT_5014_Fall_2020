@@ -122,7 +122,7 @@ The basic idea is that much of what we want all the time can be configured so we
 This is what we did a few slides ago using the `usethis` package.  We added an environment variable to R's startup so that we could create larger vectors.
 
 Note that when sharing code, you need to be a little careful about how custum you make your startup.  Commonly used helper functions and other customizations could be better in a package.  For some other startup tricks:  
-<https://www.gettinggeneticsdone.com/2011/08/sync-your-rprofile-across-multiple-r.html>
+<https://gettinggeneticsdone.blogspot.com/2011/08/sync-your-rprofile-across-multiple-r.html>
 
 ## parapply
 

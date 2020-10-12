@@ -1,0 +1,351 @@
+---
+title: 'Projecting knowledge in plots'
+author: "Bob Settlage"
+authorbox: false
+slug: "Lecture-8"
+date: 2019-10-22
+publishdate: 2019-10-22
+draft: false
+categories:
+- Lecture
+tags:
+- Lecture
+- plots
+- ggplot2
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 4
+    smaller: yes
+  slidy_presentation: default
+header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{mathrsfs}
+---
+
+## Teaser
+
+```{r echo=F, eval=T, include=T, out.height=450, out.width=450, fig.align="center"}
+
+knitr::include_graphics("../img/IMG_4754.JPG")
+```
+
+## Today's Agenda
+
+- Review good programming practices  
+- Review functions and looping  
+- Introduce Data Exploration
+- Introduce Base R plotting
+- Introduce "Grammer of Graphics"
+- Homework 8
+
+
+## Good Programming Practices
+
+We started the class with ideas around Reproducible Research.  The main idea being that the output we create should be something that someone else can reproduce.  Code is an intricate part of our life and falls in the same bucket.  For someone to follow our code, we should adopt some sort of standard.  
+
+Google's R Style Guide <https://google.github.io/styleguide/Rguide.xml>  
+Hadley Wickam's Style Guide: <http://r-pkgs.had.co.nz/style.html>  
+
+## Good Programming Practices cont
+
+Remember: ultimate goal is Reproducible Research.  Think well documented (annotated) _**readable**_ code.
+
+1. variable/object names  
+    + nouns describing what the object holds, e.g. originaData instad of d  
+    + DO NOT use existing variables or functions, e.g. T<-1000
+2. function formation  
+    + function names should be verb associated with the function purpose  
+    + comment both function purpose and required arguments    
+    + arguments should have defaults (my personal preference)
+    + my preference is to explicitly return a value  
+3. commenting rules  
+    + comment your code!!  'nough said?  
+4. indent within logical blocks of code !!
+    + indenting improves the readability of the code by orders of magnetute!  
+    
+## Functions
+
+A function is an _**object**_ that takes some input objects (args) and produces some output objects.
+
+```{r echo=T, eval=F, tidy=F}
+    dataA<-1;dataB<-2
+    BAD<-function(x){
+        mean(c(x,dataA))
+    }
+    computeMeanGOOD<-function(x=3,y=5){
+        # quick function to compute the geometric mean of two numbers, x and y
+        # returns geometric mean
+        if (!is.numeric(x) || !is.numeric(y)) stop("both x and y must be numeric")
+        return(mean(c(x,y)))
+    }
+    BAD(x=dataB)
+    computeMeanGOOD(x=dataA,y=dataB)
+```
+
+GOOD functions include passing in ALL necessary data.  If we do not do this, we can have MAJOR issues with variable scope that is often difficult to troubleshoot.  Ideally our code includes error checking.
+
+_**All**_ work in R is done in functions. '[<-'(animals,4,"duck")
+
+## Variable scope
+
+R uses Lexical scoping rules.  What tha?
+
+<https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/>  
+Totally recommend subscribing to Darren's blog AND reading all his past posts.  
+
+Two more:  
+<http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/>  
+<https://www.r-bloggers.com>
+
+```{r eval=F, echo=T, results='asis', tidy=F}
+    z <- 1; a <- 1
+    m <- function(){a <- 2; return(c(a,z)) }
+    m(); a
+    #######################################
+    a <- 1; b <- 2
+    f<-function(x){ a*x + b }
+    g<-function(x){ a <<- 2; b <- 1; print(objects()); f(x) }
+    g(2)
+```
+
+
+## Programming loops
+
+Currently we have `for`, `while`, and `repeat`, each of which can be modified by **break** and **next**.  Further, we have `if else` (and `switch`) to branch.  Help on these needs quotes, i.e. ?"for".
+
+```{r echo=T, eval=T, cache=F}
+    Iter <- 20
+    cumIndex <- 0
+    for(i in 1:Iter){
+        cumIndex <- cumIndex + 1
+        if((cumIndex %% 6) == 0){ 
+            print(cumIndex)
+        }
+    }
+
+```
+
+## Loops and functions
+
+Functions allow you to automate tedious tasks.
+
+```{r, eval=F, echo=T}
+    library(tidyverse)
+    #read in and tidy data
+    example_data<-readRDS("../03_good_programming_R_functions/HW3_data.rds")
+    example_data_tidy<-example_data %>%
+        gather(dev, observer, dev1:dev2) %>%
+        mutate(dev=gsub("dev","",dev))
+    #make quick function to get mean, sd
+    computeMeanSD<-function(x){
+        temp<-c(mean(x$observer[x$dev==1]),
+                mean(x$observer[x$dev==2]),cor(x[x$dev==1,3],x[x$dev==2,3]))
+        return(temp)
+    }
+    #create container for results, loop through data and get stats
+    summary_df<-data.frame(NA,nrow=13,ncol=3)
+    for(i in 1:13){
+        summary_df[i,]<-computeMeanSD(x=example_data_tidy[example_data_tidy$Observer==i,])
+    }
+```
+## Timing
+
+As you start to make functions, it is a good idea to think about how long things take.
+
+Really good blog on this here:  <https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/>
+
+The library *microbenchmark* has some cool stuff to do timings.  Here, let's just look at *system.time* in base R.
+
+```{r echo=T, eval=F, cache=F, tidy=T}
+    
+    z1 <- NULL
+    system.time({for(i in 1:50000){
+        z1 <- c(z1,i)
+    }})
+    z2 <- rep(NA,50000)
+    system.time({for(i in 1:50000){
+        z2[i] <- i
+    }})
+    identical(z1,z2)
+```
+
+## Exploratory Data Analysis (EDA)
+
+Data exploration is the process of learning your data.
+
+Free book (in Rbookdown with pay options): <https://leanpub.com/exdata>
+
+In my experience, plots are crucial in learning about your data.  I make A LOT of plots when I get a dataset.  Plots can also be very helpful in assumption checking.  The more factors you have, the more difficult it is to come up with a single (meaningful) plot that gives you a useful view into the data.
+
+Free course:
+<https://www.udacity.com/course/data-analysis-with-r--ud651>
+
+"Exploratory data analysis is an approach for summarizing and visualizing the important characteristics of a data set. Promoted by *John Tukey*, exploratory data analysis focuses on exploring data to understand the data’s underlying structure and variables, to develop intuition about the data set, to consider how that data set came into existence, and to decide how it can be investigated with more formal statistical methods."
+
+Velleman, Paul and Hoaglin, David (1981), The ABC's of EDA: Applications, Basics, and Computing of Exploratory Data Analysis, Duxbury.
+
+## NIST and EDA
+
+<http://www.itl.nist.gov/div898/handbook/eda/eda.htm>
+
+1. what is typical value  
+2. what is undertainty for typical value  
+3. what is a good distribution for the set of numbers  
+4. what is the relationship between factors  
+5. what are the most important factors  
+6. is there a structure to the data  
+7. are there outliers  
+
+## NIST comments on assumptions for measurement processes
+
+1. random drawings  
+2. fixed distribution  
+3. distribution has fixed location  
+4. distribution has fixed variation  
+
+Univariate or single response variable leads to this model:  
+`response = constant + error`
+
+Which then gives this set of assumptions
+
++ data are uncorrelated 
++ random component has a fixed distribution  
++ deterministic component is a constant  
++ random component has a fixed variation  
+
+## Useful functions and tools to explore data
+
+1. dim()  
+2. str()  
+3. summary()  
+4. mean, sd, is.na, complete.cases, range
+5. summaryBY (aggregate)
+6. scatter plot, hist (plus rug), barplot, boxplot, violin plots, pie
+7. qqplot, qplot, ggplot2, pairs
+8. ordination and PCA plots
+9. hive, circular, network plots
+10. dendrograms, heatmaps, etc etc
+
+## EDA on a single variable
+
+Generally, on a single variable, we would be interested in:
+
+1. basic summary statistics (count, mean, sd, etc)  
+2. data issues (missing data, formatting errors, outliers)  
+3. distribution of data
+
+histograms, boxplots, transformations, word clouds
+
+## EDA on two variables
+
+When we get to two variables, we add to our single variable list, learning about any relationships between the variables.
+
+scatter plots, correlations, conditional means
+
+## EDA on multiple variables
+
+Again, all the above, but now we need more tools to visualize in higher dimension or dimensional reduction techniques.
+
+color, shape, PCA, ordination, network graphs
+
+## Example EDA
+
+This blog is a little commercial for my taste, BUT, he does a great job at EDA imo:
+
+<http://sharpsightlabs.com/blog/line-chart-ggplot2-amzn/?utm_source=ssl_email_primary&utm_medium=email&utm_campaign=newsletter>
+
+
+## Plot inspiration
+
+<http://www.r-graph-gallery.com>
+
+<https://flowingdata.com/2016/03/22/comparing-ggplot2-and-r-base-graphics/>
+<https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/>
+<http://varianceexplained.org/r/why-I-use-ggplot2/>
+
+## Multipanel plots
+
+I personally find these the most rewarding, but most time consuming plots.  I often end up doing them in base R because -I- find the layout easier for me to understand.   
+
+Consider a Base R 3 panel plot showing density of a scatter plot in the margins.
+
+```{r multipanel_plot, echo=F, eval=T, include=T, out.height=290, out.width=290, fig.align="center"}
+    knitr::include_graphics("../img/base_multipanel.png")
+
+```
+
+## Multipanel base plot
+
+How do we get to the above?  -- We manipulate the canvas.
+
+This site has everything needed to make fantastic plots using base functions:
+
+<https://www.statmethods.net/advgraphs/layout.html>
+
+## Multipanel plots
+
+ggplot2 version:
+
+```{r multipanel_plot2, echo=F, eval=T, include=T, out.height=290, out.width=290, fig.align="center"}
+
+    knitr::include_graphics("../img/ggplot2_multipanel.png")
+
+```
+
+## How do we do multipanel in ggplot2?
+
+From the ggplot2 reference:
+
+All ggplot2 plots begin with a call to ggplot(), supplying default data and aesthethic mappings, specified by aes(). You then add layers, scales, coords and facets with +. To save a plot to disk, use ggsave().
+
+So, it must be something to do with layers.  For ggplot2, I recommend:
+
+1. the cheatsheet  
+2. gridExtra (or one of the many other extension packages to ggplot2)
+
+<https://www.r-bloggers.com/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/>
+
+
+## Elements of a good figure | EDA stage
+
+1. simple to create  
+2. shows only what you need it to
+3. doesn't take a lot of explaination  
+4. YOU are the primary audience (at first)  
+5. has enough detail to give insight
+
+## Elements of a good figure | Publication stage
+
+1. ok, wow factor  
+2. shows only what you need it to  
+3. draws the reader in  
+4. invokes inquiry  
+5. is fully self contained with legend AND caption 
+6. simple is GENERALLY better (meaning less factors in play)  
+7. all these rules are out the window for art
+
+General good advice:  
+<http://jaoa.org/article.aspx?articleid=2094515>  
+Figure caption specifics:  
+<https://www.physics.ohio-state.edu/~wilkins/writing/Handouts/fig-captions.html>  
+How to lie with charts:  
+<https://flowingdata.com/2017/02/09/how-to-spot-visualization-lies/>
+
+## Elements of a good figure | specifics
+
+<https://flowingdata.com/2010/07/22/7-basic-rules-for-making-charts-and-graphs/>
+
+1. EDA stage, stay simple and investigate oddities
+    + outliers, typos, interesting features   
+2. make a legend if needed (ie you used colors, shapes, etc for a factor) 
+3. label axes
+4. include units  
+5. keep geometry in check  
+    + area of circle or square, size of bubble
+6. always include sources  
+7. keep your audience in mind  
+
+"To put it simply: tell your story clearly and communicate the data accurately."
+
+
+## Homework 8

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plots on STAT-5014 Fall 2020</title>
+    <link>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/plots/</link>
+    <description>Recent content in plots on STAT-5014 Fall 2020</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/tags/plots/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Projecting knowledge in plots</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/10/22/lecture-8/</link>
+      <pubDate>Tue, 22 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/10/22/lecture-8/</guid>
+      <description>Teaser  Today’s Agenda  Review good programming practices
+ Review functions and looping
+ Introduce Data Exploration Introduce Base R plotting Introduce “Grammer of Graphics” Homework 8   Good Programming Practices We started the class with ideas around Reproducible Research. The main idea being that the output we create should be something that someone else can reproduce. Code is an intricate part of our life and falls in the same bucket.</description>
+    </item>
+    
+  </channel>
+</rss>
