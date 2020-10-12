@@ -35,19 +35,19 @@ How many data points were there in the complete dataset?  In your cleaned datase
 
 Choosing 2 countries, create a summary table of indicators for comparison.
 
-## Problem 3
-
-Using *base* plotting functions, create a single figure that is composed of the first two rows of plots from SAS's simple linear regression diagnostics as shown here: <https://support.sas.com/rnd/app/ODSGraphics/examples/reg.html>.  Demonstrate the plot using suitable data from problem 2.
-
 ## Problem 4
 
-Recreate the plot in problem 3 using ggplot2 functions.  Note: there are many extension libraries for ggplot, you will probably find an extension to the ggplot2 functionality will do exactly what you want.
+Using *base* plotting functions, create a single figure that is composed of the first two rows of plots from SAS's simple linear regression diagnostics as shown here: <https://support.sas.com/rnd/app/ODSGraphics/examples/reg.html>.  Demonstrate the plot using suitable data from problem 3.
 
 ## Problem 5
 
+Recreate the plot in problem 3 using ggplot2 functions.  Note: there are many extension libraries for ggplot, you will probably find an extension to the ggplot2 functionality will do exactly what you want.
+
+## Problem 6
+
 Finish this homework by pushing your changes to your repo.
 
-**Only submit the .Rmd and .pdf solution files.  Names should be formatted HW8_lastname_firstname.Rmd and HW4_lastname_firstname.pdf**
+**Only submit the .Rmd and .pdf solution files.  Names should be formatted HW5_lastname_firstname.Rmd and HW5_lastname_firstname.pdf**
 
 
 
