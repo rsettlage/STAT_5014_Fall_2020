@@ -1,0 +1,148 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Homework 5},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+
+\title{Homework 5}
+\providecommand{\subtitle}[1]{}
+\subtitle{Due Wednesday Nov 4, 2020}
+\author{}
+\date{\vspace{-2.5em}2020-10-12}
+
+\begin{document}
+\maketitle
+
+For each assignment, turn in by the due date/time. Late assignments must
+be arranged prior to submission. In every case, assignments are to be
+typed neatly using proper English in Markdown.
+
+This week, we spoke about Exploratory Data Analysis and plotting. To
+begin the homework, we will as usual, start by loading, munging and
+creating tidy data sets. In this homework, our goal is to create
+informative (and perhaps pretty) plots showing features or perhaps
+deficiencies in the data.
+
+\hypertarget{problem-1}{%
+\subsection{Problem 1}\label{problem-1}}
+
+Work through the Swirl ``Exploratory\_Data\_Analysis'' lesson parts 1 -
+10. If you need some review of ggplot, see the tutorial on
+Rstudio.cloud.
+
+\hypertarget{problem-2}{%
+\subsection{Problem 2}\label{problem-2}}
+
+Create a new R Markdown file within your local GitHub repo folder
+(file--\textgreater{}new--\textgreater{}R Markdown--\textgreater{}save
+as).
+
+The filename should be: HW5\_lastname, i.e.~for me it would be
+HW5\_Settlage
+
+You will use this new R Markdown file to solve the following problems.
+
+\hypertarget{problem-3}{%
+\subsection{Problem 3}\label{problem-3}}
+
+Using tidy concepts, get and clean the following data on education from
+the World Bank.
+
+\url{http://databank.worldbank.org/data/download/Edstats_csv.zip}
+
+How many data points were there in the complete dataset? In your cleaned
+dataset?
+
+Choosing 2 countries, create a summary table of indicators for
+comparison.
+
+\hypertarget{problem-3-1}{%
+\subsection{Problem 3}\label{problem-3-1}}
+
+Using \emph{base} plotting functions, create a single figure that is
+composed of the first two rows of plots from SAS's simple linear
+regression diagnostics as shown here:
+\url{https://support.sas.com/rnd/app/ODSGraphics/examples/reg.html}.
+Demonstrate the plot using suitable data from problem 2.
+
+\hypertarget{problem-4}{%
+\subsection{Problem 4}\label{problem-4}}
+
+Recreate the plot in problem 3 using ggplot2 functions. Note: there are
+many extension libraries for ggplot, you will probably find an extension
+to the ggplot2 functionality will do exactly what you want.
+
+\hypertarget{problem-5}{%
+\subsection{Problem 5}\label{problem-5}}
+
+Finish this homework by pushing your changes to your repo.
+
+\textbf{Only submit the .Rmd and .pdf solution files. Names should be
+formatted HW8\_lastname\_firstname.Rmd and HW4\_lastname\_firstname.pdf}
+
+\end{document}

@@ -3,8 +3,8 @@ title: 'Projecting knowledge in plots'
 author: "Bob Settlage"
 authorbox: false
 slug: "Lecture-8"
-date: 2019-10-22
-publishdate: 2019-10-22
+date: 2020-10-12
+publishdate: 2020-10-12
 draft: false
 categories:
 - Lecture
@@ -26,7 +26,7 @@ header-includes: \setlength\parindent{24pt} \usepackage{MnSymbol} \usepackage{ma
 
 ```{r echo=F, eval=T, include=T, out.height=450, out.width=450, fig.align="center"}
 
-knitr::include_graphics("../img/IMG_4754.JPG")
+knitr::include_graphics("./img/IMG_4754.JPG")
 ```
 
 ## Today's Agenda

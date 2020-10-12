@@ -6,10 +6,21 @@
     <description>Recent content in Lecture on STAT-5014 Fall 2020</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://rsettlage.github.io/STAT_5014_Fall_2020/categories/lecture/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Projecting knowledge in plots</title>
+      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/12/lecture-8/</link>
+      <pubDate>Mon, 12 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/12/lecture-8/</guid>
+      <description>Teaser  Today’s Agenda  Review good programming practices
+ Review functions and looping
+ Introduce Data Exploration Introduce Base R plotting Introduce “Grammer of Graphics” Homework 8   Good Programming Practices We started the class with ideas around Reproducible Research. The main idea being that the output we create should be something that someone else can reproduce. Code is an intricate part of our life and falls in the same bucket.</description>
+    </item>
     
     <item>
       <title>Going parallel in R</title>
@@ -32,7 +43,7 @@ Apply family:</description>
  Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
 Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
 Consider the following code and timings:
- library(&amp;quot;microbenchmark&amp;quot;) ## calculate mean of vector lvec &amp;lt;- 10000 vec &amp;lt;- rnorm(lvec) times&amp;lt;-microbenchmark(result1&amp;lt;-mean(vec), result2&amp;lt;-sum(vec)/length(vec), result3&amp;lt;-sum(vec)/lvec,times = 100, unit = &amp;quot;ms&amp;quot;) identical(result1, result2) ## [1] TRUE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.</description>
+ library(&amp;quot;microbenchmark&amp;quot;) ## calculate mean of vector lvec &amp;lt;- 10000 vec &amp;lt;- rnorm(lvec) times&amp;lt;-microbenchmark(result1&amp;lt;-mean(vec), result2&amp;lt;-sum(vec)/length(vec), result3&amp;lt;-sum(vec)/lvec,times = 100, unit = &amp;quot;ms&amp;quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.</description>
     </item>
     
     <item>
@@ -91,17 +102,6 @@ Answer: Awesome, because you annotated your code with text to create a RR compen
  Introduce R as the (main) platform for the course Homework 1   Course Learning Objectives  R programming Reproducible research concepts Good programming practices
  Data cleaning and munging Git fundamentals Markdown Python basics SAS basics   Tentative Course Lecture Schedule Due dates are solid, however, feel free to race ahead.
 https://rsettlage.github.io/STAT_5014_Fall_2020/schedule/</description>
-    </item>
-    
-    <item>
-      <title>Projecting knowledge in plots</title>
-      <link>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/10/22/lecture-8/</link>
-      <pubDate>Tue, 22 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/10/22/lecture-8/</guid>
-      <description>Teaser  Today’s Agenda  Review good programming practices
- Review functions and looping
- Introduce Data Exploration Introduce Base R plotting Introduce “Grammer of Graphics” Homework 8   Good Programming Practices We started the class with ideas around Reproducible Research. The main idea being that the output we create should be something that someone else can reproduce. Code is an intricate part of our life and falls in the same bucket.</description>
     </item>
     
   </channel>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Projecting knowledge in plots - STAT-5014 Fall 2020</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Projecting knowledge in plots" />
+<meta property="og:description" content="Teaser  Today’s Agenda  Review good programming practices
+ Review functions and looping
+ Introduce Data Exploration Introduce Base R plotting Introduce “Grammer of Graphics” Homework 8   Good Programming Practices We started the class with ideas around Reproducible Research. The main idea being that the output we create should be something that someone else can reproduce. Code is an intricate part of our life and falls in the same bucket." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/12/lecture-8/" />
+<meta property="article:published_time" content="2020-10-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-12T00:00:00+00:00" />
+
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/STAT_5014_Fall_2020/css/style.css">
+	
+	<link rel="shortcut icon" href="/STAT_5014_Fall_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/STAT_5014_Fall_2020/" title="STAT-5014 Fall 2020" rel="home">
+				<div class="logo__title">STAT-5014 Fall 2020</div>
+				<div class="logo__tagline">Official place to find course material.</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/">Home</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/syllabus">Syllabus</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/schedule">Schedule</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/homework">Homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://github.com/rsettlage/STAT_5014_Fall_2020/tree/master/rmd">Rmd</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/homework-submit">Submitting homework</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/git-config">Git conf</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/docker-config">Docker</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/STAT_5014_Fall_2020/about/">About</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Projecting knowledge in plots</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-10-12T00:00:00">October 12, 2020</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/STAT_5014_Fall_2020/categories/lecture" rel="category">Lecture</a></span>
+</div>
+</div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="teaser" class="section level2">
+<h2>Teaser</h2>
+<p><img src="img/IMG_4754.JPG" width="450" height="450" style="display: block; margin: auto;" /></p>
+</div>
+<div id="todays-agenda" class="section level2">
+<h2>Today’s Agenda</h2>
+<ul>
+<li>Review good programming practices<br />
+</li>
+<li>Review functions and looping<br />
+</li>
+<li>Introduce Data Exploration</li>
+<li>Introduce Base R plotting</li>
+<li>Introduce “Grammer of Graphics”</li>
+<li>Homework 8</li>
+</ul>
+</div>
+<div id="good-programming-practices" class="section level2">
+<h2>Good Programming Practices</h2>
+<p>We started the class with ideas around Reproducible Research. The main idea being that the output we create should be something that someone else can reproduce. Code is an intricate part of our life and falls in the same bucket. For someone to follow our code, we should adopt some sort of standard.</p>
+<p>Google’s R Style Guide <a href="https://google.github.io/styleguide/Rguide.xml" class="uri">https://google.github.io/styleguide/Rguide.xml</a><br />
+Hadley Wickam’s Style Guide: <a href="http://r-pkgs.had.co.nz/style.html" class="uri">http://r-pkgs.had.co.nz/style.html</a></p>
+</div>
+<div id="good-programming-practices-cont" class="section level2">
+<h2>Good Programming Practices cont</h2>
+<p>Remember: ultimate goal is Reproducible Research. Think well documented (annotated) <em><strong>readable</strong></em> code.</p>
+<ol style="list-style-type: decimal">
+<li>variable/object names
+<ul>
+<li>nouns describing what the object holds, e.g. originaData instad of d<br />
+</li>
+<li>DO NOT use existing variables or functions, e.g. T&lt;-1000</li>
+</ul></li>
+<li>function formation
+<ul>
+<li>function names should be verb associated with the function purpose<br />
+</li>
+<li>comment both function purpose and required arguments<br />
+</li>
+<li>arguments should have defaults (my personal preference)</li>
+<li>my preference is to explicitly return a value<br />
+</li>
+</ul></li>
+<li>commenting rules
+<ul>
+<li>comment your code!! ’nough said?<br />
+</li>
+</ul></li>
+<li>indent within logical blocks of code !!
+<ul>
+<li>indenting improves the readability of the code by orders of magnetute!</li>
+</ul></li>
+</ol>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>A function is an <em><strong>object</strong></em> that takes some input objects (args) and produces some output objects.</p>
+<pre class="r"><code>    dataA&lt;-1;dataB&lt;-2
+    BAD&lt;-function(x){
+        mean(c(x,dataA))
+    }
+    computeMeanGOOD&lt;-function(x=3,y=5){
+        # quick function to compute the geometric mean of two numbers, x and y
+        # returns geometric mean
+        if (!is.numeric(x) || !is.numeric(y)) stop(&quot;both x and y must be numeric&quot;)
+        return(mean(c(x,y)))
+    }
+    BAD(x=dataB)
+    computeMeanGOOD(x=dataA,y=dataB)</code></pre>
+<p>GOOD functions include passing in ALL necessary data. If we do not do this, we can have MAJOR issues with variable scope that is often difficult to troubleshoot. Ideally our code includes error checking.</p>
+<p><em><strong>All</strong></em> work in R is done in functions. ‘[&lt;-’(animals,4,“duck”)</p>
+</div>
+<div id="variable-scope" class="section level2">
+<h2>Variable scope</h2>
+<p>R uses Lexical scoping rules. What tha?</p>
+<p><a href="https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/" class="uri">https://darrenjw.wordpress.com/2011/11/23/lexical-scope-and-function-closures-in-r/</a><br />
+Totally recommend subscribing to Darren’s blog AND reading all his past posts.</p>
+<p>Two more:<br />
+<a href="http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/" class="uri">http://andrewgelman.com/2014/01/29/stupid-r-tricks-random-scope/</a><br />
+<a href="https://www.r-bloggers.com" class="uri">https://www.r-bloggers.com</a></p>
+<pre class="r"><code>    z &lt;- 1; a &lt;- 1
+    m &lt;- function(){a &lt;- 2; return(c(a,z)) }
+    m(); a
+    #######################################
+    a &lt;- 1; b &lt;- 2
+    f&lt;-function(x){ a*x + b }
+    g&lt;-function(x){ a &lt;&lt;- 2; b &lt;- 1; print(objects()); f(x) }
+    g(2)</code></pre>
+</div>
+<div id="programming-loops" class="section level2">
+<h2>Programming loops</h2>
+<p>Currently we have <code>for</code>, <code>while</code>, and <code>repeat</code>, each of which can be modified by <strong>break</strong> and <strong>next</strong>. Further, we have <code>if else</code> (and <code>switch</code>) to branch. Help on these needs quotes, i.e. ?“for”.</p>
+<pre class="r"><code>    Iter &lt;- 20
+    cumIndex &lt;- 0
+    for(i in 1:Iter){
+        cumIndex &lt;- cumIndex + 1
+        if((cumIndex %% 6) == 0){ 
+            print(cumIndex)
+        }
+    }</code></pre>
+<pre><code>## [1] 6
+## [1] 12
+## [1] 18</code></pre>
+</div>
+<div id="loops-and-functions" class="section level2">
+<h2>Loops and functions</h2>
+<p>Functions allow you to automate tedious tasks.</p>
+<pre class="r"><code>    library(tidyverse)
+    #read in and tidy data
+    example_data&lt;-readRDS(&quot;../03_good_programming_R_functions/HW3_data.rds&quot;)
+    example_data_tidy&lt;-example_data %&gt;%
+        gather(dev, observer, dev1:dev2) %&gt;%
+        mutate(dev=gsub(&quot;dev&quot;,&quot;&quot;,dev))
+    #make quick function to get mean, sd
+    computeMeanSD&lt;-function(x){
+        temp&lt;-c(mean(x$observer[x$dev==1]),
+                mean(x$observer[x$dev==2]),cor(x[x$dev==1,3],x[x$dev==2,3]))
+        return(temp)
+    }
+    #create container for results, loop through data and get stats
+    summary_df&lt;-data.frame(NA,nrow=13,ncol=3)
+    for(i in 1:13){
+        summary_df[i,]&lt;-computeMeanSD(x=example_data_tidy[example_data_tidy$Observer==i,])
+    }</code></pre>
+</div>
+<div id="timing" class="section level2">
+<h2>Timing</h2>
+<p>As you start to make functions, it is a good idea to think about how long things take.</p>
+<p>Really good blog on this here: <a href="https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/" class="uri">https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/</a></p>
+<p>The library <em>microbenchmark</em> has some cool stuff to do timings. Here, let’s just look at <em>system.time</em> in base R.</p>
+<pre class="r"><code>z1 &lt;- NULL
+system.time({
+    for (i in 1:50000) {
+        z1 &lt;- c(z1, i)
+    }
+})
+z2 &lt;- rep(NA, 50000)
+system.time({
+    for (i in 1:50000) {
+        z2[i] &lt;- i
+    }
+})
+identical(z1, z2)</code></pre>
+</div>
+<div id="exploratory-data-analysis-eda" class="section level2">
+<h2>Exploratory Data Analysis (EDA)</h2>
+<p>Data exploration is the process of learning your data.</p>
+<p>Free book (in Rbookdown with pay options): <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p>
+<p>In my experience, plots are crucial in learning about your data. I make A LOT of plots when I get a dataset. Plots can also be very helpful in assumption checking. The more factors you have, the more difficult it is to come up with a single (meaningful) plot that gives you a useful view into the data.</p>
+<p>Free course:
+<a href="https://www.udacity.com/course/data-analysis-with-r--ud651" class="uri">https://www.udacity.com/course/data-analysis-with-r--ud651</a></p>
+<p>“Exploratory data analysis is an approach for summarizing and visualizing the important characteristics of a data set. Promoted by <em>John Tukey</em>, exploratory data analysis focuses on exploring data to understand the data’s underlying structure and variables, to develop intuition about the data set, to consider how that data set came into existence, and to decide how it can be investigated with more formal statistical methods.”</p>
+<p>Velleman, Paul and Hoaglin, David (1981), The ABC’s of EDA: Applications, Basics, and Computing of Exploratory Data Analysis, Duxbury.</p>
+</div>
+<div id="nist-and-eda" class="section level2">
+<h2>NIST and EDA</h2>
+<p><a href="http://www.itl.nist.gov/div898/handbook/eda/eda.htm" class="uri">http://www.itl.nist.gov/div898/handbook/eda/eda.htm</a></p>
+<ol style="list-style-type: decimal">
+<li>what is typical value<br />
+</li>
+<li>what is undertainty for typical value<br />
+</li>
+<li>what is a good distribution for the set of numbers<br />
+</li>
+<li>what is the relationship between factors<br />
+</li>
+<li>what are the most important factors<br />
+</li>
+<li>is there a structure to the data<br />
+</li>
+<li>are there outliers</li>
+</ol>
+</div>
+<div id="nist-comments-on-assumptions-for-measurement-processes" class="section level2">
+<h2>NIST comments on assumptions for measurement processes</h2>
+<ol style="list-style-type: decimal">
+<li>random drawings<br />
+</li>
+<li>fixed distribution<br />
+</li>
+<li>distribution has fixed location<br />
+</li>
+<li>distribution has fixed variation</li>
+</ol>
+<p>Univariate or single response variable leads to this model:<br />
+<code>response = constant + error</code></p>
+<p>Which then gives this set of assumptions</p>
+<ul>
+<li>data are uncorrelated</li>
+<li>random component has a fixed distribution<br />
+</li>
+<li>deterministic component is a constant<br />
+</li>
+<li>random component has a fixed variation</li>
+</ul>
+</div>
+<div id="useful-functions-and-tools-to-explore-data" class="section level2">
+<h2>Useful functions and tools to explore data</h2>
+<ol style="list-style-type: decimal">
+<li>dim()<br />
+</li>
+<li>str()<br />
+</li>
+<li>summary()<br />
+</li>
+<li>mean, sd, is.na, complete.cases, range</li>
+<li>summaryBY (aggregate)</li>
+<li>scatter plot, hist (plus rug), barplot, boxplot, violin plots, pie</li>
+<li>qqplot, qplot, ggplot2, pairs</li>
+<li>ordination and PCA plots</li>
+<li>hive, circular, network plots</li>
+<li>dendrograms, heatmaps, etc etc</li>
+</ol>
+</div>
+<div id="eda-on-a-single-variable" class="section level2">
+<h2>EDA on a single variable</h2>
+<p>Generally, on a single variable, we would be interested in:</p>
+<ol style="list-style-type: decimal">
+<li>basic summary statistics (count, mean, sd, etc)<br />
+</li>
+<li>data issues (missing data, formatting errors, outliers)<br />
+</li>
+<li>distribution of data</li>
+</ol>
+<p>histograms, boxplots, transformations, word clouds</p>
+</div>
+<div id="eda-on-two-variables" class="section level2">
+<h2>EDA on two variables</h2>
+<p>When we get to two variables, we add to our single variable list, learning about any relationships between the variables.</p>
+<p>scatter plots, correlations, conditional means</p>
+</div>
+<div id="eda-on-multiple-variables" class="section level2">
+<h2>EDA on multiple variables</h2>
+<p>Again, all the above, but now we need more tools to visualize in higher dimension or dimensional reduction techniques.</p>
+<p>color, shape, PCA, ordination, network graphs</p>
+</div>
+<div id="example-eda" class="section level2">
+<h2>Example EDA</h2>
+<p>This blog is a little commercial for my taste, BUT, he does a great job at EDA imo:</p>
+<p><a href="http://sharpsightlabs.com/blog/line-chart-ggplot2-amzn/?utm_source=ssl_email_primary&amp;utm_medium=email&amp;utm_campaign=newsletter" class="uri">http://sharpsightlabs.com/blog/line-chart-ggplot2-amzn/?utm_source=ssl_email_primary&amp;utm_medium=email&amp;utm_campaign=newsletter</a></p>
+</div>
+<div id="plot-inspiration" class="section level2">
+<h2>Plot inspiration</h2>
+<p><a href="http://www.r-graph-gallery.com" class="uri">http://www.r-graph-gallery.com</a></p>
+<p><a href="https://flowingdata.com/2016/03/22/comparing-ggplot2-and-r-base-graphics/" class="uri">https://flowingdata.com/2016/03/22/comparing-ggplot2-and-r-base-graphics/</a>
+<a href="https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/" class="uri">https://simplystatistics.org/2016/02/11/why-i-dont-use-ggplot2/</a>
+<a href="http://varianceexplained.org/r/why-I-use-ggplot2/" class="uri">http://varianceexplained.org/r/why-I-use-ggplot2/</a></p>
+</div>
+<div id="multipanel-plots" class="section level2">
+<h2>Multipanel plots</h2>
+<p>I personally find these the most rewarding, but most time consuming plots. I often end up doing them in base R because -I- find the layout easier for me to understand.</p>
+<p>Consider a Base R 3 panel plot showing density of a scatter plot in the margins.</p>
+<p><img src="../img/base_multipanel.png" width="290" height="290" style="display: block; margin: auto;" /></p>
+</div>
+<div id="multipanel-base-plot" class="section level2">
+<h2>Multipanel base plot</h2>
+<p>How do we get to the above? – We manipulate the canvas.</p>
+<p>This site has everything needed to make fantastic plots using base functions:</p>
+<p><a href="https://www.statmethods.net/advgraphs/layout.html" class="uri">https://www.statmethods.net/advgraphs/layout.html</a></p>
+</div>
+<div id="multipanel-plots-1" class="section level2">
+<h2>Multipanel plots</h2>
+<p>ggplot2 version:</p>
+<p><img src="../img/ggplot2_multipanel.png" width="290" height="290" style="display: block; margin: auto;" /></p>
+</div>
+<div id="how-do-we-do-multipanel-in-ggplot2" class="section level2">
+<h2>How do we do multipanel in ggplot2?</h2>
+<p>From the ggplot2 reference:</p>
+<p>All ggplot2 plots begin with a call to ggplot(), supplying default data and aesthethic mappings, specified by aes(). You then add layers, scales, coords and facets with +. To save a plot to disk, use ggsave().</p>
+<p>So, it must be something to do with layers. For ggplot2, I recommend:</p>
+<ol style="list-style-type: decimal">
+<li>the cheatsheet<br />
+</li>
+<li>gridExtra (or one of the many other extension packages to ggplot2)</li>
+</ol>
+<p><a href="https://www.r-bloggers.com/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/" class="uri">https://www.r-bloggers.com/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/</a></p>
+</div>
+<div id="elements-of-a-good-figure-eda-stage" class="section level2">
+<h2>Elements of a good figure | EDA stage</h2>
+<ol style="list-style-type: decimal">
+<li>simple to create<br />
+</li>
+<li>shows only what you need it to</li>
+<li>doesn’t take a lot of explaination<br />
+</li>
+<li>YOU are the primary audience (at first)<br />
+</li>
+<li>has enough detail to give insight</li>
+</ol>
+</div>
+<div id="elements-of-a-good-figure-publication-stage" class="section level2">
+<h2>Elements of a good figure | Publication stage</h2>
+<ol style="list-style-type: decimal">
+<li>ok, wow factor<br />
+</li>
+<li>shows only what you need it to<br />
+</li>
+<li>draws the reader in<br />
+</li>
+<li>invokes inquiry<br />
+</li>
+<li>is fully self contained with legend AND caption</li>
+<li>simple is GENERALLY better (meaning less factors in play)<br />
+</li>
+<li>all these rules are out the window for art</li>
+</ol>
+<p>General good advice:<br />
+<a href="http://jaoa.org/article.aspx?articleid=2094515" class="uri">http://jaoa.org/article.aspx?articleid=2094515</a><br />
+Figure caption specifics:<br />
+<a href="https://www.physics.ohio-state.edu/~wilkins/writing/Handouts/fig-captions.html" class="uri">https://www.physics.ohio-state.edu/~wilkins/writing/Handouts/fig-captions.html</a><br />
+How to lie with charts:<br />
+<a href="https://flowingdata.com/2017/02/09/how-to-spot-visualization-lies/" class="uri">https://flowingdata.com/2017/02/09/how-to-spot-visualization-lies/</a></p>
+</div>
+<div id="elements-of-a-good-figure-specifics" class="section level2">
+<h2>Elements of a good figure | specifics</h2>
+<p><a href="https://flowingdata.com/2010/07/22/7-basic-rules-for-making-charts-and-graphs/" class="uri">https://flowingdata.com/2010/07/22/7-basic-rules-for-making-charts-and-graphs/</a></p>
+<ol style="list-style-type: decimal">
+<li>EDA stage, stay simple and investigate oddities
+<ul>
+<li>outliers, typos, interesting features<br />
+</li>
+</ul></li>
+<li>make a legend if needed (ie you used colors, shapes, etc for a factor)</li>
+<li>label axes</li>
+<li>include units<br />
+</li>
+<li>keep geometry in check
+<ul>
+<li>area of circle or square, size of bubble</li>
+</ul></li>
+<li>always include sources<br />
+</li>
+<li>keep your audience in mind</li>
+</ol>
+<p>“To put it simply: tell your story clearly and communicate the data accurately.”</p>
+</div>
+<div id="homework-8" class="section level2">
+<h2>Homework 8</h2>
+</div>
+
+		</div>
+		
+<div class="post__tags tags clearfix">
+	<svg class="tags__icon icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/lecture/" rel="tag">Lecture</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/plots/" rel="tag">plots</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/STAT_5014_Fall_2020/tags/ggplot2/" rel="tag">ggplot2</a></li>
+	</ul>
+</div>
+	</article>
+</main>
+
+
+<nav class="post-nav flex">
+	<div class="post-nav__item post-nav__item--prev">
+		<a class="post-nav__link" href="/STAT_5014_Fall_2020/2020/10/02/lecture-7/" rel="prev"><span class="post-nav__caption">«&thinsp;Previous</span><p class="post-nav__post-title">Going parallel in R</p></a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="http://rsettlage.github.io/STAT_5014_Fall_2020/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/10/12/lecture-8/">Projecting knowledge in plots</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/10/02/lecture-7/">Going parallel in R</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/2020/09/24/lecture-6/">The apply family of functions</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/course-logistics">Course logistics</a></li>
+			<li class="widget__item"><a class="widget__link" href="/STAT_5014_Fall_2020/categories/lecture">Lecture</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/apply" title="Apply">Apply</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/docker" title="Docker">Docker</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/functions" title="Functions">Functions</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/ggplot2" title="Ggplot2">Ggplot2</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/git" title="Git">Git</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/good-programming" title="Good programming">Good programming</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/homework" title="Homework">Homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/latex" title="Latex">Latex</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/lecture" title="Lecture">Lecture</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/logic" title="Logic">Logic</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/math" title="Math">Math</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/munging" title="Munging">Munging</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/parallel" title="Parallel">Parallel</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/plots" title="Plots">Plots</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/reproducible-research" title="Reproducible research">Reproducible research</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/rmarkdown" title="Rmarkdown">Rmarkdown</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/sample-homework" title="Sample homework">Sample homework</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/schedule" title="Schedule">Schedule</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/syllabus" title="Syllabus">Syllabus</a>
+		<a class="widget-taglist__link widget__link btn" href="/STAT_5014_Fall_2020/tags/tidyverse" title="Tidyverse">Tidyverse</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 STAT-5014 Fall 2020.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/STAT_5014_Fall_2020/js/menu.js"></script></body>
+</html>

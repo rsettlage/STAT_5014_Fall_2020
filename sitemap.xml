@@ -4,21 +4,46 @@
   
   <url>
     <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/categories/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/02/lecture-7/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/ggplot2/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/lecture/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/categories/lecture/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/plots/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/post/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/12/lecture-8/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/</loc>
+    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/2020/10/02/lecture-7/</loc>
     <lastmod>2020-10-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -29,16 +54,6 @@
   
   <url>
     <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/parallel/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/post/</loc>
-    <lastmod>2020-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/</loc>
     <lastmod>2020-10-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -170,21 +185,6 @@
   <url>
     <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/syllabus/</loc>
     <lastmod>2020-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/ggplot2/</loc>
-    <lastmod>2019-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/tags/plots/</loc>
-    <lastmod>2019-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://rsettlage.github.io/STAT_5014_Fall_2020/2019/10/22/lecture-8/</loc>
-    <lastmod>2019-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>

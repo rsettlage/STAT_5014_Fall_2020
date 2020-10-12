@@ -21,7 +21,7 @@
  Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
 Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
 Consider the following code and timings:
- library(&amp;quot;microbenchmark&amp;quot;) ## calculate mean of vector lvec &amp;lt;- 10000 vec &amp;lt;- rnorm(lvec) times&amp;lt;-microbenchmark(result1&amp;lt;-mean(vec), result2&amp;lt;-sum(vec)/length(vec), result3&amp;lt;-sum(vec)/lvec,times = 100, unit = &amp;quot;ms&amp;quot;) identical(result1, result2) ## [1] TRUE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.</description>
+ library(&amp;quot;microbenchmark&amp;quot;) ## calculate mean of vector lvec &amp;lt;- 10000 vec &amp;lt;- rnorm(lvec) times&amp;lt;-microbenchmark(result1&amp;lt;-mean(vec), result2&amp;lt;-sum(vec)/length(vec), result3&amp;lt;-sum(vec)/lvec,times = 100, unit = &amp;quot;ms&amp;quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.</description>
     </item>
     
   </channel>
