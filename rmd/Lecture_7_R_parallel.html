@@ -3126,7 +3126,7 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2>Today’s Agenda</h2></hgroup><article  class="smaller " id="todays-agenda">
+<slide class=""><hgroup><h2>Today’s Agenda</h2></hgroup><article  id="todays-agenda" class="smaller ">
 
 <ul>
 <li>Apply review</li>
@@ -3138,7 +3138,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Apply family of functions</h2></hgroup><article  class="smaller " id="apply-family-of-functions">
+</article></slide><slide class=""><hgroup><h2>Apply family of functions</h2></hgroup><article  id="apply-family-of-functions" class="smaller ">
 
 <p>We often want to &ldquo;apply&rdquo; a function along a &ldquo;margin&rdquo; of our data. In the previous example, we used a matrix operation, but what if we have a custom function we wish to use.</p>
 
@@ -3150,7 +3150,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Nice tutorial:<br/><a href='https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/' title=''>https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Apply detail</h2></hgroup><article  class="smaller " id="apply-detail">
+</article></slide><slide class=""><hgroup><h2>Apply detail</h2></hgroup><article  id="apply-detail" class="smaller ">
 
 <p><em>apply(X, MARGIN, FUN, …)</em></p>
 
@@ -3162,11 +3162,11 @@ slide:not(.current) .plotly.html-widget{
     col.sums &lt;- apply(x, 2, sum)
     row.sums &lt;- apply(x, 1, sum)</pre>
 
-</article></slide><slide class=""><hgroup><h2>What is difference between various apply functions</h2></hgroup><article  class="smaller " id="what-is-difference-between-various-apply-functions">
+</article></slide><slide class=""><hgroup><h2>What is difference between various apply functions</h2></hgroup><article  id="what-is-difference-between-various-apply-functions" class="smaller ">
 
 <p>We could start with the help <code>?apply, ?sapply</code>. The main differences are:<br/><a href='http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/' title=''>http://www.dummies.com/programming/r/how-to-use-the-apply-family-of-functions-in-r/</a></p>
 
-</article></slide><slide class=""><hgroup><h2>Apply on a big matrix</h2></hgroup><article  class="smaller " id="apply-on-a-big-matrix">
+</article></slide><slide class=""><hgroup><h2>Apply on a big matrix</h2></hgroup><article  id="apply-on-a-big-matrix" class="smaller ">
 
 <pre class = 'prettyprint lang-r'>  size &lt;- 5000
   big_x &lt;- matrix(rnorm(size^2),nrow=size)
@@ -3176,7 +3176,7 @@ slide:not(.current) .plotly.html-widget{
   system.time({median(apply(big_x,1,median))})
   # ca. 1.6 sec on my Mac</pre>
 
-</article></slide><slide class=""><hgroup><h2>What if we want to go really big</h2></hgroup><article  class="smaller " id="what-if-we-want-to-go-really-big">
+</article></slide><slide class=""><hgroup><h2>What if we want to go really big</h2></hgroup><article  id="what-if-we-want-to-go-really-big" class="smaller ">
 
 <p>Turns out, the first thing we need to do is worry about how big an object we can store. It seems as though, in R 3.5 there were some limits imposed on our vectors that were not present in earlier releases.</p>
 
@@ -3194,7 +3194,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>I put 100 Gb and it works on my Mac. This may or may not be appropriate for your system. On our clusters, it depends on the job size and cluster you get a job on. On Cascades, for a full node, 100Gb will fit in RAM so you can go bigger than that!</p>
 
-</article></slide><slide class=""><hgroup><h2>Bigger example</h2></hgroup><article  class="smaller " id="bigger-example">
+</article></slide><slide class=""><hgroup><h2>Bigger example</h2></hgroup><article  id="bigger-example" class="smaller ">
 
 <pre class = 'prettyprint lang-r'>  size &lt;- 4e4
   big_x &lt;- matrix(rnorm(size^2),nrow=size)
@@ -3202,7 +3202,7 @@ slide:not(.current) .plotly.html-widget{
   system.time({median(apply(big_x,1,median))})
   # 7 min on my Mac</pre>
 
-</article></slide><slide class=""><hgroup><h2>An aside on R’s startup</h2></hgroup><article  class="smaller " id="an-aside-on-rs-startup">
+</article></slide><slide class=""><hgroup><h2>An aside on R’s startup</h2></hgroup><article  id="an-aside-on-rs-startup" class="smaller ">
 
 <p>The basic idea is that much of what we want all the time can be configured so we don’t have to continuously type it. For some of this, we can and should put this in a code chunk at the start of our Markdown files. For instance, setting a path. For other things we just want all the time that is more like style preferences or things R needs to do as it starts, we need to edit our R startup files.</p>
 
@@ -3212,7 +3212,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Note that when sharing code, you need to be a little careful about how custum you make your startup. Commonly used helper functions and other customizations could be better in a package. For some other startup tricks:<br/><a href='https://gettinggeneticsdone.blogspot.com/2011/08/sync-your-rprofile-across-multiple-r.html' title=''>https://gettinggeneticsdone.blogspot.com/2011/08/sync-your-rprofile-across-multiple-r.html</a></p>
 
-</article></slide><slide class=""><hgroup><h2>parapply</h2></hgroup><article  class="smaller " id="parapply">
+</article></slide><slide class=""><hgroup><h2>parapply</h2></hgroup><article  id="parapply" class="smaller ">
 
 <p>This doesn’t seem like a very big matrix, but it takes a while to do the compute. How can we do this faster?</p>
 
@@ -3239,7 +3239,7 @@ system.time({median(parApply(cl, big_x, 2, median))})
 # Stop the cluster
 stopCluster(cl)</pre>
 
-</article></slide><slide class=""><hgroup><h2>What can be parallelized</h2></hgroup><article  class="smaller " id="what-can-be-parallelized">
+</article></slide><slide class=""><hgroup><h2>What can be parallelized</h2></hgroup><article  id="what-can-be-parallelized" class="smaller ">
 
 <p><code>embarassingly</code> parallel tasks are perfect candidates. Things that update, somewhere between maybe and no.</p>
 
@@ -3261,7 +3261,7 @@ stopCluster(cl)</pre>
     x[i] &lt;- x[i-1]
   }</pre>
 
-</article></slide><slide class=""><hgroup><h2>types of clusters</h2></hgroup><article  class="smaller " id="types-of-clusters">
+</article></slide><slide class=""><hgroup><h2>types of clusters</h2></hgroup><article  id="types-of-clusters" class="smaller ">
 
 <ul>
 <li>FORK (Mac/Linux) divide and conquer, env goes with fork, but may diverge during run</li>
@@ -3281,7 +3281,7 @@ parLapply(cl,
 
 stopCluster(cl)</pre>
 
-</article></slide><slide class=""><hgroup><h2>steps</h2></hgroup><article  class="smaller " id="steps">
+</article></slide><slide class=""><hgroup><h2>steps</h2></hgroup><article  id="steps" class="smaller ">
 
 <ul>
 <li>load package</li>
@@ -3291,7 +3291,7 @@ stopCluster(cl)</pre>
 <li>stop cluster!! &lt;– super important unless you want to reboot ;)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>foreach</h2></hgroup><article  class="smaller " id="foreach">
+</article></slide><slide class=""><hgroup><h2>foreach</h2></hgroup><article  id="foreach" class="smaller ">
 
 <p>The <code>foreach</code> package works much like lapply. Note that this returns a list like lapply. You can change this, for instance, try <code>.combine = &#39;c&#39;</code>.</p>
 
@@ -3304,7 +3304,7 @@ foreach(i=2:4) %do% {
   2^i
 }</pre>
 
-</article></slide><slide class=""><hgroup><h2>Going parallel</h2></hgroup><article  class="smaller " id="going-parallel">
+</article></slide><slide class=""><hgroup><h2>Going parallel</h2></hgroup><article  id="going-parallel" class="smaller ">
 
 <p>The last set ran sequentially, if we want to do this in parallel, we need to make and register a cluster and use <code>dopar</code>.</p>
 
@@ -3315,13 +3315,13 @@ foreach(i=2:4, .combine = &#39;c&#39;) %dopar% {
 }
 stopCluster(cl)</pre>
 
-</article></slide><slide class=""><hgroup><h2>Data and packages</h2></hgroup><article  class="smaller " id="data-and-packages">
+</article></slide><slide class=""><hgroup><h2>Data and packages</h2></hgroup><article  id="data-and-packages" class="smaller ">
 
 <p>The foreach package works more like a <em>PSOCK</em> cluster but it exports variables it needs. However, it only looks in the env the foreach call is made in. So, you either need to use the .export option or make sure the data is in the current env (pass in to function if you are in a function).</p>
 
 <p>For packages, you have two options, a) use the .packages option or b) use the package::function construct.</p>
 
-</article></slide><slide class=""><hgroup><h2>seeds</h2></hgroup><article  class="smaller " id="seeds">
+</article></slide><slide class=""><hgroup><h2>seeds</h2></hgroup><article  id="seeds" class="smaller ">
 
 <p>Seeds are one thing you need to be careful with when trying to parallelize. You either want the same or different seeds across all workers.</p>
 

@@ -12,7 +12,7 @@
  Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
 Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
 Consider the following code and timings:
- library(&quot;microbenchmark&quot;) ## calculate mean of vector lvec &lt;- 10000 vec &lt;- rnorm(lvec) times&lt;-microbenchmark(result1&lt;-mean(vec), result2&lt;-sum(vec)/length(vec), result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present." />
+ library(&quot;microbenchmark&quot;) ## calculate mean of vector lvec &lt;- 10000 vec &lt;- rnorm(lvec) times&lt;-microbenchmark(result1&lt;-mean(vec), result2&lt;-sum(vec)/length(vec), result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;) identical(result1, result2) ## [1] TRUE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://rsettlage.github.io/STAT_5014_Fall_2020/2020/09/24/lecture-6/" />
 <meta property="article:published_time" content="2020-09-24T00:00:00+00:00" />
@@ -120,7 +120,7 @@ Consider the following code and timings:
                           result2&lt;-sum(vec)/length(vec),
                           result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;)
     identical(result1, result2)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="functions-and-timing-1" class="section level2">
 <h2>Functions and Timing</h2>
@@ -142,11 +142,11 @@ Consider the following code and timings:
 
     print(rbind(time1, time2, time3)[,1:3])</code></pre>
 <pre><code>##       user.self sys.self elapsed
-## time1     7.445    0.037   7.501
-## time2     1.925    0.004   1.934
-## time3     2.762    0.050   2.820</code></pre>
+## time1     6.589    0.026   6.627
+## time2     1.623    0.002   1.627
+## time3     2.304    0.038   2.347</code></pre>
 <pre class="r"><code>    max(c(abs(b_inverting - b_solving),abs(b_matrix_solve - b_solving)))</code></pre>
-<pre><code>## [1] 1.427747e-13</code></pre>
+<pre><code>## [1] 2.032541e-13</code></pre>
 </div>
 <div id="for-those-interested-in-boosting-thier-local-r" class="section level2">
 <h2>For those interested in boosting thier local R</h2>

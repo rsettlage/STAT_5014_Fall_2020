@@ -148,7 +148,7 @@ Apply family:
  Apply functions   Functions and Timing As you start to make functions, it is a good idea to think about how long things take.
 Really good blog on this here: https://www.r-bloggers.com/5-ways-to-measure-running-time-of-r-code/
 Consider the following code and timings:
- library(&quot;microbenchmark&quot;) ## calculate mean of vector lvec &lt;- 10000 vec &lt;- rnorm(lvec) times&lt;-microbenchmark(result1&lt;-mean(vec), result2&lt;-sum(vec)/length(vec), result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;) identical(result1, result2) ## [1] FALSE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.
+ library(&quot;microbenchmark&quot;) ## calculate mean of vector lvec &lt;- 10000 vec &lt;- rnorm(lvec) times&lt;-microbenchmark(result1&lt;-mean(vec), result2&lt;-sum(vec)/length(vec), result3&lt;-sum(vec)/lvec,times = 100, unit = &quot;ms&quot;) identical(result1, result2) ## [1] TRUE  Functions and Timing ggplot2::autoplot(times) ## Coordinate system already present.
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
